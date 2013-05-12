@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pgn.net", "pgn.net\pgn.net.csproj", "{68EEDF75-A3F0-4132-BB92-A9AC517BE05E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pgn.net.Test", "pgn.net.Test\pgn.net.Test.csproj", "{FB9C3AC7-CCFE-46DA-BA14-98EC53E0DE24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{68EEDF75-A3F0-4132-BB92-A9AC517BE05E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68EEDF75-A3F0-4132-BB92-A9AC517BE05E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68EEDF75-A3F0-4132-BB92-A9AC517BE05E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68EEDF75-A3F0-4132-BB92-A9AC517BE05E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB9C3AC7-CCFE-46DA-BA14-98EC53E0DE24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB9C3AC7-CCFE-46DA-BA14-98EC53E0DE24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB9C3AC7-CCFE-46DA-BA14-98EC53E0DE24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB9C3AC7-CCFE-46DA-BA14-98EC53E0DE24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
