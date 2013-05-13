@@ -49,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="1_TestBase.fs" />
-    <Compile Include="2_Tests.fs" />
+    <Compile Include="2_TagParserTest.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PgnParser\PgnParser.fsproj">
