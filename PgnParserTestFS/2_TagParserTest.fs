@@ -1,7 +1,7 @@
 ﻿namespace ilf.pgn.Test
 
 open ilf.pgn
-open ilf.pgn.PgnParsers
+open ilf.pgn.PgnParsers.Tag
 open ilf.pgn.Test.TestBase
 
 open Microsoft.VisualStudio.TestTools.UnitTesting

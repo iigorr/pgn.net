@@ -48,10 +48,11 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parser.fs" />
-    <Compile Include="ParseException.fs" />
-    <Compile Include="PgnParsers.fs" />
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="ParseException.fs" />
+    <Compile Include="BasicParsers.fs" />
+    <Compile Include="TagParsers.fs" />
+    <Compile Include="Parser.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\pgn.net\pgn.net.csproj">
