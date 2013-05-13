@@ -26,4 +26,4 @@ let tagContent= pTagName .>>. (spaces >>. tagValue);
 
 let pTag = spaces >>. pchar '[' >>. spaces >>. tagContent .>> spaces .>> pchar ']' .>> spaces
 
-let appyPTag (p: string)= run pTag 
+let appyPTag (p: string)= run pTag p
