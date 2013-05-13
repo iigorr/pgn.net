@@ -95,3 +95,47 @@ type MoveParserTest() =
         tryParse pBasicMove "N5f3"
         tryParse pBasicMove "Rdd5"
         tryParse pBasicMove "R3d5"
+
+    [<TestMethod>]
+    member this.pPawnPromotion_should_accept_pawn_promotion_moves() =
+        tryParse pPawnPromotion "d8Q"
+        tryParse pPawnPromotion "c8R"
+        tryParse pPawnPromotion "Pc8R"
+
+    [<TestMethod>]
+    member this.pCastle_should_accept_catling() =
+        tryParse pCastle "O-O"
+        tryParse pCastle "O-O-O"
+        tryParse pCastle "0-0"
+        tryParse pCastle "0-0-0"
+
+    [<TestMethod>]
+    member this.pMove_should_accept_all_kinds_of_moves() =
+        tryParse pMove "Rc5"
+        tryParse pMove "QF1"
+        tryParse pMove "c5xQD5"
+        tryParse pMove "Qc5:Bd5"
+        tryParse pMove "cxd5e.p."
+        tryParse pMove "d5"
+        tryParse pMove "N5f3"
+        tryParse pMove "Pc8R"
+        tryParse pMove "O-O"
+        tryParse pMove "0-0-0"
+
+        
+    [<TestMethod>]
+    member this.pMove_should_accept_moves_with_check_annotation() =
+        tryParse pMove "c5xQD5+"
+        tryParse pMove "Qc5:Bd5†"
+        tryParse pMove "Qc5:Bd5ch"
+
+    [<TestMethod>]
+    member this.pMove_should_accept_moves_with_doublecheck_annotation() =
+        tryParse pMove "c5xQD5++"
+        tryParse pMove "Qc5:Bd5††"
+        tryParse pMove "Qc5:Bd5dbl ch"
+
+    [<TestMethod>]
+    member this.pMove_should_accept_moves_with_check_mate_annotation() =
+        tryParse pMove "Qd2#"
+        tryParse pMove "Qxd2‡"
