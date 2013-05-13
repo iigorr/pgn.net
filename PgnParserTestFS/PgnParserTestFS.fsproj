@@ -48,8 +48,8 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="1_TestBase.fs" />
-    <Compile Include="2_TagParserTest.fs" />
+    <Compile Include="TestBase.fs" />
+    <Compile Include="TagParserTest.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PgnParser\PgnParser.fsproj">
