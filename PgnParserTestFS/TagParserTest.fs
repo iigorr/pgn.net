@@ -7,7 +7,7 @@ open ilf.pgn.Test.TestBase
 open Microsoft.VisualStudio.TestTools.UnitTesting
 
 [<TestClass>]
-type ParserTests() = 
+type TagParserTests() = 
     [<TestMethod; ExpectedException(typeof<ParseException>)>]
     member this.pTag_should_fail_if_expressions_starts_with_non_bracket() =
         tryParse pTag "test"
