@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="TestBase.fs" />
     <Compile Include="TagParserTest.fs" />
+    <Compile Include="MoveParsersTest.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PgnParser\PgnParser.fsproj">

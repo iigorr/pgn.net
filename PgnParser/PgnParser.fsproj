@@ -52,6 +52,7 @@
     <Compile Include="ParseException.fs" />
     <Compile Include="BasicParsers.fs" />
     <Compile Include="TagParsers.fs" />
+    <Compile Include="MoveParsers.fs" />
     <Compile Include="Parser.fs" />
   </ItemGroup>
   <ItemGroup>
