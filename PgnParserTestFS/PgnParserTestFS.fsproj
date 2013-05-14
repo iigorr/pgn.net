@@ -54,6 +54,11 @@
     <Compile Include="MoveSieriesParserTests.fs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\pgn.net\pgn.net.fsproj">
+      <Name>pgn.net</Name>
+      <Project>{e3c61152-f675-49e9-8f18-58c68c8bc33d}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\PgnParser\PgnParser.fsproj">
       <Name>PgnParser</Name>
       <Project>{5a0392f9-1ca1-4349-a04e-341fb8600c72}</Project>
