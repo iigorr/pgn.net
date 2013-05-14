@@ -51,6 +51,7 @@
     <Compile Include="TestBase.fs" />
     <Compile Include="TagParserTest.fs" />
     <Compile Include="MoveParsersTest.fs" />
+    <Compile Include="MoveSieriesParserTests.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PgnParser\PgnParser.fsproj">
