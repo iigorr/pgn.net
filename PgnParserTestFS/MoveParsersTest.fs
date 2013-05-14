@@ -84,6 +84,11 @@ type MoveParserTest() =
 
 
     [<TestMethod>]
+    member this.pBasicMove_should_accept_pawn_move() =
+        tryParse pBasicMove "e2e4"
+
+
+    [<TestMethod>]
     member this.pBasicMove_should_accept_simple_target_move() =
         tryParse pBasicMove "Rc5"
         tryParse pBasicMove "d4d5"
@@ -112,6 +117,7 @@ type MoveParserTest() =
     [<TestMethod>]
     member this.pMove_should_accept_all_kinds_of_moves() =
         tryParse pMove "Rc5"
+        tryParse pMove "e2e4"
         tryParse pMove "QF1"
         tryParse pMove "c5xQD5"
         tryParse pMove "Qc5:Bd5"
