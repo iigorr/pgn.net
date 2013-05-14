@@ -8,6 +8,7 @@ let str = pstring
 let strCI = pstringCI
 let pNotChar c = manySatisfy (fun x -> x <> c)
 
+let charList2String (lChars: char list)= System.String.Concat(lChars)
 
 let pList(p, list:'a list) = list |> List.map p |> choice
 
