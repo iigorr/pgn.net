@@ -56,13 +56,6 @@
     <Compile Include="MoveSeriesParsers.fs" />
     <Compile Include="Parser.fs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\pgn.net\pgn.net.csproj">
-      <Name>pgn.net</Name>
-      <Project>{68eedf75-a3f0-4132-bb92-a9ac517be05e}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
   </PropertyGroup>

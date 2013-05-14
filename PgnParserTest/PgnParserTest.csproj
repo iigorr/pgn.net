@@ -54,10 +54,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\pgn.net\pgn.net.csproj">
-      <Project>{68eedf75-a3f0-4132-bb92-a9ac517be05e}</Project>
-      <Name>pgn.net</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PgnParser\PgnParser.fsproj">
       <Project>{5a0392f9-1ca1-4349-a04e-341fb8600c72}</Project>
       <Name>PgnParser</Name>
