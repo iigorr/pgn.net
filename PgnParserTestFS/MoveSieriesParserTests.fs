@@ -28,10 +28,17 @@ type MoveSeriesParserTest() =
 
     [<TestMethod>]
     member this.pMovePair_should_accept_move_pair() =
-        tryParse pMovePair "1. e2e4 Nb8c6"
-        tryParse pMovePair "1 .   e2e4   Nb8c6"    
+        tryParse pMoveSeriesEntry "1. e2e4 Nb8c6"
+        tryParse pMoveSeriesEntry "1 .   e2e4   Nb8c6"    
     
     [<TestMethod>]
-    member this.pMovePair_should_accept_a_split_move() =
-        tryParse pMovePair "1. e2e4 \n 1... Nb8c6"
+    member this.pMovePair_should_accept_a_split_move_pair() =
+        tryParse pMoveSeriesEntry "1. e2e4 \n 1... Nb8c6"
 
+    [<TestMethod>]
+    member this.pMovePair_should_accept_a_single_move_by_white() =
+        tryParse pMoveSeriesEntry "13.Nxd4"
+
+    [<TestMethod>]
+    member this.pMovePair_should_accept_a_continued_move_by_black() =
+        tryParse pMoveSeriesEntry "13... Ba6"

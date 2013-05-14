@@ -6,11 +6,14 @@ open ilf.pgn.PgnParsers.Move
 
 let pPeriods = (many1Chars (pchar '.')) <|> str "…"
 
-let pMoveNumberIndicator = pint32 .>> ws .>> pPeriods <!> "pMoveNumberIndicator"
-let pFinishedMovePair =
-    opt pMoveNumberIndicator .>> ws1 .>> pMove .>> ws1 .>> pMove <!> "pFinishedMovePair"
-let pUnfinishedMovePair = 
-    opt pMoveNumberIndicator .>> ws1 .>> pMove <!> "pUnfinishedMovePair"
+let pMoveNumberIndicator = (pint32 |>> fun c -> c.ToString()) .>> ws .>> pPeriods <!> "pMoveNumberIndicator"
+let pFullMoveEntry =
+    opt pMoveNumberIndicator .>> ws .>> pMove .>> ws1 .>> pMove <!> "pFullMoveEntry"
+let pSplitMoveEntry = 
+    opt pMoveNumberIndicator .>> ws .>> pMove <!> "pSplitMoveEntry"
 
-let pMovePair= attempt(pFinishedMovePair) <|> (pUnfinishedMovePair .>> ws .>> pUnfinishedMovePair) <!> "pMovePair"
-let appyPMoveSeries (p: string)= run pMovePair p
+let pCommentary = pchar '{' >>. sepEndBy (noneOf "{") (pchar '}') |>> charList2String
+let pMoveSeriesEntry= attempt(pFullMoveEntry) <|> pSplitMoveEntry  <!> "pMoveSeriesEntry"
+
+let appyPMoveSeries (p: string)= run pMoveSeriesEntry p
+let appyPCommentary (p: string)= run pCommentary p
