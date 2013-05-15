@@ -1,6 +1,7 @@
 ﻿module ilf.pgn.PgnParsers.Tag
 
 open FParsec
+open ilf.pgn
 open ilf.pgn.PgnParsers.Basic
 
 let sevenTagRoasterTagNames= ["Event"; "Site"; "Date"; "Round"; "White"; "Black"; "Result"];
@@ -20,10 +21,9 @@ let pTagName =
     |> choice
 
 
-
 let tagValue = pchar '"' >>. (pNotChar '"') .>> pchar '"'
 let tagContent= pTagName .>>. (spaces >>. tagValue);
 
-let pTag = spaces >>. pchar '[' >>. spaces >>. tagContent .>> spaces .>> pchar ']' .>> spaces
+let pTag = spaces .>> pchar '[' .>> spaces >>. tagContent .>> spaces .>> pchar ']' .>> spaces |>> fun (name, value) -> PgnTag(name, value)
 
-let appyPTag (p: string)= run pTag p
+let applyPTag p = run pTag p

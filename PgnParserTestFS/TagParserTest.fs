@@ -51,3 +51,11 @@ type TagParserTests() =
         let parseTag x = tryParse pTag ("["+ x + " \"Foo\"]")
         List.map parseTag allowedTagNames |> ignore
         ()
+
+    [<TestMethod>]
+    member this.pTag_should_create_a_Tag_object_from_a_valid_tag() =
+        let tag= parse pTag "[Date \"2013.05.15\"]"
+        Assert.IsInstanceOfType(tag, typeof<PgnTag>)
+        Assert.AreEqual("Date", tag.Name)
+        Assert.AreEqual("2013.05.15", tag.Value)
+

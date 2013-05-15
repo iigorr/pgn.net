@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Game.fs" />
     <Compile Include="Database.fs" />
+    <Compile Include="PgnTag.fs" />
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
