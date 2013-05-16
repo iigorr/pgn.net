@@ -17,14 +17,9 @@ let findPiece(a: string) =
     | "R" -> Piece.Rook
     | "Q" -> Piece.Queen
     | "K" -> Piece.King
-    | _ -> raise <| System.ArgumentException "Invalid piece character"
+    | _ -> raise <| System.ArgumentException("Invalid piece character " + a)
 
 let fileSymbol = [ 'a' .. 'h'] |> List.map (fun x -> x.ToString())
-
-let myFunc a = 
-    match a with 
-    | "A" -> 1
-    | _ -> 0
 
 let findFile (a: string) =
     match a.ToUpper() with
@@ -36,7 +31,7 @@ let findFile (a: string) =
     |"F" -> File.F
     |"G" -> File.G
     |"H" -> File.H
-    | _ -> raise <| System.ArgumentException "Invalid file letter"
+    | _ -> raise <| System.ArgumentException ("Invalid file letter " + a)
 
 let rankSymbol = [1 .. 8] |> List.map (fun x -> x.ToString())
 
@@ -48,6 +43,31 @@ type MoveInfo(piece, file, rank) =
     member val Piece : Piece option = piece with get, set
     member val File  : File option = file with get, set
     member val Rank  : int option = rank with get, set
+
+let getSquare(moveInfo : MoveInfo) =
+    match moveInfo.File, moveInfo.Rank with
+    | Some(x), Some(y) -> Some(Square(x, y))
+    | _, _ -> None
+
+let getMove(originInfo: MoveInfo option, targetInfo: MoveInfo, moveType: MoveType) = 
+    match originInfo, targetInfo with
+    | None, _ -> Move (
+                    Type = moveType,
+                    Piece = targetInfo.Piece,
+                    TargetPiece = targetInfo.Piece,
+                    TargetSquare =getSquare targetInfo,
+                    TargetFile = targetInfo.File
+                )
+    | Some(orig), _ -> Move (
+                        Type = moveType,
+                        Piece = orig.Piece,
+                        OriginSquare = getSquare orig,
+                        OriginFile = orig.File,
+                        OriginRank = orig.Rank,
+                        TargetPiece = targetInfo.Piece,
+                        TargetSquare =getSquare targetInfo,
+                        TargetFile = targetInfo.File
+                     )
 
 //MOVE MECHANICS
 
@@ -61,59 +81,74 @@ let pTarget =
 
 // origin squalre of move (usually for disambiguation)
 let pOrigin = 
-        opt pPiece .>>. opt pFile .>>. opt pRank 
-        |>> fun ((piece, file), rank) ->  MoveInfo(piece, file, rank)
+    opt pPiece .>>. opt pFile .>>. opt pRank 
+    |>> fun ((piece, file), rank) ->  MoveInfo(piece, file, rank)
     <!> "pOrigin"
+
+let pBasicMove = 
+    attempt (pOrigin .>>. pTarget) |>> fun (origin, target) -> getMove(Some(origin), target, MoveType.Simple)
+    <|> (pTarget |>> fun target -> getMove(None, target, MoveType.Simple))
+    <!> "pBasicMove"
 
 // parsers for capturing
 let pCapturingSign = (pchar 'x' <|> pchar ':') |>> fun x -> x.ToString()
 
-let pSuffixCaptureMove = // e.g. Qf4x or Qf4:
-    pTarget .>> pCapturingSign  
-    |>> fun moveInfo -> new Move()
-
 let pInfixCaptureMove =   // e.g. QxBc5
     pOrigin .>> pCapturingSign .>>. pTarget
-    |>> fun moveInfo -> new Move() 
+    |>> fun (orig, target) -> getMove(Some orig, target, MoveType.Capture)
+    <!> "pInfixCaptureMove"
 
 let pSimplifiedPawnCapture =  // e.g. dxe or de
     pFile .>> (pCapturingSign <|>% "") .>>. pFile 
     |>> fun (file1, file2) -> 
         new Move (
-//            Type = MoveType.Capture,
-//            Piece = Some(Piece.Pawn),
-//            TargetPiece = Some(Piece.Pawn),
-//            SourceFile = Some(file1),
-//            TargetFile = Some(file2)
-         ) 
+            Type = MoveType.Capture,
+            Piece = Some(Piece.Pawn),
+            TargetPiece = Some(Piece.Pawn),
+            OriginFile = Some(file1),
+            TargetFile = Some(file2)
+    )
+    <!> "pSimplifiedPawnCapture"
+
+let pSuffixCaptureMove = // e.g. Qf4d4x or Qf4:
+    pBasicMove .>> pCapturingSign 
+    |>> fun move -> move.Type <- MoveType.Capture; move
+    <!> "pSuffixCaptureMove"
 
 let pBasicCapturingMove = 
-        attempt pSimplifiedPawnCapture
-    <|> attempt pSuffixCaptureMove 
-    <|> attempt pInfixCaptureMove
+    attempt (attempt pInfixCaptureMove <|> pSuffixCaptureMove)
+    <|> pSimplifiedPawnCapture
+    <!> "pBasicCapturingMove"
 
 
 // the two most common move types: move and capture
-let pCapturingMove = pBasicCapturingMove .>> opt (strCI "e.p.") <!> "pCapturingMove"
-let pBasicMove = 
-    attempt (pOrigin .>>. pTarget) |>> fun (origin, target) -> new Move()
-    <|> (pTarget |>> fun target -> new Move())
-    <!> "pBasicMove"
+let pCapturingMove = 
+    pBasicCapturingMove .>>. opt (strCI "e.p." ) //TODO: e.p. should only be allowed for pawns
+    |>> fun (move, enpassant) ->
+            match enpassant with
+            | None -> move
+            | _ -> move.Type <- MoveType.CaptureEnPassant; move
+    <!> "pCapturingMove"
+
 
 // special moves: pawn promotion and castle (king-side, queen-side)
+// TODO: this parser allows to much, e.g. Qxd5(R). 
+//       It should be asserted, that the moved piece is a pawn.
+//       If rank is set, then only rank 8 is allowed
 let pPawnPromotion = 
-    opt (strCI "P") .>> pFile .>> str "8" >>. pPiece 
-    |>> fun piece -> new Move()//Type = MoveType.PawnPromotion, PromotedPiece = Some(piece))
+    (attempt  pBasicCapturingMove <|> pBasicMove)
+    .>>. ((str "=" >>. pPiece) <|> (str "(" >>. pPiece .>> str ")"))
+    |>> fun (move, piece) -> move.PromotedPiece <- Some piece; move
     <!> "pPawnPromotion"
 
 let pCasteKingSide = 
     str "O-O" <|> str "O - O" <|> str "0-0"  <|> str "0 - 0" 
-    |>> fun _ -> new Move()//Type=MoveType.CastleKingSide) 
+    |>> fun _ -> new Move(Type=MoveType.CastleKingSide) 
     <!> "pCastleKingSide"
 
 let pCasteQueenSide = 
     str "O-O-O" <|> str "O - O - O" <|> str "0-0-0"  <|> str "0 - 0 - 0" 
-    |>> fun _ -> new Move()//Type=MoveType.CastleQueenSide) 
+    |>> fun _ -> new Move(Type=MoveType.CastleQueenSide) 
     <!> "pCasteQueenSide"
 
 let pCastle = pCasteQueenSide <|> pCasteKingSide
@@ -123,9 +158,9 @@ let pCheckIndicator = str "+" <|> str "†" <|> str "ch" <|> str "++" <|> str "�
 let pCheckMateIndicator = str "#" <|> str "‡"
 
 let pMove = 
-    attempt pBasicMove <|> 
-    attempt pCapturingMove <|>
     attempt pPawnPromotion <|>
+    attempt pCapturingMove <|>
+    attempt pBasicMove <|> 
     pCastle
     .>> opt (pCheckIndicator <|> pCheckMateIndicator)
     <!> "pMove"
