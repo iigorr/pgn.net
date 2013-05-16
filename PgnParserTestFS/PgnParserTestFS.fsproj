@@ -38,11 +38,9 @@
     <Reference Include="FParsecCS">
       <HintPath>..\lib\FParsecCS.dll</HintPath>
     </Reference>
+    <Reference Include="FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="mscorlib" />
-    <Reference Include="FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
@@ -56,7 +54,7 @@
   <ItemGroup>
     <ProjectReference Include="..\pgn.net\pgn.net.fsproj">
       <Name>pgn.net</Name>
-      <Project>{e3c61152-f675-49e9-8f18-58c68c8bc33d}</Project>
+      <Project>{4785baec-b14a-4fcc-8318-11d49b451439}</Project>
       <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\PgnParser\PgnParser.fsproj">
