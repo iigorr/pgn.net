@@ -1,7 +1,8 @@
 language: c
 
 install:
-  - sudo apt-get install mono-devel mono-gmcs nunit
+  - sudo apt-get install mono-devel mono-gmcs nunit-consolescript:
 
 script:
-  - xbuild pgn.net.sln
+  - xbuild CI.proj
+
