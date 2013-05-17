@@ -32,9 +32,19 @@ let pCommentary =
     <|> between (str "(") (str ")") (many (noneOf ")"))
     <|> between (str ";") newline (many (noneOf "\n")) //to end of line comment
     |>>charList2String
-    
+
+let pOneHalf = str "1/2" <|> str "½"
+let pDraw = pOneHalf .>> ws .>> str "-" .>> ws .>> pOneHalf |>> fun _ -> MoveEntryType.GameEndDraw
+let pWhiteWin = str "1" .>> ws .>> str "-" .>> ws .>> str "0"  |>> fun _ -> MoveEntryType.GameEndWhite
+let pBlackWin = str "0" .>> ws .>> str "-" .>> ws .>> str "1"  |>> fun _ -> MoveEntryType.GameEndBlack
+let pEndOpen = str "*"  |>> fun _ -> MoveEntryType.GameEndOpen
+
+let pEndOfGame =
+    pDraw <|> pWhiteWin <|> pBlackWin <|> pEndOpen |>> fun endType -> MoveEntry(Type = endType )
+
 let pMoveSeriesEntry= 
-    attempt(pFullMoveEntry) 
+    attempt(pEndOfGame)
+    <|> attempt(pFullMoveEntry) 
     <|> pSplitMoveEntry
     .>> ws .>>. opt pCommentary
     |>> fun (entry, comment) -> 

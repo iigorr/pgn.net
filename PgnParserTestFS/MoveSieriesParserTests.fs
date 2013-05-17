@@ -1,6 +1,7 @@
 ﻿namespace ilf.pgn.Test
 
 open ilf.pgn
+open ilf.pgn.MoveSeries
 open ilf.pgn.PgnParsers.Move
 open ilf.pgn.PgnParsers.MoveSeries
 open ilf.pgn.Test.TestBase
@@ -115,3 +116,35 @@ type MoveSeriesParserTest() =
 
         Assert.AreEqual(4, moveSeries.Length)
         Assert.AreEqual(Some "This opening is called the Ruy Lopez.", moveSeries.Item(2).Comment) 
+
+
+    [<TestMethod>]
+    member this.pEndOfGame_should_accept_Draw() =
+        let entry = parse pEndOfGame "1/2 - 1/2"
+
+        Assert.AreEqual(MoveEntryType.GameEndDraw, entry.Type)
+
+    [<TestMethod>]
+    member this.pEndOfGame_should_accept_WhiteWin() =
+        let entry = parse pEndOfGame "1-0"
+
+        Assert.AreEqual(MoveEntryType.GameEndWhite, entry.Type)
+
+    [<TestMethod>]
+    member this.pEndOfGame_should_accept_BlackWin() =
+        let entry = parse pEndOfGame "0-1"
+
+        Assert.AreEqual(MoveEntryType.GameEndBlack, entry.Type)
+
+    [<TestMethod>]
+    member this.pEndOfGame_should_accept_EndOpen() =
+        let entry = parse pEndOfGame "*"
+
+        Assert.AreEqual(MoveEntryType.GameEndOpen, entry.Type)
+
+    [<TestMethod>]
+    member this.pMoveSeriesEntry_should_accept_comment_after_end_game() =
+        let entry = parse pMoveSeriesEntry "1-0 {impressive game!}"
+
+        Assert.AreEqual(MoveEntryType.GameEndWhite, entry.Type)       
+        Assert.AreEqual(Some "impressive game!", entry.Comment)
