@@ -83,3 +83,35 @@ type MoveSeriesParserTest() =
         let moveSeries = parse pMoveSeries "1. e4 c5 2. Nf3 \n 2... d6 3. Bb5+ Bd7"
          
         Assert.AreEqual(4, moveSeries.Length)
+
+    [<TestMethod>]
+    member this.pMoveEntry_should_accept_comments_in_braces() =
+        let entry = parse pMoveSeriesEntry "13... Ba6{this is a comment}"
+
+        Assert.AreEqual(Some "this is a comment", entry.Comment)
+
+    [<TestMethod>]
+    member this.pMoveEntry_should_accept_comments_in_parantheses() =
+        let entry = parse pMoveSeriesEntry "13... Ba6(this is a comment)"
+
+        Assert.AreEqual(Some  "this is a comment", entry.Comment)
+        
+    [<TestMethod>]
+    member this.pMoveEntry_should_accept_comments_in_square_brackets() =
+        let entry = parse pMoveSeriesEntry "13... Ba6[this is a comment]"
+
+        Assert.AreEqual(Some  "this is a comment", entry.Comment)
+
+    [<TestMethod>]
+    member this.pMoveEntry_should_accept_comments_after_whitespaces() =
+        let entry = parse pMoveSeriesEntry "13... Ba6  \n\t[this is a comment]"
+
+        Assert.AreEqual(Some  "this is a comment", entry.Comment)
+
+    [<TestMethod>]
+    member this.pMoveEntry_should_accept_comments_semicolon_comment() =
+        let moveSeries = parse pMoveSeries "1. e4 e5 2. Nf3 Nc6 3. Bb5 ;This opening is called the Ruy Lopez.
+        3... a6"
+
+        Assert.AreEqual(4, moveSeries.Length)
+        Assert.AreEqual(Some "This opening is called the Ruy Lopez.", moveSeries.Item(2).Comment) 

@@ -26,8 +26,22 @@ let pSplitMoveEntry =
             | false -> MoveEntry(MoveNumber=Some num, Black= Some move)
     <!> "pSplitMoveEntry"
 
-let pCommentary = pchar '{' >>. sepEndBy (noneOf "{") (pchar '}') |>> charList2String
-let pMoveSeriesEntry= attempt(pFullMoveEntry) <|> pSplitMoveEntry  <!> "pMoveSeriesEntry"
+let pCommentary = 
+    between (str "{") (str "}") (many (noneOf "}")) 
+    <|> between (str "[") (str "]") (many (noneOf "]"))
+    <|> between (str "(") (str ")") (many (noneOf ")"))
+    <|> between (str ";") newline (many (noneOf "\n")) //to end of line comment
+    |>>charList2String
+    
+let pMoveSeriesEntry= 
+    attempt(pFullMoveEntry) 
+    <|> pSplitMoveEntry
+    .>> ws .>>. opt pCommentary
+    |>> fun (entry, comment) -> 
+            match comment with
+            | None -> entry
+            | Some(c) -> entry.Comment <- Some c; entry
+    <!> "pMoveSeriesEntry"
 
 let pMoveSeries = sepEndBy pMoveSeriesEntry ws
 let appyPCommentary (p: string)= run pCommentary p
