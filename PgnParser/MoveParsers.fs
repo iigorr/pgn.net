@@ -99,7 +99,11 @@ let pInfixCaptureMove =   // e.g. QxBc5
     <!> "pInfixCaptureMove"
 
 let pSimplifiedPawnCapture =  // e.g. dxe or de
-    pFile .>> (pCapturingSign <|>% "") .>>. pFile 
+    pFile .>> pCapturingSign .>>. pFile 
+    >>= fun(f1, f2) -> 
+        match f1 = f2 with //do not allow a6xa7
+        | true -> pzero
+        | false -> preturn (f1, f2)
     |>> fun (file1, file2) -> 
         new Move (
             Type = MoveType.Capture,

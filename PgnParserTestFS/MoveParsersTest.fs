@@ -117,8 +117,11 @@ type MoveParserTest() =
     [<TestMethod>]
     member this.pCapturingMove_should_accept_simplified_pawn_capturing_moves() =
         tryParse pCapturingMove "cxd" //pawn on c captures pawn on d5 en passant
-        tryParse pCapturingMove "cd" //pawn on c captures pawn on d5 en passant
         tryParse pCapturingMove "cxde.p" //pawn on c captures pawn on d5 en passant
+
+    [<TestMethod>]
+    member this.pCapturingMove_should_accept_simplified_pawn_capturing_on_same_lane_should_fail() =
+        shouldFail pCapturingMove "axa" //pawn on c captures pawn on d5 en passant
 
     [<TestMethod>]
     member this.pCapturing_move_should_parse_normal_move_correctly() =
