@@ -158,15 +158,73 @@ let pCasteQueenSide =
 let pCastle = pCasteQueenSide <|> pCasteKingSide
 
 // indicators
-let pCheckIndicator = str "+" <|> str "†" <|> str "ch" <|> str "++" <|> str "††" <|> str "dbl ch"
-let pCheckMateIndicator = str "#" <|> str "‡"
-
+let pCheckIndicator = str "++" <|> str "††" <|> str "dbl ch" <|> str "+" <|> str "†" <|> str "ch" <!> "pCheckIndicator"
+let pCheckMateIndicator = str "#" <|> str "‡" <!> "pCheckMateIndicator"
+let pIndicator = pCheckIndicator <|> pCheckMateIndicator
+let pAnnotation = 
+    str "????" <|> str "???"
+    <|> str "!!!!" <|> str "!!!" <|> str "?!?" <|> str "!?!" <|> str "??" <|> str "?!"
+    <|> str "!!" <|> str "!?" <|> str "?" <|> str "!"
+    <|> str "=/∞" <|> str "=/+" <|> str "="
+    <|> str "+/=" <|> str "+/-" <|> str "+-" <|> str "-/+" <|> str "-+"
+    <|> str "∞" <|> str "○" <|> str "↑↑" <|> str "↑" <|> str "⇄" <|> str "∇" <|> str "Δ"
+    <|> str "TN" <|> str "N"
+    |>> fun annotation ->
+            match annotation with
+            | "!!!" | "!!!!" -> MoveAnnotation.MindBlowing
+            | "!!" -> MoveAnnotation.Brilliant
+            | "!" -> MoveAnnotation.Good
+            | "!?" -> MoveAnnotation.Interesting
+            | "?!" -> MoveAnnotation.Dubious
+            | "?" -> MoveAnnotation.Mistake
+            | "??" -> MoveAnnotation.Blunder
+            | "???" | "????" -> MoveAnnotation.Abysmal
+            | "!?!" | "?!?" -> MoveAnnotation.FascinatingButUnsound
+            | "∞" -> MoveAnnotation.Unclear
+            | "=/∞" -> MoveAnnotation.WithCompensation
+            | "=" -> MoveAnnotation.EvenPosition
+            | "+/=" -> MoveAnnotation.SlightAdvantageWhite
+            | "=/+" -> MoveAnnotation.SlightAdvantageBlack
+            | "+/-" -> MoveAnnotation.AdvantageWhite
+            | "-/+" -> MoveAnnotation.AdvantageBlack
+            | "+-" -> MoveAnnotation.DecisiveAdvantageWhite
+            | "-+" -> MoveAnnotation.DecisiveAdvantageBlack
+            | "○" -> MoveAnnotation.Space
+            | "↑" -> MoveAnnotation.Initiative
+            | "↑↑" -> MoveAnnotation.Development
+            | "⇄" -> MoveAnnotation.Counterplay
+            | "∇" -> MoveAnnotation.Countering
+            | "Δ" -> MoveAnnotation.Idea
+            | "TN" | "N" -> MoveAnnotation.TheoreticalNovelty
+            | _ -> MoveAnnotation.UnknownAnnotation
+    <!> "pAnnotation"
+let pAdditionalInfo =
+    (attempt(pIndicator .>>. pAnnotation) |>> fun (i, a) -> Some(i), Some(a))
+    <|> (attempt(pAnnotation) |>> fun (a) -> None, Some(a))
+    <|> (pIndicator|>> fun (i) -> Some(i), None)
+    
 let pMove = 
     attempt pPawnPromotion <|>
     attempt pCapturingMove <|>
     attempt pBasicMove <|> 
     pCastle
-    .>> opt (pCheckIndicator <|> pCheckMateIndicator)
+    .>>. opt(pAdditionalInfo)
+    |>> fun (move, addInfo) ->
+            let indicator, annotation = 
+                match addInfo with
+                | None -> None, None
+                | Some(x) -> x
+            move.Annotation<- annotation
+            match indicator with 
+            | None -> move
+            | Some(i) ->
+                match i with
+                | "+"  | "†"  | "ch" -> move.IsCheck <- Some true; move
+                | "++" | "††" | "dbl ch" -> move.IsCheck <- Some true; move.IsDoubleCheck <- Some true; move
+                | "#"  | "‡" -> move.IsCheckMate <- Some true; move
+                | _ -> move
+
+
     <!> "pMove"
 
 let appyPMove (p: string)= run pMove p

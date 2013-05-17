@@ -8,7 +8,35 @@ type MoveType =
     | CaptureEnPassant
     | CastleKingSide
     | CastleQueenSide
-    | PawnPromotion
+
+type MoveAnnotation =
+    | MindBlowing
+    | Brilliant
+    | Good
+    | Interesting
+    | Dubious
+    | Mistake
+    | Blunder
+    | Abysmal
+    | FascinatingButUnsound
+    | Unclear
+    | WithCompensation
+    | EvenPosition
+    | SlightAdvantageWhite
+    | SlightAdvantageBlack
+    | AdvantageWhite
+    | AdvantageBlack
+    | DecisiveAdvantageWhite
+    | DecisiveAdvantageBlack
+    | Space
+    | Initiative
+    | Development
+    | Counterplay
+    | Countering
+    | Idea
+    | TheoreticalNovelty
+    | UnknownAnnotation
+
 
 type Move() =
     member val Type = MoveType.Simple with get, set
@@ -20,6 +48,10 @@ type Move() =
     member val OriginFile : File option = None with get, set
     member val OriginRank : int option = None with get, set
     member val PromotedPiece : Piece option = None with get, set
+    member val IsCheck : bool option = None with get, set
+    member val IsDoubleCheck : bool option = None with get, set
+    member val IsCheckMate : bool option = None with get, set
+    member val Annotation : MoveAnnotation option = None with get, set
 
     override x.Equals(yobj) =
         match yobj with
@@ -39,3 +71,6 @@ type Move() =
             && (x.OriginFile = y.OriginFile)
             && (x.OriginRank = y.OriginRank)
             && (x.PromotedPiece = y.PromotedPiece)
+            && (x.IsCheck = y.IsCheck)
+            && (x.IsCheckMate = y.IsCheckMate)
+            && (x.Annotation = y.Annotation)

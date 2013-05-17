@@ -332,6 +332,14 @@ type MoveParserTest() =
         Assert.AreEqual(Some Piece.Queen, move.PromotedPiece);
 
     [<TestMethod>]
+    member this.pMove_should_correctly_parse_promotion_move_wiht_check() =
+        let move = parse pMove "c8=Q+"
+        Assert.AreEqual(MoveType.Simple, move.Type);
+        Assert.AreEqual(Some(Square(File.C, 8)), move.TargetSquare);
+        Assert.AreEqual(Some Piece.Queen, move.PromotedPiece);
+        Assert.IsTrue(move.IsCheck.Value);
+
+    [<TestMethod>]
     member this.pMove_should_correctly_parse_castle_king_side() =
         let move = parse pMove "O-O"
         Assert.AreEqual(MoveType.CastleKingSide, move.Type);
@@ -340,3 +348,60 @@ type MoveParserTest() =
     member this.pMove_should_correctly_parse_castle_queen_side() =
         let move = parse pMove "0-0-0"
         Assert.AreEqual(MoveType.CastleQueenSide, move.Type);
+
+    [<TestMethod>]
+    member this.pMove_should_correctly_parse_check_indicator() =
+        let move = parse pMove "Bb5+"
+
+        Assert.AreEqual(MoveType.Simple, move.Type)
+        Assert.IsTrue(move.IsCheck.Value)
+
+    [<TestMethod>]
+    member this.pMove_should_correctly_parse_dbl_check_indicator() =
+        let move = parse pMove "Bb5++"
+
+        Assert.AreEqual(MoveType.Simple, move.Type)
+        Assert.IsTrue(move.IsCheck.Value)
+        Assert.IsTrue(move.IsDoubleCheck.Value)
+
+    [<TestMethod>]
+    member this.pMove_should_correctly_parse_checkmate_indicator() =
+        let move = parse pMove "Bb5#"
+
+        Assert.AreEqual(MoveType.Simple, move.Type)
+        Assert.IsTrue(move.IsCheckMate.Value)
+
+    [<TestMethod>]
+    member this.pMove_should_correctly_parse_annotation() =
+        let move = parse pMove "Bb5+!"
+
+        Assert.AreEqual(MoveType.Simple, move.Type)
+        Assert.IsTrue(move.IsCheck.Value)
+        Assert.AreEqual(MoveAnnotation.Good, move.Annotation.Value)
+
+    [<TestMethod>]
+    member this.pMove_should_correctly_parse_differentAnnotations() =
+        Assert.AreEqual(MoveAnnotation.MindBlowing, (parse pMove "Bb5!!!").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.Brilliant, (parse pMove "Bb5!!").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.Good, (parse pMove "Bb5!").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.Interesting, (parse pMove "Bb5!?").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.Dubious, (parse pMove "Bb5?!").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.Mistake, (parse pMove "Bb5?").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.Blunder, (parse pMove "Bb5??").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.Abysmal, (parse pMove "Bb5???").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.FascinatingButUnsound, (parse pMove "Bb5!?!").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.Unclear, (parse pMove "Bb5∞").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.WithCompensation, (parse pMove "Bb5=/∞").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.EvenPosition, (parse pMove "Bb5=").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.SlightAdvantageWhite, (parse pMove "Bb5+/=").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.SlightAdvantageBlack, (parse pMove "Bb5=/+").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.AdvantageWhite, (parse pMove "Bb5+/-").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.AdvantageBlack, (parse pMove "Bb5-/+").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.DecisiveAdvantageWhite, (parse pMove "Bb5+-").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.Space, (parse pMove "Bb5○").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.Initiative, (parse pMove "Bb5↑").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.Development, (parse pMove "Bb5↑↑").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.Counterplay, (parse pMove "Bb5⇄").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.Countering, (parse pMove "Bb5∇").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.Idea, (parse pMove "Bb5Δ").Annotation.Value)
+        Assert.AreEqual(MoveAnnotation.TheoreticalNovelty, (parse pMove "Bb5N").Annotation.Value)
