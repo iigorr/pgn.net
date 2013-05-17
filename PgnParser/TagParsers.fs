@@ -19,11 +19,14 @@ let pTagName =
     suplementTagNames @ sevenTagRoasterTagNames
     |> Seq.map pstring 
     |> choice
+    <!> "pTagName"
 
 
 let tagValue = pchar '"' >>. (pNotChar '"') .>> pchar '"'
 let tagContent= pTagName .>>. (spaces >>. tagValue);
 
-let pTag = spaces .>> pchar '[' .>> spaces >>. tagContent .>> spaces .>> pchar ']' .>> spaces |>> fun (name, value) -> PgnTag(name, value)
+let pTag = 
+    ws .>> pchar '[' .>> ws >>. tagContent .>> ws .>> pchar ']' .>> ws |>> fun (name, value) -> PgnTag(name, value)
+    <!> "pTag"
 
 let applyPTag p = run pTag p

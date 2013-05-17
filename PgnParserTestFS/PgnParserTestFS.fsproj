@@ -50,6 +50,7 @@
     <Compile Include="TagParserTest.fs" />
     <Compile Include="MoveParsersTest.fs" />
     <Compile Include="MoveSieriesParserTests.fs" />
+    <Compile Include="GameParserTest.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\pgn.net\pgn.net.fsproj">

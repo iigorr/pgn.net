@@ -23,6 +23,7 @@ type MoveParserTest() =
     [<TestMethod>]
     member this.pTarget_should_accept_a_pawn_move_with_omitted_FigureSymbol() =
         tryParse pTarget "c5"
+        tryParse pTarget "b5 "
 
     [<TestMethod>]
     member this.pTarget_should_fail_on_incorrect_format() =

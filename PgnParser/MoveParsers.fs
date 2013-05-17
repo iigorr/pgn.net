@@ -72,10 +72,9 @@ let getMove(originInfo: MoveInfo option, targetInfo: MoveInfo, moveType: MoveTyp
 
 // target square of a move
 let pTarget = 
-    opt pPiece //piece is optional in pawn moves
-    .>>. pFile 
-    .>>. pRank
-    |>> fun ((piece, file), rank) ->  MoveInfo(piece, Some(file), Some(rank))
+    attempt(pPiece .>>. pFile .>>. pRank) // Qd5
+    <|> (pFile .>>. pRank |>> fun (f, r) -> ((Piece.Pawn, f),r)) //Pawn move, e.g. d5
+    |>> fun ((piece, file), rank) ->  MoveInfo(Some(piece), Some(file), Some(rank))
     <!> "pTarget"
 
 // origin squalre of move (usually for disambiguation)
