@@ -1,7 +1,6 @@
-﻿namespace ilf.pgn.MoveSeries
+﻿namespace ilf.pgn
 
-open ilf.pgn.Basic
-open ilf.pgn.Move
+open ilf.pgn
 
 type MoveEntryType = 
     | MovePair

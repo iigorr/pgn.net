@@ -1,8 +1,6 @@
 ﻿namespace ilf.pgn.Test
 
 open ilf.pgn
-open ilf.pgn.Basic
-open ilf.pgn.Move
 open ilf.pgn.PgnParsers.Move
 open ilf.pgn.Test.TestBase
 

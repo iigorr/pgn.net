@@ -1,6 +1,6 @@
-﻿namespace ilf.pgn.Move
+﻿namespace ilf.pgn
 
-open ilf.pgn.Basic
+open ilf.pgn
 
 type MoveType = 
     | Simple

@@ -1,7 +1,7 @@
 ﻿module ilf.pgn.PgnParsers.MoveSeries
 
 open FParsec
-open ilf.pgn.MoveSeries
+open ilf.pgn
 open ilf.pgn.PgnParsers.Basic
 open ilf.pgn.PgnParsers.Move
 

@@ -1,4 +1,4 @@
-﻿namespace ilf.pgn.Basic
+﻿namespace ilf.pgn
 
 type File = | A | B | C | D | E | F | G | H
 

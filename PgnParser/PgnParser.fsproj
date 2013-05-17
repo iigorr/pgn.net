@@ -55,6 +55,7 @@
     <Compile Include="TagParsers.fs" />
     <Compile Include="MoveParsers.fs" />
     <Compile Include="MoveSeriesParsers.fs" />
+    <Compile Include="GameParsers.fs" />
     <Compile Include="Parser.fs" />
   </ItemGroup>
   <ItemGroup>
