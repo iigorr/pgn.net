@@ -44,6 +44,7 @@
     <Compile Include="Basic.fs" />
     <Compile Include="PgnTag.fs" />
     <Compile Include="Move.fs" />
+    <Compile Include="MoveSeries.fs" />
     <Compile Include="Game.fs" />
     <Compile Include="Database.fs" />
   </ItemGroup>
