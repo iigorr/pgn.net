@@ -4,7 +4,7 @@
   <Target Name="CI" DependsOnTargets="Build" />
  
   <Target Name="Build">
-    <MSBuild Projects="pgn.net.sln" Properties="Configuration=Debug;Platform=anycpu" />
+    <MSBuild Projects="pgn.net.sln" />
   </Target>
  
 </Project>
