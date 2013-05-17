@@ -26,7 +26,7 @@ let D (p: Parser<_,_>, name:string) stream =
 
 let (<!>) (p: Parser<_,_>) label : Parser<_,_> =
     fun stream ->
-        printfn "%A: Entering %s" stream.Position label
+        printfn "%A: Entering %s. \"%s\"" stream.Position label (stream.PeekString(20))
         let reply = p stream
         printfn "%A: Leaving %s (%A)" stream.Position label reply.Status
         reply
