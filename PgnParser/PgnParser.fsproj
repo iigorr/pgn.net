@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="ParseException.fs" />
     <Compile Include="BasicParsers.fs" />
     <Compile Include="TagParsers.fs" />
     <Compile Include="MoveParsers.fs" />

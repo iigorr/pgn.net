@@ -22,11 +22,28 @@ let pTagName =
     <!> "pTagName"
 
 
+// Date Tag value (e.g. ????.??.??, 2013.05.18, 2013.??.??)
+let pYear = ((str "????" |>> fun x -> None) <|> (pint32 |>> fun x -> Some(x)))
+let pMonth = ((str "??" |>> fun x -> None) <|> (pint32 |>> fun x -> Some(x)))
+let pDay = pMonth
+
+let pDateTagValue = 
+    pchar '"' >>. pYear .>> pchar '.' .>>. pMonth .>> pchar '.' .>>. pDay .>> pchar '"'
+    |>> fun((year, month), day) -> PgnDateTag("Date", Year = year, Month = month, Day=day) :> PgnTag
+ 
+
+ // Basic tag (e.g. [Site "Boston"]
 let tagValue = pchar '"' >>. (pNotChar '"') .>> pchar '"'
-let tagContent= pTagName .>>. (spaces >>. tagValue);
+let pBasicTag = 
+    pTagName .>> spaces .>>. tagValue
+    |>> fun (tagName, tagValue) -> PgnBasicTag(tagName, tagValue) :> PgnTag
+
+let tagContent = 
+    str "Date" .>> spaces >>. pDateTagValue
+    <|> pBasicTag 
 
 let pTag = 
-    ws .>> pchar '[' .>> ws >>. tagContent .>> ws .>> pchar ']' .>> ws |>> fun (name, value) -> PgnTag(name, value)
+    ws .>> pchar '[' .>> ws >>. tagContent .>> ws .>> pchar ']' .>> ws 
     <!> "pTag"
 
 let applyPTag p = run pTag p

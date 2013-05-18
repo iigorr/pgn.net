@@ -8,32 +8,34 @@ open Microsoft.VisualStudio.TestTools.UnitTesting
 
 [<TestClass>]
 type TagParserTests() = 
-    [<TestMethod; ExpectedException(typeof<ParseException>)>]
+    [<TestMethod; ExpectedException(typeof<PgnFormatException>)>]
     member this.pTag_should_fail_if_expressions_starts_with_non_bracket() =
         tryParse pTag "test"
 
     [<TestMethod>]
     member this.pTag_should_accept_random_spaces_before_and_after_brackets() =
-        tryParse pTag "          [Date \"Foo\"]"
-        tryParse pTag "  \t \n  [Date \"Foo\"]"
-        tryParse pTag "  \t \n  [Date \"Foo\"]"
-        tryParse pTag "[  \t \nDate \"Foo\"\t \n ]  \t \n   \t \n"
-        tryParse pTag "  \t \n  [  \t \n   \t \n Date \"Foo\"  \t \n   \t \n ]  \t\n\t \n   \t\t\n\n   \t \n\n "
+        tryParse pTag "          [Event \"Foo\"]"
+        tryParse pTag "  \t \n  [Event \"Foo\"]"
+        tryParse pTag "  \t \n  [Event \"Foo\"]"
+        tryParse pTag "[  \t \tEvent \"Foo\"\t \n ]  \t \n   \t \n"
+        tryParse pTag "  \t \n  [  \t \n   \t \n Event \"Foo\"  \t \n   \t \n ]  \t\n\t \n   \t\t\n\n   \t \n\n "
 
     [<TestMethod>]
     member this.pTag_should_accept_random_spaces_between_tag_name_and_value() =
-        tryParse pTag "[Date\t \n   \t \"Foo\"]"
-        tryParse pTag "[Date \"Foo\"]"
-        tryParse pTag "[Date \t \n   \t\"Foo\"]"
-        tryParse pTag "[  \t \nDate         \"Foo\"\t \n ]  \t \n   \t \n"
-        tryParse pTag "  \t \n  [  \t \n   \t \n Date \t \n   \t \n  \"Foo\"  \t \n   \t \n ]  \t\n\t \n   \t\t\n\n   \t \n\n "
+        tryParse pTag "[Event\t \n   \t \"Foo\"]"
+        tryParse pTag "[Event \"Foo\"]"
+        tryParse pTag "[Event \t \n   \t\"Foo\"]"
+        tryParse pTag "[  \t \tEvent         \"Foo\"\t \n ]  \t \n   \t \n"
+        tryParse pTag "  \t \n  [  \t \n   \t \n Event \t \n   \t \n  \"Foo\"  \t \n   \t \n ]  \t\n\t \n   \t\t\n\n   \t \n\n "
 
     [<TestMethod>]
     ///<see href="see http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm#c8.1.1" />
     member this.pTag_should_allow_tag_names_from_SevenTagRoaster() =
-        let allowedTagNames = ["Event"; "Site"; "Date"; "Round"; "White"; "Black"; "Result"]
+        tryParse pTag "[Date \"2013.05.18\"]"
+
+        let basicTagNames = ["Event"; "Site"; "Round"; "White"; "Black"; "Result"]
         let parseTag x = tryParse pTag ("["+ x + " \"Foo\"]")
-        List.map parseTag allowedTagNames |> ignore
+        List.map parseTag basicTagNames |> ignore
         ()
 
     [<TestMethod>]
@@ -57,5 +59,7 @@ type TagParserTests() =
         let tag= parse pTag "[Date \"2013.05.15\"]"
         Assert.IsInstanceOfType(tag, typeof<PgnTag>)
         Assert.AreEqual("Date", tag.Name)
-        Assert.AreEqual("2013.05.15", tag.Value)
+        Assert.AreEqual(Some 2013, (tag :?> PgnDateTag).Year)
+        Assert.AreEqual(Some 5, (tag :?> PgnDateTag).Month)
+        Assert.AreEqual(Some 15, (tag :?> PgnDateTag).Day)
 
