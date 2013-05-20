@@ -10,6 +10,7 @@ type MoveTextEntryType =
     | GameEndWhite
     | GameEndBlack
     | GameEndOpen
+    | Comment
 
 type MoveTextEntry()=
     member val Type : MoveTextEntryType = MoveTextEntryType.MovePair with get, set

@@ -31,7 +31,8 @@ let pCommentary =
     <|> between (str "[") (str "]") (many (noneOf "]"))
     <|> between (str "(") (str ")") (many (noneOf ")"))
     <|> between (str ";") newline (many (noneOf "\n")) //to end of line comment
-    |>>charList2String
+    |>> charList2String
+    |>> fun text -> MoveTextEntry(Type = MoveTextEntryType.Comment, Comment = Some text )
 
 let pOneHalf = str "1/2" <|> str "½"
 let pDraw = pOneHalf .>> ws .>> str "-" .>> ws .>> pOneHalf |>> fun _ -> MoveTextEntryType.GameEndDraw
@@ -47,11 +48,7 @@ let pMoveSeriesEntry=
     attempt(pEndOfGame)
     <|> attempt(pFullMoveTextEntry) 
     <|> pSplitMoveTextEntry
-    .>> ws .>>. opt pCommentary
-    |>> fun (entry, comment) -> 
-            match comment with
-            | None -> entry
-            | Some(c) -> entry.Comment <- Some c; entry
+    <|> pCommentary
     <!> "pMoveSeriesEntry"
 
 let pMoveSeries = 
