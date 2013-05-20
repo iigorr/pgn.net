@@ -34,13 +34,9 @@ let pGame =
     |>>  makeGame
     <!> "pGame"
 
-let pEmptyDatabase = 
-    ws >>. eof |>> fun _ -> []
-    <!> "pEmptyDatabase"
-
 let pDatabase = 
-    attempt(pEmptyDatabase)
-    <|> (ws >>. sepEndBy pGame ws) |>> fun games -> 
-                                            let db = new Database()
-                                            db.Games.AddRange(games)
-                                            db
+    ws >>. sepEndBy pGame ws .>> eof
+    |>> fun games -> 
+            let db = new Database()
+            db.Games.AddRange(games)
+            db

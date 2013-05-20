@@ -7,6 +7,8 @@ type MoveTextEntryType =
     | SingleMove
     | GameEnd
     | Comment
+    | NumericAnnotationGlyph
+    | RecursiveAnnotationVariation
 
 type MoveTextEntry()=
     member val Type : MoveTextEntryType = MoveTextEntryType.MovePair with get, set
@@ -32,3 +34,15 @@ type GameEndEntry(result : GameResult)=
     inherit MoveTextEntry(Type = MoveTextEntryType.GameEnd)
 
     member val Result : GameResult = result with get, set
+
+
+type NAGEntry(code : int)=
+    inherit MoveTextEntry(Type = MoveTextEntryType.NumericAnnotationGlyph)
+
+    member val Code : int = code with get, set
+
+    
+type RAVEntry(moveText : MoveTextEntry list)=
+    inherit MoveTextEntry(Type = MoveTextEntryType.RecursiveAnnotationVariation)
+
+    member val MoveText : MoveTextEntry list = moveText with get, set

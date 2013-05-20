@@ -34,9 +34,17 @@ let findFile (a: string) =
 
 let rankSymbol = [1 .. 8] |> List.map (fun x -> x.ToString())
 
-let pPiece = pList(strCI, pieceSymbol) |>> findPiece
-let pFile =  pList(strCI, fileSymbol) |>> findFile
-let pRank = pList(strCI, rankSymbol) |>> System.Convert.ToInt32
+let pPiece = 
+    pList(strCI, pieceSymbol) |>> findPiece
+    <?> "Piece (N, B, R, Q, K or P)"
+
+let pFile =  
+    pList(strCI, fileSymbol) |>> findFile
+    <?> "File letter (A..H)"
+
+let pRank = 
+    pList(strCI, rankSymbol) |>> System.Convert.ToInt32
+    <?> "Rank (1..8)"
 
 type MoveInfo(piece, file, rank) =
     member val Piece : Piece option = piece with get, set
@@ -196,6 +204,8 @@ let pAnnotation =
             | "TN" | "N" -> MoveAnnotation.TheoreticalNovelty
             | _ -> MoveAnnotation.UnknownAnnotation
     <!> "pAnnotation"
+    <?> "Move annotation (e.g. ! or ??)"
+
 let pAdditionalInfo =
     (attempt(pIndicator .>>. pAnnotation) |>> fun (i, a) -> Some(i), Some(a))
     <|> (attempt(pAnnotation) |>> fun (a) -> None, Some(a))
@@ -224,5 +234,6 @@ let pMove =
 
 
     <!> "pMove"
+    <?> "Move (e.g. Qc4 or e2e4 or 0-0-0 etc.)"
 
 let appyPMove (p: string)= run pMove p

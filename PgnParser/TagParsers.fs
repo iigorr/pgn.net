@@ -35,7 +35,7 @@ let pDateTagValue =
     |>> fun((year, month), day) -> PgnDateTag("Date", Year = year, Month = month, Day=day) :> PgnTag
 
 let pRound = 
-    attempt(pchar '"' >>. (str "?" |>> fun x -> None) <|> (pint32 |>> fun x -> Some(x)) .>> pchar '"')
+    attempt(pchar '"' >>. ((str "?" |>> fun x -> None) <|> (pint32 |>> fun x -> Some(x))) .>> pchar '"')
     <|> (pchar '"' .>> pchar '"' >>. preturn None)
     |>> fun round -> PgnRoundTag("Round", round) :> PgnTag
 
@@ -63,6 +63,7 @@ let tagContent =
 let pTag = 
     ws .>> pchar '[' .>> ws >>. tagContent .>> ws .>> pchar ']' .>> ws 
     <!> "pTag"
+    <?> "Tag (e.g [Date \"2013.10.02\"])"
 
 let checkSTRTags (tagList: PgnTag list) : Parser<_, _> =
     fun stream ->

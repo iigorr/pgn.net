@@ -151,3 +151,37 @@ type MoveSeriesParserTest() =
         Assert.AreEqual(5, entries.Length)
         let commentEntry= (entries.Item(1)) :?> CommentEntry
         Assert.AreEqual("[%emt 0.0]", commentEntry.Comment) 
+
+
+    [<TestMethod>]
+    member this.pMoveSeries_should_accept_NAGs() =
+        let entries = parse pMoveSeries "1. e4 c5 $6 "
+
+        Assert.AreEqual(2, entries.Length)
+        let nagEntry= (entries.Item(1)) :?> NAGEntry
+        Assert.AreEqual(6, nagEntry.Code)
+
+
+    [<TestMethod>]
+    member this.pMoveSeries_should_accept_RAVs() =
+        let entries = parse pMoveSeries "6. d5 $6 (6. Bd3 cxd4 7. exd4 d5 { - B14 }) 6... exd5"
+
+        Assert.AreEqual(4, entries.Length)
+        let ravEntry= (entries.Item(2)) :?> RAVEntry
+        Assert.AreEqual(3, ravEntry.MoveText.Length)
+        Assert.AreEqual(MoveTextEntryType.MovePair, ravEntry.MoveText.Item(0).Type)
+        Assert.AreEqual(MoveTextEntryType.MovePair, ravEntry.MoveText.Item(1).Type)
+        Assert.AreEqual(MoveTextEntryType.Comment, ravEntry.MoveText.Item(2).Type)
+
+
+    [<TestMethod>]
+    member this.pMoveSeries_should_accept_nested_RAVs() =
+        let entries = parse pMoveSeries "6. d5 (6. Bd3 cxd4 7. exd4 d5 (7... Qa4)) 6... exd5"
+
+        Assert.AreEqual(3, entries.Length)
+        let ravEntry1= (entries.Item(1)) :?> RAVEntry
+        Assert.AreEqual(3, ravEntry1.MoveText.Length)
+
+        let ravEntry2= (ravEntry1.MoveText.Item(2)) :?> RAVEntry
+        Assert.AreEqual(1, ravEntry2.MoveText.Length)
+        Assert.AreEqual(MoveTextEntryType.SingleMove, ravEntry2.MoveText.Item(0).Type)

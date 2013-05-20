@@ -104,3 +104,8 @@ type GameParserTest() =
         let game= parse pGame testGame2
 
         Assert.AreEqual(39, game.MoveText.Count)
+
+
+    [<TestMethod; ExpectedException(typeof<PgnFormatException>)>]
+    member this.pGame_should_disallow_non_game_data_before_end_of_file() =
+        tryParse pDatabase (testGame2 + "   x")
