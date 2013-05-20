@@ -4,7 +4,7 @@ open FParsec
 open ilf.pgn
 open ilf.pgn.PgnParsers.Basic
 
-let sevenTagRoasterTagNames= ["Event"; "Site"; "Date"; "Round"; "White"; "Black"; "Result"];
+let sevenTagRosterTagNames= ["Event"; "Site"; "Date"; "Round"; "White"; "Black"; "Result"];
 let suplementTagNames = 
             ["WhiteTitle"; "BlackTitle"; "WhiteElo"; "BlackElo"; "WhiteUSCF"; "BlackUSCF"; "WhiteNA"; "BlackNA"; "WhiteType"; "BlackType"; 
             "EventDate"; "EventSponsor"; "Section"; "Stage"; "Board";
@@ -17,7 +17,7 @@ let suplementTagNames =
             "WhiteClock"; "BlackClock"]
 
 let pTagName =
-    attempt(suplementTagNames @ sevenTagRoasterTagNames
+    attempt(suplementTagNames @ sevenTagRosterTagNames
     |> Seq.map pstring 
     |> choice)
     <|> (identifier (IdentifierOptions()))
@@ -61,5 +61,16 @@ let tagContent =
 let pTag = 
     ws .>> pchar '[' .>> ws >>. tagContent .>> ws .>> pchar ']' .>> ws 
     <!> "pTag"
+
+let checkSTRTags (tagList: PgnTag list) : Parser<_, _> =
+    fun stream ->
+        match tagList with 
+        | l when l.Length = 0 -> Reply(Error, NoErrorMessages) //no tags
+        | _  -> Reply(tagList)
+
+let pTagList = 
+    ws >>. sepEndBy pTag ws
+    >>=  checkSTRTags
+    <!> "pTagList"
 
 let applyPTag p = run pTag p

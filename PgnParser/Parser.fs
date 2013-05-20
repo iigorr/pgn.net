@@ -15,12 +15,9 @@ type Parser() =
     member this.ReadFromStream(stream: System.IO.Stream) =
         let parserResult = runParserOnStream pDatabase () "pgn" stream System.Text.Encoding.UTF8
         
-        let game =
+        let db =
             match parserResult with
             | Success(result, _, _)   -> result
             | Failure(errorMsg, _, _) -> raise (PgnFormatException errorMsg)
-
-        let db= new Database();
-        db.Games.AddRange(game)
 
         db

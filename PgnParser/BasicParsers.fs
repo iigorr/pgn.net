@@ -2,6 +2,7 @@
 
 open FParsec
 
+let TRACE = false
 let ws = spaces
 let ws1 = spaces1
 let str = pstring
@@ -26,7 +27,7 @@ let D (p: Parser<_,_>, name:string) stream =
 
 let (<!>) (p: Parser<_,_>) label : Parser<_,_> =
     fun stream ->
-        printfn "%A: Entering %s. \"%s\"" stream.Position label (stream.PeekString(20))
+        if TRACE then printfn "%A: Entering %s. \"%s\"" stream.Position label (stream.PeekString(5))
         let reply = p stream
-        printfn "%A: Leaving %s (%A)" stream.Position label reply.Status
+        if TRACE then printfn "%A: Leaving %s (%A)" stream.Position label reply.Status
         reply

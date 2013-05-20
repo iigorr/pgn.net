@@ -83,19 +83,6 @@ type MoveSeriesParserTest() =
         Assert.AreEqual("this is a comment", entry.Comment)
 
     [<TestMethod>]
-    member this.pMoveEntry_should_accept_comments_in_parantheses() =
-        let entry = (parse pMoveSeriesEntry "(this is a comment)") :?> CommentEntry
-
-        Assert.AreEqual("this is a comment", entry.Comment)
-        
-    [<TestMethod>]
-    member this.pMoveEntry_should_accept_comments_in_square_brackets() =
-        let entry = (parse pMoveSeriesEntry "[this is a comment]") :?> CommentEntry
-
-        Assert.AreEqual("this is a comment", entry.Comment)
-
-
-    [<TestMethod>]
     member this.pMoveEntry_should_accept_comments_semicolon_comment() =
         let moveSeries = parse pMoveSeries "1. e4 e5 2. Nf3 Nc6 3. Bb5 ;This opening is called the Ruy Lopez.
         3... a6"

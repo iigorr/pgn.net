@@ -30,7 +30,7 @@ type TagParserTests() =
 
     [<TestMethod>]
     ///<see href="see http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm#c8.1.1" />
-    member this.pTag_should_allow_tag_names_from_SevenTagRoaster() =
+    member this.pTag_should_allow_tag_names_from_SevenTagRoster() =
         tryParse pTag "[Date \"2013.05.18\"]"
         tryParse pTag "[Round \"5\"]"
         tryParse pTag "[Result \"*\"]"

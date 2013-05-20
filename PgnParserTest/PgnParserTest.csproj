@@ -53,6 +53,7 @@
     <Compile Include="FileTestCases.cs" />
     <Compile Include="ParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RealFileTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\pgn.net\pgn.net.fsproj">
@@ -66,17 +67,25 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Test Files\empty-file.pgn">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Test Files\Real Files\chess-informant-sample.pgn" />
-    <None Include="Test Files\Real Files\demoGames.pgn" />
-    <None Include="Test Files\Real Files\lon09r5.pgn" />
-    <None Include="Test Files\Real Files\tilb98r2.pgn" />
+    <None Include="Test Files\Real Files\chess-informant-sample.pgn">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Test Files\Real Files\demoGames.pgn">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Test Files\Real Files\lon09r5.pgn">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Test Files\Real Files\tilb98r2.pgn">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Test Files\simple-game.pgn">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Test Files\time-annotated-games.pgn">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Choose>

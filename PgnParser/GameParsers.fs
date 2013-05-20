@@ -6,9 +6,7 @@ open ilf.pgn.PgnParsers.Basic
 open ilf.pgn.PgnParsers.Tag
 open ilf.pgn.PgnParsers.MoveSeries
 
-let pTagList = 
-    ws >>. sepEndBy pTag ws
-    <!> "pTagList"
+
 
 let setTag(game : Game, tag : PgnTag) =
     match tag.Name with
@@ -23,15 +21,6 @@ let setTag(game : Game, tag : PgnTag) =
         let basicTag = (tag :?> PgnBasicTag)
         game.AdditionalInfo.Add(GameInfo(basicTag.Name, basicTag.Value))
 
-let checkErrors(tagList: PgnTag list, moveTextList : MoveTextEntry list) : Parser<_, _> =
-    let existingTags = tagList |> List.collect (fun tag -> [tag.Name]) //select tag names
-    let missingTags = (set sevenTagRoasterTagNames) - set existingTags |> Set.toList
-
-    fun stream ->
-        match missingTags with 
-        | [] -> Reply((tagList, moveTextList))
-        | _  -> Reply(Error, messageError( sprintf "The following tags of the Seven Tag Roaster are missing: '%s'" (missingTags |> String.concat "'")))
-
 
 let makeGame (tagList : PgnTag list, moveTextList : MoveTextEntry list) =
     let game = new Game()
@@ -41,7 +30,8 @@ let makeGame (tagList : PgnTag list, moveTextList : MoveTextEntry list) =
     game
 
 let pGame = 
-    pTagList .>> ws .>>.  pMoveSeries >>= checkErrors |>>  makeGame
+    pTagList .>> ws .>>.  pMoveSeries 
+    |>>  makeGame
     <!> "pGame"
 
 let pEmptyDatabase = 
@@ -50,4 +40,7 @@ let pEmptyDatabase =
 
 let pDatabase = 
     attempt(pEmptyDatabase)
-    <|> (ws >>. sepEndBy pGame (ws <|> eof))
+    <|> (ws >>. sepEndBy pGame ws) |>> fun games -> 
+                                            let db = new Database()
+                                            db.Games.AddRange(games)
+                                            db

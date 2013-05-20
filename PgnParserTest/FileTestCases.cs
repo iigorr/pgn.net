@@ -24,12 +24,12 @@ namespace ilf.pgn.Test
             Assert.AreEqual(1, db.Games.Count);
         }
 
-        //[TestMethod]
-        //public void TimeAnnotatedGammes()
-        //{
-        //    var parser = new Parser();
-        //    var db = parser.ReadFromFile(TestFolder + "time-annotated-games.pgn");
-        //    Assert.AreEqual(4, db.Games.Count);
-        //}
+        [TestMethod]
+        public void TimeAnnotatedGames()
+        {
+            var parser = new Parser();
+            var db = parser.ReadFromFile(TestFolder + "time-annotated-games.pgn");
+            Assert.AreEqual(4, db.Games.Count);
+        }
     }
 }

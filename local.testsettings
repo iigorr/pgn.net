@@ -3,6 +3,7 @@
   <Description>These are default test settings for a local test run.</Description>
   <Deployment>
     <DeploymentItem filename="PgnParserTest\Test Files\" />
+    <DeploymentItem filename="PgnParserTest\Test Files\Real Files\" />
   </Deployment>
   <Execution>
     <TestTypeSpecific>

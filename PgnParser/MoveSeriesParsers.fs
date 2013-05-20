@@ -21,8 +21,6 @@ let pSplitMoveTextEntry =
 
 let pCommentary = 
     between (str "{") (str "}") (many (noneOf "}")) 
-    <|> between (str "[") (str "]") (many (noneOf "]"))
-    <|> between (str "(") (str ")") (many (noneOf ")"))
     <|> between (str ";") newline (many (noneOf "\n")) //to end of line comment
     |>> charList2String
     |>> fun text -> CommentEntry(text) :> MoveTextEntry
@@ -45,5 +43,5 @@ let pMoveSeriesEntry=
     <!> "pMoveSeriesEntry"
 
 let pMoveSeries = 
-    sepEndBy pMoveSeriesEntry ws
+    sepEndBy1 pMoveSeriesEntry ws
     <!> "pMoveSeries"

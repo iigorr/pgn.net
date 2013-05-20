@@ -52,18 +52,6 @@ type GameParserTest() =
         Assert.AreEqual(25, game.MoveText.Count); //24 move pairs and finish tag
         Assert.AreEqual(MoveTextEntryType.GameEnd, game.MoveText.Item(24).Type);
 
-    [<TestMethod; ExpectedException(typeof<PgnFormatException>)>]
-    member this.pGame_should_raise_an_exception_if_less_than_7_tags_are_defined() =
-        tryParse pGame "
-        [Event \"Breslau\"]
-        [Site \"Breslau\"]
-        [Date \"1879.??.??\"]
-        [Round \"?\"]
-        [White \"Tarrasch, Siegbert\"]
-        [Black \"Mendelsohn, J.\"]
-
-        1.e4"
-
     [<TestMethod>]
     member this.pGame_should_set_event_correctly() =
         let game= parse pGame testGame1
