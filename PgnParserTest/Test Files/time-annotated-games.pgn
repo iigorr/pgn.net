@@ -1,0 +1,74 @@
+
+1. d4 {[%emt 0.0]} e6 {[%emt 0.0]} 2. c4 {[%emt 2.4]} b6 {[%emt 4.052]} 3. Nf3 {[%emt 3.86]} Bb7 {[%emt 111.277]} 4. g3 {[%emt 5.596]} Bb4+ {[%emt 244.539]} 5. Bd2 {[%emt 2.55]} Bxf3 {[%emt 185.379]} 6. exf3 {[%emt 3.682]} Bxd2+ {[%emt 3.127]} 7. Qxd2 {[%emt 3.293]} Nf6 {[%emt 873.43]} 8. Bg2 {[%emt 194.429]} O-O {[%emt 186.978]} 9. O-O {[%emt 3.156]} d5 {[%emt 3.05]} 10. cxd5 {[%emt 57.119]} Nxd5 {[%emt 62.38]} 11. Nc3 {[%emt 64.538]} c6 {[%emt 64.074]} 12. Rac1 {[%emt 382.195]} a6 {[%emt 381.845]} 13. f4 {[%emt 311.359]} g6 {[%emt 125.07]} 14. Rfe1 {[%emt 317.495]} Ra7 {[%emt 318.139]} 15. Nxd5 {[%emt 66.397]} cxd5 {[%emt 4.593]} 16. h4 {[%emt 122.821]} Nd7 {[%emt 254.951]} 17. Qb4 {[%emt 697.085]} Rc7 {[%emt 192.71]} 18. Bf1 {[%emt 506.16]} a5 {[%emt 193.005]} 19. Qd6 {[%emt 253.967]} Rxc1 {[%emt 127.339]} 20. Rxc1 {[%emt 4.044]} Nf6 {[%emt 60.341]} 21. Qc6 {[%emt 315.796]} Qb8 {[%emt 321.801]} 22. Bd3 {[%emt 195.816]} Rd8 {[%emt 249.391]} 23. f5 {[%emt 636.925]} Kg7 {[%emt 1149.884]} 24. fxg6 {[%emt 322.869]} hxg6 {[%emt 2.261]} 25. Qc7 {[%emt 129.333]} Qxc7 {[%emt 509.296]} 26. Rxc7 {[%emt 3.211]} Ne4 {[%emt 196.79]} 27. Kg2 {[%emt 120.099]} Kf6 {[%emt 69.019]} 28. f3 {[%emt 189.837]} Nd6 {[%emt 63.96]} 29. Rc6 {[%emt 192.766]} b5 {[%emt 190.065]} 30. Kf2 {[%emt 569.028]} Ke7 {[%emt 261.254]} 31. Ra6 {[%emt 255.007]} a4 {[%emt 54.47]} 32. g4 {[%emt 194.809]} Rc8 {[%emt 127.985]} 33. Ra7+ {[%emt 3.586]} Kf6 {[%emt 52.836]} 34. Ra6 {[%emt 61.411]} Ke7 {[%emt 65.427]} 35. Ra7+ {[%emt 3.579]} Kf6 {[%emt 3.197]} 36. Ra6 {[%emt 199.261]} Ke7 {[%emt 61.214]} {Game drawn by repetition} 1/2-1/2
+
+[Event "FICS rated blitz game"]
+[Site "FICS freechess.org"]
+[FICSGamesDBGameNo "317348178"]
+[White "frengel"]
+[Black "Terniaku(FM)"]
+[WhiteElo "1810"]
+[BlackElo "2011"]
+[TimeControl "120+2"]
+[Date "2012.11.08"]
+[Time "12:43:00"]
+[WhiteClock "0:02:00.000"]
+[BlackClock "0:02:00.000"]
+[ECO "B23"]
+[PlyCount "73"]
+[Result "1-0"]
+
+1. e4 {[%emt 0.0]} c5 {[%emt 0.0]} 2. Nc3 {[%emt 0.783]} Nc6 {[%emt 2.216]} 3. f4 {[%emt 0.496]} g6 {[%emt 2.745]} 4. Bc4 {[%emt 1.262]} Bg7 {[%emt 1.716]} 5. Nf3 {[%emt 0.34]} e6 {[%emt 1.217]} 6. O-O {[%emt 0.586]} Nge7 {[%emt 1.934]} 7. Qe1 {[%emt 0.377]} O-O {[%emt 3.9]} 8. d3 {[%emt 0.529]} d5 {[%emt 3.916]} 9. Bb3 {[%emt 0.521]} b6 {[%emt 35.365]} 10. Qh4 {[%emt 17.26]} c4 {[%emt 4.961]} 11. dxc4 {[%emt 2.654]} dxe4 {[%emt 1.326]} 12. Rd1 {[%emt 8.994]} Qc7 {[%emt 30.654]} 13. Nxe4 {[%emt 4.408]} Nf5 {[%emt 20.233]} 14. Nf6+ {[%emt 1.295]} Bxf6 {[%emt 0.811]} 15. Qxf6 {[%emt 0.803]} Bb7 {[%emt 6.412]} 16. g4 {[%emt 3.881]} Ng7 {[%emt 18.922]} 17. f5 {[%emt 6.358]} Rfd8 {[%emt 13.369]} 18. Bh6 {[%emt 2.384]} Ne8 {[%emt 0.968]} 19. Qh4 {[%emt 13.961]} exf5 {[%emt 0.655]} 20. gxf5 {[%emt 3.332]} Na5 {[%emt 0.39]} 21. fxg6 {[%emt 3.876]} hxg6 {[%emt 1.513]} 22. Nd4 {[%emt 18.995]} Nxb3 {[%emt 1.965]} 23. axb3 {[%emt 1.397]} Qe5 {[%emt 2.808]} 24. c3 {[%emt 5.125]} Qe4 {[%emt 2.996]} 25. Qxe4 {[%emt 2.467]} Bxe4 {[%emt 0.1]} 26. Rf1 {[%emt 3.167]} Ng7 {[%emt 1.591]} 27. Bxg7 {[%emt 7.533]} Kxg7 {[%emt 1.326]} 28. Rae1 {[%emt 3.212]} Re8 {[%emt 1.435]} 29. Nb5 {[%emt 4.134]} a6 {[%emt 5.288]} 30. Nc7 {[%emt 1.809]} Bc6 {[%emt 2.839]} 31. Nxe8+ {[%emt 1.716]} Bxe8 {[%emt 0.749]} 32. Re7 {[%emt 2.762]} Rb8 {[%emt 3.791]} 33. Ra7 {[%emt 3.765]} a5 {[%emt 0.905]} 34. Re7 {[%emt 7.303]} Rd8 {[%emt 1.669]} 35. Rf2 {[%emt 3.228]} Rc8 {[%emt 4.056]} 36. Rb7 {[%emt 4.656]} Rc6 {[%emt 0.936]} 37. Re2 {[%emt 7.438]} {Black forfeits on time} 1-0
+
+[Event "FICS rated blitz game"]
+[Site "FICS freechess.org"]
+[FICSGamesDBGameNo "317348589"]
+[White "Terniaku(FM)"]
+[Black "pecunianonolet"]
+[WhiteElo "1999"]
+[BlackElo "1928"]
+[TimeControl "120+2"]
+[Date "2012.11.08"]
+[Time "12:50:00"]
+[WhiteClock "0:02:00.000"]
+[BlackClock "0:02:00.000"]
+[ECO "B06"]
+[PlyCount "105"]
+[Result "1-0"]
+
+1. e4 {[%emt 0.0]} d6 {[%emt 0.0]} 2. d4 {[%emt 1.233]} g6 {[%emt 0.677]} 3. Nf3 {[%emt 1.17]} Bg7 {[%emt 0.563]} 4. Bc4 {[%emt 0.842]} Nd7 {[%emt 8.113]} 5. O-O {[%emt 2.824]} Nb6 {[%emt 3.701]} 6. Bb3 {[%emt 2.715]} c6 {[%emt 3.054]} 7. c4 {[%emt 3.448]} d5 {[%emt 10.928]} 8. cxd5 {[%emt 17.16]} cxd5 {[%emt 1.902]} 9. exd5 {[%emt 0.406]} Nxd5 {[%emt 2.509]} 10. Nc3 {[%emt 0.405]} Nxc3 {[%emt 7.293]} 11. bxc3 {[%emt 1.622]} Nf6 {[%emt 0.908]} 12. Re1 {[%emt 11.076]} O-O {[%emt 1.458]} 13. Ba3 {[%emt 1.42]} Re8 {[%emt 1.074]} 14. Ng5 {[%emt 1.217]} e6 {[%emt 4.629]} 15. Qf3 {[%emt 2.855]} h6 {[%emt 7.638]} 16. Ne4 {[%emt 25.787]} Nxe4 {[%emt 7.459]} 17. Qxe4 {[%emt 2.621]} Qc7 {[%emt 7.863]} 18. c4 {[%emt 36.208]} Bd7 {[%emt 12.221]} 19. Rad1 {[%emt 1.841]} Bc6 {[%emt 6.571]} 20. Qh4 {[%emt 4.352]} Rad8 {[%emt 14.935]} 21. Bc1 {[%emt 1.435]} Kh7 {[%emt 2.764]} 22. Bg5 {[%emt 10.39]} Rc8 {[%emt 14.537]} 23. Bf4 {[%emt 9.126]} Qa5 {[%emt 6.574]} 24. Bd2 {[%emt 6.006]} Qf5 {[%emt 8.297]} 25. Be3 {[%emt 8.331]} Rcd8 {[%emt 2.294]} 26. h3 {[%emt 2.98]} Qe4 {[%emt 5.836]} 27. Qxe4 {[%emt 1.887]} Bxe4 {[%emt 0.73]} 28. d5 {[%emt 5.772]} exd5 {[%emt 2.591]} 29. Bxa7 {[%emt 2.761]} d4 {[%emt 14.924]} 30. Bb6 {[%emt 5.148]} Rd6 {[%emt 4.139]} 31. c5 {[%emt 1.451]} Rde6 {[%emt 8.048]} 32. Bxe6 {[%emt 1.341]} Rxe6 {[%emt 0.668]} 33. f3 {[%emt 1.903]} Bd5 {[%emt 1.327]} 34. Rxe6 {[%emt 0.406]} fxe6 {[%emt 0.487]} 35. c6 {[%emt 2.122]} Bxc6 {[%emt 1.054]} 36. Bxd4 {[%emt 1.107]} e5 {[%emt 0.468]} 37. Bb2 {[%emt 1.45]} g5 {[%emt 0.62]} 38. Re1 {[%emt 1.217]} e4 {[%emt 6.755]} 39. Bxg7 {[%emt 3.027]} Kxg7 {[%emt 0.75]} 40. fxe4 {[%emt 0.749]} Kf6 {[%emt 0.816]} 41. Kf2 {[%emt 0.78]} Ke5 {[%emt 0.524]} 42. Kf3 {[%emt 1.606]} h5 {[%emt 1.613]} 43. g3 {[%emt 1.56]} g4+ {[%emt 1.596]} 44. hxg4 {[%emt 1.295]} hxg4+ {[%emt 0.67]} 45. Kxg4 {[%emt 0.64]} Bxe4 {[%emt 1.096]} 46. Kg5 {[%emt 1.622]} b5 {[%emt 4.79]} 47. g4 {[%emt 2.215]} b4 {[%emt 1.51]} 48. Kh6 {[%emt 2.137]} Kd4 {[%emt 5.209]} 49. Rxe4+ {[%emt 2.012]} Kxe4 {[%emt 0.67]} 50. g5 {[%emt 0.1]} Kd3 {[%emt 0.564]} 51. g6 {[%emt 0.1]} Kc2 {[%emt 0.861]} 52. g7 {[%emt 0.1]} Kb2 {[%emt 0.42]} 53. g8=Q {[%emt 0.889]} {Black resigns} 1-0
+
+[Event "FICS rated blitz game"]
+[Site "FICS freechess.org"]
+[FICSGamesDBGameNo "317355506"]
+[White "gautama"]
+[Black "Maurian(FM)"]
+[WhiteElo "1602"]
+[BlackElo "1933"]
+[TimeControl "180+0"]
+[Date "2012.11.08"]
+[Time "15:11:00"]
+[WhiteClock "0:03:00.000"]
+[BlackClock "0:03:00.000"]
+[ECO "E62"]
+[PlyCount "52"]
+[Result "1-0"]
+
+1. Nf3 {[%emt 0.0]} Nf6 {[%emt 0.0]} 2. g3 {[%emt 0.454]} g6 {[%emt 1.455]} 3. Bg2 {[%emt 0.1]} Bg7 {[%emt 0.33]} 4. O-O {[%emt 1.305]} O-O {[%emt 0.5]} 5. d4 {[%emt 0.33]} c6 {[%emt 0.637]} 6. c4 {[%emt 0.429]} d6 {[%emt 0.757]} 7. Nc3 {[%emt 0.975]} Qa5 {[%emt 0.437]} 8. Qc2 {[%emt 3.655]} Qh5 {[%emt 2.581]} 9. e4 {[%emt 6.373]} Bh3 {[%emt 1.585]} 10. Bg5 {[%emt 2.749]} Bxg2 {[%emt 2.501]} 11. Kxg2 {[%emt 0.1]} h6 {[%emt 2.35]} 12. Bxf6 {[%emt 1.046]} Bxf6 {[%emt 1.506]} 13. Rae1 {[%emt 5.794]} e5 {[%emt 8.169]} 14. d5 {[%emt 9.894]} Bg7 {[%emt 14.199]} 15. dxc6 {[%emt 4.785]} bxc6 {[%emt 1.608]} 16. Rd1 {[%emt 0.626]} Rd8 {[%emt 3.867]} 17. Qa4 {[%emt 7.211]} f5 {[%emt 8.628]} 18. Rd3 {[%emt 4.74]} f4 {[%emt 15.372]} 19. Rfd1 {[%emt 3.594]} Bf8 {[%emt 2.458]} 20. c5 {[%emt 8.835]} fxg3 {[%emt 15.315]} 21. fxg3 {[%emt 2.376]} Nd7 {[%emt 14.083]} 22. Rxd6 {[%emt 22.216]} Bxd6 {[%emt 3.579]} 23. Rxd6 {[%emt 0.1]} Nf8 {[%emt 8.206]} 24. Qxc6 {[%emt 6.321]} Rac8 {[%emt 6.832]} 25. Qd5+ {[%emt 2.613]} Kh7 {[%emt 2.002]} 26. Rxd8 {[%emt 1.152]} Rc7 {[%emt 1.161]} {Black resigns} 1-0
+
+[Event "FICS rated blitz game"]
+[Site "FICS freechess.org"]
+[FICSGamesDBGameNo "317355815"]
+[White "Maurian(FM)"]
+[Black "sosser"]
+[WhiteElo "1919"]
+[BlackElo "1751"]
+[TimeControl "180+0"]
+[Date "2012.11.08"]
+[Time "15:15:00"]
+[WhiteClock "0:03:00.000"]
+[BlackClock "0:03:00.000"]
+[ECO "B22"]
+[PlyCount "112"]
+[Result "0-1"]
+
+1. e4 {[%emt 0.0]} c5 {[%emt 0.0]} 2. c3 {[%emt 0.882]} e6 {[%emt 1.656]} 3. d4 {[%emt 1.165]} d5 {[%emt 1.093]} 4. exd5 {[%emt 0.848]} exd5 {[%emt 1.195]} 5. Be3 {[%emt 1.201]} cxd4 {[%emt 3.233]} 6. Bxd4 {[%emt 0.701]} Nf6 {[%emt 1.616]} 7. Bxf6 {[%emt 0.868]} Qxf6 {[%emt 1.681]} 8. Qxd5 {[%emt 1.557]} Bd6 {[%emt 9.15]} 9. Bb5+ {[%emt 5.457]} Bd7 {[%emt 2.774]} 10. Bxd7+ {[%emt 1.224]} Nxd7 {[%emt 0.855]} 11. Qxb7 {[%emt 6.927]} Rd8 {[%emt 8.697]} 12. Qe4+ {[%emt 7.872]} Be7 {[%emt 2.804]} 13. Nf3 {[%emt 4.271]} O-O {[%emt 1.095]} 14. O-O {[%emt 0.899]} Nc5 {[%emt 3.576]} 15. Qe5 {[%emt 8.704]} Nd3 {[%emt 11.703]} 16. Qxf6 {[%emt 1.343]} Bxf6 {[%emt 0.524]} 17. b3 {[%emt 18.542]} Rfe8 {[%emt 2.328]} 18. Nbd2 {[%emt 10.45]} Bxc3 {[%emt 2.39]} 19. Rad1 {[%emt 2.611]} Nb2 {[%emt 3.278]} 20. Rb1 {[%emt 3.422]} Re2 {[%emt 13.388]} 21. Nc4 {[%emt 2.583]} Nd3 {[%emt 12.156]} 22. Rbd1 {[%emt 9.093]} h6 {[%emt 14.48]} 23. g3 {[%emt 10.078]} g5 {[%emt 1.08]} 24. Kg2 {[%emt 1.141]} g4 {[%emt 2.936]} 25. Ng1 {[%emt 3.548]} Rxa2 {[%emt 12.218]} 26. h3 {[%emt 2.043]} h5 {[%emt 2.671]} 27. hxg4 {[%emt 0.865]} hxg4 {[%emt 0.696]} 28. Ne3 {[%emt 8.702]} Rb2 {[%emt 8.941]} 29. Nxg4 {[%emt 2.842]} Rxb3 {[%emt 0.571]} 30. Nf3 {[%emt 3.949]} Rb4 {[%emt 1.219]} 31. Ne3 {[%emt 3.64]} a5 {[%emt 5.725]} 32. Nc2 {[%emt 11.825]} Rb2 {[%emt 1.86]} 33. Nce1 {[%emt 2.91]} Bxe1 {[%emt 4.917]} 34. Nxe1 {[%emt 0.798]} Rb3 {[%emt 9.075]} 35. Nc2 {[%emt 5.549]} a4 {[%emt 1.408]} 36. Na1 {[%emt 2.002]} Rb2 {[%emt 1.314]} 37. Rh1 {[%emt 6.444]} a3 {[%emt 0.623]} 38. Rhf1 {[%emt 1.693]} a2 {[%emt 0.783]} 39. Nb3 {[%emt 1.186]} Rxb3 {[%emt 1.779]} 40. Rd2 {[%emt 3.015]} Ne1+ {[%emt 5.01]} 41. Rxe1 {[%emt 2.445]} Rxd2 {[%emt 0.415]} 42. Re8+ {[%emt 1.863]} Kg7 {[%emt 1.667]} 43. Ra8 {[%emt 0.419]} Rb1 {[%emt 1.361]} 44. Kh3 {[%emt 0.782]} a1=Q {[%emt 1.673]} 45. Rxa1 {[%emt 0.523]} Rxa1 {[%emt 0.1]} 46. f4 {[%emt 0.821]} Raa2 {[%emt 0.1]} 47. Kg4 {[%emt 0.76]} Rg2 {[%emt 0.83]} 48. Kh4 {[%emt 1.713]} Ra3 {[%emt 1.205]} 49. g4 {[%emt 0.577]} Rag3 {[%emt 0.923]} 50. g5 {[%emt 1.213]} Rg4+ {[%emt 0.58]} 51. Kh3 {[%emt 0.767]} Rg1 {[%emt 0.612]} 52. Kh2 {[%emt 0.86]} R4g2+ {[%emt 0.658]} 53. Kh3 {[%emt 0.641]} Kg6 {[%emt 0.471]} 54. f5+ {[%emt 0.918]} Kxf5 {[%emt 0.777]} 55. g6 {[%emt 0.698]} Rxg6 {[%emt 1.204]} 56. Kh2 {[%emt 0.98]} R1g5 {[%emt 1.251]} {White forfeits on time} 0-1

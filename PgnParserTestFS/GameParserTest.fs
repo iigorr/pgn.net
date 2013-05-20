@@ -47,10 +47,10 @@ type GameParserTest() =
 
     [<TestMethod>]
     member this.pGame_should_accept_a_standard_pgn_game() =
-        let (tags, moves)= parse pGameRaw testGame1
-        Assert.AreEqual(10, tags.Length);
-        Assert.AreEqual(25, moves.Length); //24 move pairs and finish tag
-        Assert.AreEqual(MoveTextEntryType.GameEndWhite, moves.Item(24).Type);
+        let game= parse pGame testGame1
+        Assert.AreEqual("Tarrasch, Siegbert", game.WhitePlayer);
+        Assert.AreEqual(25, game.MoveText.Count); //24 move pairs and finish tag
+        Assert.AreEqual(MoveTextEntryType.GameEndWhite, game.MoveText.Item(24).Type);
 
     [<TestMethod; ExpectedException(typeof<PgnFormatException>)>]
     member this.pGame_should_raise_an_exception_if_less_than_7_tags_are_defined() =

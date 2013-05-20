@@ -70,10 +70,31 @@ namespace ilf.pgn.Test
         public void ReadFromStream_should_return_empty_Database_if_data_is_empty()
         {
             var parser = new Parser();
-            var stream = PrepareStream(NormalGame);
+            var stream = PrepareStream("");
             var db = parser.ReadFromStream(stream);
 
             Assert.AreEqual(0, db.Games.Count);
+        }
+
+
+        [TestMethod]
+        public void ReadFromStream_should_return_read_game_from_stream()
+        {
+            var parser = new Parser();
+            var stream = PrepareStream(NormalGame);
+            var db = parser.ReadFromStream(stream);
+
+            Assert.AreEqual(1, db.Games.Count);
+        }
+
+        [TestMethod]
+        public void ReadFromFile_should_return_read_game_from_file()
+        {
+            var parser = new Parser();
+            PrepareFile("one-game.pgn", NormalGame);
+            var db = parser.ReadFromFile("one-game.pgn");
+
+            Assert.AreEqual(1, db.Games.Count);
         }
     }
 }

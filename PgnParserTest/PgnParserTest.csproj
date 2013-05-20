@@ -63,6 +63,21 @@
       <Name>PgnParser</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Test Files\empty-file.pgn">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Test Files\Real Files\chess-informant-sample.pgn" />
+    <None Include="Test Files\Real Files\demoGames.pgn" />
+    <None Include="Test Files\Real Files\lon09r5.pgn" />
+    <None Include="Test Files\Real Files\tilb98r2.pgn" />
+    <None Include="Test Files\simple-game.pgn">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Test Files\time-annotated-games.pgn">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

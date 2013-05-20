@@ -2,7 +2,6 @@
 
 type File = | A | B | C | D | E | F | G | H
 
-
 type Square(file: File, rank: int) = 
     member val File = file with get
     member val Rank = rank with get

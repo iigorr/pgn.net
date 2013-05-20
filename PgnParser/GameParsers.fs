@@ -23,28 +23,31 @@ let setTag(game : Game, tag : PgnTag) =
         let basicTag = (tag :?> PgnBasicTag)
         game.AdditionalInfo.Add(GameInfo(basicTag.Name, basicTag.Value))
 
-let checkTags(tagList: PgnTag list) =
+let checkErrors(tagList: PgnTag list, moveTextList : MoveTextEntry list) : Parser<_, _> =
     let existingTags = tagList |> List.collect (fun tag -> [tag.Name]) //select tag names
-    let missingTags = (set sevenTagRoasterTagNames) - set existingTags 
+    let missingTags = (set sevenTagRoasterTagNames) - set existingTags |> Set.toList
 
-    if not missingTags.IsEmpty then
-        raise (PgnFormatException("The following tags of the Seven Tag Roaster are missing: '" + (missingTags |> String.concat "' '")+"'"))
+    fun stream ->
+        match missingTags with 
+        | [] -> Reply((tagList, moveTextList))
+        | _  -> Reply(Error, messageError( sprintf "The following tags of the Seven Tag Roaster are missing: '%s'" (missingTags |> String.concat "'")))
 
- 
+
 let makeGame (tagList : PgnTag list, moveTextList : MoveTextEntry list) =
-    checkTags tagList
-
     let game = new Game()
     tagList |> List.map(fun tag -> setTag(game, tag)) |> ignore
 
     moveTextList |>  List.iter (fun entry -> game.MoveText.Add(entry))
     game
 
-
 let pGame = 
-    pTagList .>> ws .>>.  pMoveSeries
-    |>> makeGame
+    pTagList .>> ws .>>.  pMoveSeries >>= checkErrors |>>  makeGame
     <!> "pGame"
 
-let pGameRaw = 
-    pTagList .>> ws .>>.  pMoveSeries   
+let pEmptyDatabase = 
+    ws >>. eof |>> fun _ -> []
+    <!> "pEmptyDatabase"
+
+let pDatabase = 
+    attempt(pEmptyDatabase)
+    <|> (ws >>. sepEndBy pGame (ws <|> eof))

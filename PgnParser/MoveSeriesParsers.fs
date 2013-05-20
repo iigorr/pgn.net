@@ -41,6 +41,7 @@ let pEndOpen = str "*"  |>> fun _ -> MoveTextEntryType.GameEndOpen
 
 let pEndOfGame =
     pDraw <|> pWhiteWin <|> pBlackWin <|> pEndOpen |>> fun endType -> MoveTextEntry(Type = endType )
+    <!> "pEndOfGame"
 
 let pMoveSeriesEntry= 
     attempt(pEndOfGame)
@@ -53,5 +54,6 @@ let pMoveSeriesEntry=
             | Some(c) -> entry.Comment <- Some c; entry
     <!> "pMoveSeriesEntry"
 
-let pMoveSeries = sepEndBy pMoveSeriesEntry ws
-let appyPCommentary (p: string)= run pCommentary p
+let pMoveSeries = 
+    sepEndBy pMoveSeriesEntry ws
+    <!> "pMoveSeries"
