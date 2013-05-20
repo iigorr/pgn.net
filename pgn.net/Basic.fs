@@ -17,7 +17,11 @@ type Square(file: File, rank: int) =
 
 type Piece = | King | Queen | Rook | Bishop | Knight | Pawn
 
-
+type GameResult =
+    | Draw
+    | White
+    | Black
+    | Open
 
 type PgnFormatException =
     inherit System.FormatException

@@ -2,7 +2,7 @@
 
 open ilf.pgn
 
-type MoveEntryType = 
+type MoveTextEntryType = 
     | MovePair
     | SplitMoveWhite
     | SplitMoveBlack
@@ -11,8 +11,8 @@ type MoveEntryType =
     | GameEndBlack
     | GameEndOpen
 
-type MoveEntry()=
-    member val Type : MoveEntryType = MoveEntryType.MovePair with get, set
+type MoveTextEntry()=
+    member val Type : MoveTextEntryType = MoveTextEntryType.MovePair with get, set
     member val MoveNumber : int option = None with get, set
     member val White :Move option = None with get, set
     member val Black :Move option = None with get, set

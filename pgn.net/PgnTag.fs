@@ -7,7 +7,7 @@ type PgnTag(name: string) =
 
 type PgnBasicTag(name: string, value: string) =
     inherit PgnTag(name)
-    member val Value = value with get, set
+    member val Value: string = value with get, set
 
 
 type PgnDateTag(name: string) = 
@@ -17,3 +17,12 @@ type PgnDateTag(name: string) =
     member val Month: int option = None with get, set
     member val Day: int option = None with get, set
 
+type PgnRoundTag(name: string, round: int option) = 
+    inherit PgnTag(name)
+    
+    member val Round: int option = round with get, set
+
+type PgnResultTag(name: string, result: GameResult) = 
+    inherit PgnTag(name)
+    
+    member val Result: GameResult = result with get, set

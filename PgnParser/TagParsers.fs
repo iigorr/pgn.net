@@ -30,7 +30,19 @@ let pDay = pMonth
 let pDateTagValue = 
     pchar '"' >>. pYear .>> pchar '.' .>>. pMonth .>> pchar '.' .>>. pDay .>> pchar '"'
     |>> fun((year, month), day) -> PgnDateTag("Date", Year = year, Month = month, Day=day) :> PgnTag
- 
+
+let pRound = 
+    pchar '"' >>. ((str "?" |>> fun x -> None) <|> (pint32 |>> fun x -> Some(x))) .>> pchar '"'
+    |>> fun round -> PgnRoundTag("Round", round) :> PgnTag
+
+let pResult = 
+    pchar '"' >>. (
+        ((str "1-0" <|> str "1 - 0") |>> fun _ -> GameResult.White)
+    <|> ((str "0-1" <|> str "0 - 1") |>> fun _ -> GameResult.Black)
+    <|> ((str "1/2-1/2" <|> str "1/2 - 1/2" <|> str "½-½" <|> str "½ - ½")  |>> fun _ -> GameResult.Draw)
+    <|> ((str "*" <|> str "?") |>> fun _ -> GameResult.Open)
+    ) .>> pchar '"'
+    |>> fun result -> PgnResultTag("Result", result) :> PgnTag
 
  // Basic tag (e.g. [Site "Boston"]
 let tagValue = pchar '"' >>. (pNotChar '"') .>> pchar '"'
@@ -39,7 +51,9 @@ let pBasicTag =
     |>> fun (tagName, tagValue) -> PgnBasicTag(tagName, tagValue) :> PgnTag
 
 let tagContent = 
-    str "Date" .>> spaces >>. pDateTagValue
+    (str "Date" .>> spaces >>. pDateTagValue)
+    <|> (str "Round" .>> spaces >>. pRound)
+    <|> (str "Result" .>> spaces >>. pResult)
     <|> pBasicTag 
 
 let pTag = 

@@ -10,21 +10,21 @@ let pSinglePeriod = pchar '.' >>. preturn true
 let pEllipsis = (str "..." .>> manyChars (pchar '.')) <|> str "…" >>. preturn false
 
 let pMoveNumberIndicator = pint32 .>> ws .>>. (pEllipsis <|> pSinglePeriod) <!> "pMoveNumberIndicator"
-let pFullMoveEntry =
+let pFullMoveTextEntry =
     opt pMoveNumberIndicator .>> ws .>>. pMove .>> ws1 .>>. pMove 
     |>> fun ((moveInd, moveWhite), moveBlack) -> 
             match moveInd with 
-            | None -> MoveEntry(White= Some moveWhite, Black= Some moveBlack)
-            | Some(num, _) -> MoveEntry(MoveNumber=Some num, White= Some moveWhite, Black= Some moveBlack)
-    <!> "pFullMoveEntry"
+            | None -> MoveTextEntry(White= Some moveWhite, Black= Some moveBlack)
+            | Some(num, _) -> MoveTextEntry(MoveNumber=Some num, White= Some moveWhite, Black= Some moveBlack)
+    <!> "pFullMoveTextEntry"
 
-let pSplitMoveEntry = 
+let pSplitMoveTextEntry = 
     pMoveNumberIndicator .>> ws .>>. pMove
     |>> fun ((num, firstMove), move) -> 
             match firstMove with 
-            | true -> MoveEntry(MoveNumber= Some num, White= Some move)
-            | false -> MoveEntry(MoveNumber=Some num, Black= Some move)
-    <!> "pSplitMoveEntry"
+            | true -> MoveTextEntry(MoveNumber= Some num, White= Some move)
+            | false -> MoveTextEntry(MoveNumber=Some num, Black= Some move)
+    <!> "pSplitMoveTextEntry"
 
 let pCommentary = 
     between (str "{") (str "}") (many (noneOf "}")) 
@@ -34,18 +34,18 @@ let pCommentary =
     |>>charList2String
 
 let pOneHalf = str "1/2" <|> str "½"
-let pDraw = pOneHalf .>> ws .>> str "-" .>> ws .>> pOneHalf |>> fun _ -> MoveEntryType.GameEndDraw
-let pWhiteWin = str "1" .>> ws .>> str "-" .>> ws .>> str "0"  |>> fun _ -> MoveEntryType.GameEndWhite
-let pBlackWin = str "0" .>> ws .>> str "-" .>> ws .>> str "1"  |>> fun _ -> MoveEntryType.GameEndBlack
-let pEndOpen = str "*"  |>> fun _ -> MoveEntryType.GameEndOpen
+let pDraw = pOneHalf .>> ws .>> str "-" .>> ws .>> pOneHalf |>> fun _ -> MoveTextEntryType.GameEndDraw
+let pWhiteWin = str "1" .>> ws .>> str "-" .>> ws .>> str "0"  |>> fun _ -> MoveTextEntryType.GameEndWhite
+let pBlackWin = str "0" .>> ws .>> str "-" .>> ws .>> str "1"  |>> fun _ -> MoveTextEntryType.GameEndBlack
+let pEndOpen = str "*"  |>> fun _ -> MoveTextEntryType.GameEndOpen
 
 let pEndOfGame =
-    pDraw <|> pWhiteWin <|> pBlackWin <|> pEndOpen |>> fun endType -> MoveEntry(Type = endType )
+    pDraw <|> pWhiteWin <|> pBlackWin <|> pEndOpen |>> fun endType -> MoveTextEntry(Type = endType )
 
 let pMoveSeriesEntry= 
     attempt(pEndOfGame)
-    <|> attempt(pFullMoveEntry) 
-    <|> pSplitMoveEntry
+    <|> attempt(pFullMoveTextEntry) 
+    <|> pSplitMoveTextEntry
     .>> ws .>>. opt pCommentary
     |>> fun (entry, comment) -> 
             match comment with

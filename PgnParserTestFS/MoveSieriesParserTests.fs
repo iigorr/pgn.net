@@ -121,29 +121,29 @@ type MoveSeriesParserTest() =
     member this.pEndOfGame_should_accept_Draw() =
         let entry = parse pEndOfGame "1/2 - 1/2"
 
-        Assert.AreEqual(MoveEntryType.GameEndDraw, entry.Type)
+        Assert.AreEqual(MoveTextEntryType.GameEndDraw, entry.Type)
 
     [<TestMethod>]
     member this.pEndOfGame_should_accept_WhiteWin() =
         let entry = parse pEndOfGame "1-0"
 
-        Assert.AreEqual(MoveEntryType.GameEndWhite, entry.Type)
+        Assert.AreEqual(MoveTextEntryType.GameEndWhite, entry.Type)
 
     [<TestMethod>]
     member this.pEndOfGame_should_accept_BlackWin() =
         let entry = parse pEndOfGame "0-1"
 
-        Assert.AreEqual(MoveEntryType.GameEndBlack, entry.Type)
+        Assert.AreEqual(MoveTextEntryType.GameEndBlack, entry.Type)
 
     [<TestMethod>]
     member this.pEndOfGame_should_accept_EndOpen() =
         let entry = parse pEndOfGame "*"
 
-        Assert.AreEqual(MoveEntryType.GameEndOpen, entry.Type)
+        Assert.AreEqual(MoveTextEntryType.GameEndOpen, entry.Type)
 
     [<TestMethod>]
     member this.pMoveSeriesEntry_should_accept_comment_after_end_game() =
         let entry = parse pMoveSeriesEntry "1-0 {impressive game!}"
 
-        Assert.AreEqual(MoveEntryType.GameEndWhite, entry.Type)       
+        Assert.AreEqual(MoveTextEntryType.GameEndWhite, entry.Type)       
         Assert.AreEqual(Some "impressive game!", entry.Comment)

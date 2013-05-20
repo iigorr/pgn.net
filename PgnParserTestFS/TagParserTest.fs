@@ -32,8 +32,10 @@ type TagParserTests() =
     ///<see href="see http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm#c8.1.1" />
     member this.pTag_should_allow_tag_names_from_SevenTagRoaster() =
         tryParse pTag "[Date \"2013.05.18\"]"
+        tryParse pTag "[Round \"5\"]"
+        tryParse pTag "[Result \"*\"]"
 
-        let basicTagNames = ["Event"; "Site"; "Round"; "White"; "Black"; "Result"]
+        let basicTagNames = ["Event"; "Site"; "White"; "Black";]
         let parseTag x = tryParse pTag ("["+ x + " \"Foo\"]")
         List.map parseTag basicTagNames |> ignore
         ()
@@ -55,11 +57,24 @@ type TagParserTests() =
         ()
 
     [<TestMethod>]
-    member this.pTag_should_create_a_Tag_object_from_a_valid_tag() =
+    member this.pTag_should_create_a_PgnDateTag_object_from_a_valid_tag() =
         let tag= parse pTag "[Date \"2013.05.15\"]"
-        Assert.IsInstanceOfType(tag, typeof<PgnTag>)
+        Assert.IsInstanceOfType(tag, typeof<PgnDateTag>)
         Assert.AreEqual("Date", tag.Name)
         Assert.AreEqual(Some 2013, (tag :?> PgnDateTag).Year)
         Assert.AreEqual(Some 5, (tag :?> PgnDateTag).Month)
         Assert.AreEqual(Some 15, (tag :?> PgnDateTag).Day)
 
+    [<TestMethod>]
+    member this.pTag_should_create_a_PgnRoundTag_object_from_a_valid_tag() =
+        let tag= parse pTag "[Round \"13\"]"
+        Assert.IsInstanceOfType(tag, typeof<PgnRoundTag>)
+        Assert.AreEqual("Round", tag.Name)
+        Assert.AreEqual(Some 13, (tag :?> PgnRoundTag).Round)
+
+    [<TestMethod>]
+    member this.pTag_should_create_a_PgnResultTag_object_from_a_valid_tag() =
+        let tag= parse pTag "[Result \"1-0\"]"
+        Assert.IsInstanceOfType(tag, typeof<PgnResultTag>)
+        Assert.AreEqual("Result", tag.Name)
+        Assert.AreEqual(GameResult.White, (tag :?> PgnResultTag).Result)
