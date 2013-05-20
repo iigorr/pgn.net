@@ -50,7 +50,7 @@ type GameParserTest() =
         let game= parse pGame testGame1
         Assert.AreEqual("Tarrasch, Siegbert", game.WhitePlayer);
         Assert.AreEqual(25, game.MoveText.Count); //24 move pairs and finish tag
-        Assert.AreEqual(MoveTextEntryType.GameEndWhite, game.MoveText.Item(24).Type);
+        Assert.AreEqual(MoveTextEntryType.GameEnd, game.MoveText.Item(24).Type);
 
     [<TestMethod; ExpectedException(typeof<PgnFormatException>)>]
     member this.pGame_should_raise_an_exception_if_less_than_7_tags_are_defined() =
