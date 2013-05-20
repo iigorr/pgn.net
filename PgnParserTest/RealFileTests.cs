@@ -16,10 +16,10 @@ namespace ilf.pgn.Test
             var parser = new Parser();
             parser.ReadFromFile(TestFolder + "chess-informant-sample.pgn");
         }
-        //[TestMethod]
-        //public void ChessInformantSample()
-        //{
-        //    TestFile("chess-informant-sample.pgn");
-        //}
+        [TestMethod]
+        public void ChessInformantSample()
+        {
+            TestFile("chess-informant-sample.pgn");
+        }
     }
 }
