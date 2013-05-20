@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="FileTestCases.cs" />
     <Compile Include="ParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -65,17 +66,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Test Files\empty-file.pgn">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Test Files\Real Files\chess-informant-sample.pgn" />
     <None Include="Test Files\Real Files\demoGames.pgn" />
     <None Include="Test Files\Real Files\lon09r5.pgn" />
     <None Include="Test Files\Real Files\tilb98r2.pgn" />
     <None Include="Test Files\simple-game.pgn">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Test Files\time-annotated-games.pgn">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Choose>

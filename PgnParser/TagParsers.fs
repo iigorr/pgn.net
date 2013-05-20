@@ -13,12 +13,14 @@ let suplementTagNames =
             "ECO"; "NIC"; "Time"; "UTCTime"; "UTCDate";
             "SetUp"; "FEN";
             "Termination";
-            "Annotator"; "Mode"; "PlyCount"]
+            "Annotator"; "Mode"; "PlyCount";
+            "WhiteClock"; "BlackClock"]
 
 let pTagName =
-    suplementTagNames @ sevenTagRoasterTagNames
+    attempt(suplementTagNames @ sevenTagRoasterTagNames
     |> Seq.map pstring 
-    |> choice
+    |> choice)
+    <|> (identifier (IdentifierOptions()))
     <!> "pTagName"
 
 

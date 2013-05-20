@@ -9,6 +9,11 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PgnParserTestFS", "PgnParse
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "pgn.net", "pgn.net\pgn.net.fsproj", "{4785BAEC-B14A-4FCC-8318-11D49B451439}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B4F23611-847D-4409-9E34-1DD07F0DC9E8}"
+	ProjectSection(SolutionItems) = preProject
+		local.testsettings = local.testsettings
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
