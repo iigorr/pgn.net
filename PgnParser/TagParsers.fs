@@ -17,10 +17,8 @@ let suplementTagNames =
             "WhiteClock"; "BlackClock"]
 
 let pTagName =
-    attempt(suplementTagNames @ sevenTagRosterTagNames
-    |> Seq.map pstring 
-    |> choice)
-    <|> (identifier (IdentifierOptions()))
+    attempt(suplementTagNames @ sevenTagRosterTagNames |> Seq.map pstring |> choice .>> ws1)
+    <|> (identifier (IdentifierOptions()) .>> ws1)
     <!> "pTagName"
 
 
@@ -62,7 +60,7 @@ let tagContent =
 
 let pTag = 
     ws .>> pchar '[' .>> ws >>. tagContent .>> ws .>> pchar ']' .>> ws 
-    <!> "pTag"
+    <!!> ("pTag", 1)
     <?> "Tag (e.g [Date \"2013.10.02\"])"
 
 let checkSTRTags (tagList: PgnTag list) : Parser<_, _> =

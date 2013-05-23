@@ -57,6 +57,11 @@ type TagParserTests() =
         ()
 
     [<TestMethod>]
+    member this.pTag_should_accept_tags_which_are_prefixes_of_others() =
+        tryParse pTag "[WhiteSomethingFoo \"\"]"
+
+
+    [<TestMethod>]
     member this.pTag_should_create_a_PgnDateTag_object_from_a_valid_tag() =
         let tag= parse pTag "[Date \"2013.05.15\"]"
         Assert.IsInstanceOfType(tag, typeof<PgnDateTag>)
