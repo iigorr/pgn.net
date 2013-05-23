@@ -51,9 +51,11 @@
   </Choose>
   <ItemGroup>
     <Compile Include="FileTestCases.cs" />
+    <Compile Include="LargeFileTests.cs" />
     <Compile Include="ParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RealFileTests.cs" />
+    <Compile Include="TestUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\pgn.net\pgn.net.fsproj">
@@ -67,6 +69,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Test Files\empty-file.pgn">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Test Files\Large Files\ficsgamesdb_2012_titled_movetimes_772441.pgn">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Test Files\Large Files\IB1313.pgn">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Test Files\Large Files\twic944.pgn">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Test Files\Real Files\chess-informant-sample.pgn">

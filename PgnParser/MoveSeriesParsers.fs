@@ -42,15 +42,16 @@ let pEndOfGame =
 
 let pNAG =
     pchar '$' >>. pint32 |>> fun code -> NAGEntry(code) :> MoveTextEntry
-    <!!> ("pNAG", 3)
     <?> "NAG ($<num> e.g. $6 or $32)"
+    <!!> ("pNAG", 3)
 
 let pMoveSeries, pMoveSeriesImpl = createParserForwardedToRef()
 
 let pRAV =
-    pchar '(' .>> ws >>. pMoveSeries .>> ws .>> pchar ')' |>> fun moveSeries -> RAVEntry(moveSeries) :> MoveTextEntry
-    <!!> ("pRAV", 4)
+    pchar '(' .>> ws >>. pMoveSeries .>> ws .>> pchar ')' 
+    |>> fun moveSeries -> RAVEntry(moveSeries) :> MoveTextEntry
     <?> "RAV e.g. \"(6. Bd3)\""
+    <!!> ("pRAV", 4)
 
 let pMoveSeriesEntry= 
      pCommentary
@@ -61,4 +62,7 @@ let pMoveSeriesEntry=
     <|> attempt(pEndOfGame)
     <!!> ("pMoveSeriesEntry", 4)
 
-do pMoveSeriesImpl := (sepEndBy1 pMoveSeriesEntry ws <!> "pMoveSeries")
+do pMoveSeriesImpl := (
+    sepEndBy1 pMoveSeriesEntry ws 
+    <!!> ("pMoveSeries", 5)
+    )

@@ -16,7 +16,7 @@ type Game() =
     member val Month:int option = None with get, set
     member val Day:int option = None with get, set
 
-    member val Round:int option = None with get, set
+    member val Round:string option = None with get, set
 
     member val WhitePlayer:string = "?" with get, set
     member val BlackPlayer:string = "?" with get, set

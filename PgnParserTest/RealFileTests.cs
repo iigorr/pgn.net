@@ -1,35 +1,39 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ilf.pgn.PgnParsers;
 
 namespace ilf.pgn.Test
 {
     [TestClass]
-    [DeploymentItem(TestFolder, TestFolder)]
     public class RealFileTests
     {
-        private const string TestFolder = @"Test Files\Real Files\";
-
-        private Database TestFile(string fileName)
-        {
-            if (!System.IO.File.Exists(TestFolder + fileName))
-                Assert.Inconclusive("Test data not available ");
-
-            var parser = new Parser();
-            return parser.ReadFromFile(TestFolder + fileName);
-
-        }
+        private const string TestSet = "Real Files\\";
 
         [TestMethod]
         public void ChessInformantSample()
         {
-            var db = TestFile("chess-informant-sample.pgn");
+            var db = TestUtils.TestFile(TestSet+"chess-informant-sample.pgn");
             Assert.AreEqual(5, db.Games.Count);
         }
 
         [TestMethod]
         public void DemoGames()
         {
-            var db = TestFile("demoGames.pgn");
+            var db = TestUtils.TestFile(TestSet + "demoGames.pgn");
             Assert.AreEqual(2, db.Games.Count);
+        }
+
+        [TestMethod]
+        public void Lon09R5()
+        {
+            var db = TestUtils.TestFile(TestSet + "lon09r5.pgn");
+            Assert.AreEqual(4, db.Games.Count);
+        }
+
+        [TestMethod]
+        public void Tilb98R2()
+        {
+            var db = TestUtils.TestFile(TestSet + "tilb98r2.pgn");
+            Assert.AreEqual(6, db.Games.Count);
         }
     }
 }

@@ -79,7 +79,7 @@ type GameParserTest() =
     [<TestMethod>]
     member this.pGame_should_set_round_correctly() =
         let game= parse pGame testGame2
-        Assert.AreEqual(Some(15), game.Round)
+        Assert.AreEqual(Some "15", game.Round)
 
     [<TestMethod>]
     member this.pGame_should_set_players_correctly() =

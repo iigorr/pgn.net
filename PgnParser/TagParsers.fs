@@ -17,8 +17,7 @@ let suplementTagNames =
             "WhiteClock"; "BlackClock"]
 
 let pTagName =
-    attempt(suplementTagNames @ sevenTagRosterTagNames |> Seq.map pstring |> choice .>> ws1)
-    <|> (identifier (IdentifierOptions()) .>> ws1)
+    identifier (IdentifierOptions()) .>> ws1
     <!> "pTagName"
 
 
@@ -31,13 +30,16 @@ let pDateTagValue =
     attempt(pchar '"' >>. pYear .>> pchar '.' .>>. pMonth .>> pchar '.' .>>. pDay .>> pchar '"')
     <|> ((pchar '"' >>. pYear .>> pchar '"') |>> fun year -> ((year, None), None))
     |>> fun((year, month), day) -> PgnDateTag("Date", Year = year, Month = month, Day=day) :> PgnTag
+    <!> "pDateTagValue"
 
-let pRound = 
-    attempt(pchar '"' >>. ((str "?" |>> fun x -> None) <|> (pint32 |>> fun x -> Some(x))) .>> pchar '"')
-    <|> (pchar '"' .>> pchar '"' >>. preturn None)
+let pRoundTagValue = 
+    attempt(pchar '"' .>> pchar '?' .>> pchar '"' >>. preturn None)
+    <|> attempt(pchar '"' .>> pchar '"' >>. preturn None)
+    <|> (pchar '"' >>. many (noneOf "\"")  .>> pchar '"' |>> fun x -> Some(charList2String(x))) 
     |>> fun round -> PgnRoundTag("Round", round) :> PgnTag
+    <!> "pRoundTagValue"
 
-let pResult = 
+let pResultTagVaue = 
     pchar '"' >>. (
         ((str "1-0" <|> str "1 - 0") |>> fun _ -> GameResult.White)
     <|> ((str "0-1" <|> str "0 - 1") |>> fun _ -> GameResult.Black)
@@ -45,18 +47,24 @@ let pResult =
     <|> ((str "*" <|> str "?") |>> fun _ -> GameResult.Open)
     ) .>> pchar '"'
     |>> fun result -> PgnResultTag("Result", result) :> PgnTag
+    <!> "pResultTagVaue"
 
  // Basic tag (e.g. [Site "Boston"]
-let tagValue = pchar '"' >>. (pNotChar '"') .>> pchar '"'
+let pBasicTagValue = 
+    between (pchar '"') (pchar '"') (pNotChar '"')
+    <!> "pBasicTagValue"
+
 let pBasicTag = 
-    pTagName .>> spaces .>>. tagValue
+    pTagName .>> spaces .>>. pBasicTagValue
     |>> fun (tagName, tagValue) -> PgnBasicTag(tagName, tagValue) :> PgnTag
+    <!> "pBasicTag"
 
 let tagContent = 
-    (str "Date" .>> spaces >>. pDateTagValue)
-    <|> (str "Round" .>> spaces >>. pRound)
-    <|> (str "Result" .>> spaces >>. pResult)
+    (str "Date" .>> ws >>. pDateTagValue)
+    <|> (str "Round" .>> ws >>. pRoundTagValue)
+    <|> (str "Result" .>> ws >>. pResultTagVaue)
     <|> pBasicTag 
+    <!> "pTagContent"
 
 let pTag = 
     ws .>> pchar '[' .>> ws >>. tagContent .>> ws .>> pchar ']' .>> ws 
@@ -72,6 +80,6 @@ let checkSTRTags (tagList: PgnTag list) : Parser<_, _> =
 let pTagList = 
     ws >>. sepEndBy pTag ws
     >>=  checkSTRTags
-    <!> "pTagList"
+    <!!> ("pTagList", 2)
 
 let applyPTag p = run pTag p
