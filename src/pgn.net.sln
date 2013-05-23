@@ -7,12 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PgnParserTest", "..\test\Pg
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PgnParserTestFS", "..\test\PgnParserTestFS\PgnParserTestFS.fsproj", "{5F14D923-AF29-433E-B813-6ED2E51969A3}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "pgn.net", "pgn.net\pgn.net.fsproj", "{4785BAEC-B14A-4FCC-8318-11D49B451439}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B4F23611-847D-4409-9E34-1DD07F0DC9E8}"
 	ProjectSection(SolutionItems) = preProject
 		..\test\local.testsettings = ..\test\local.testsettings
 	EndProjectSection
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "pgn.Data", "pgn.Data\pgn.Data.fsproj", "{9BBB599A-38EF-4AAA-A891-214736B79E13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,10 +32,10 @@ Global
 		{5F14D923-AF29-433E-B813-6ED2E51969A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F14D923-AF29-433E-B813-6ED2E51969A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F14D923-AF29-433E-B813-6ED2E51969A3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4785BAEC-B14A-4FCC-8318-11D49B451439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4785BAEC-B14A-4FCC-8318-11D49B451439}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4785BAEC-B14A-4FCC-8318-11D49B451439}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4785BAEC-B14A-4FCC-8318-11D49B451439}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BBB599A-38EF-4AAA-A891-214736B79E13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BBB599A-38EF-4AAA-A891-214736B79E13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BBB599A-38EF-4AAA-A891-214736B79E13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BBB599A-38EF-4AAA-A891-214736B79E13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

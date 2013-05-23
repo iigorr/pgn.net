@@ -65,10 +65,5 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
-    <ProjectReference Include="..\pgn.net\pgn.net.fsproj">
-      <Name>pgn.net</Name>
-      <Project>{4785baec-b14a-4fcc-8318-11d49b451439}</Project>
-      <Private>True</Private>
-    </ProjectReference>
   </ItemGroup>
 </Project>
