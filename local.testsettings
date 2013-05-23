@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <TestSettings name="local" id="10d84bd8-dadb-41be-8c75-2a1322037d83" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
   <Description>These are default test settings for a local test run.</Description>
-  <Deployment>
+  <Deployment enabled="false">
     <DeploymentItem filename="PgnParserTest\Test Files\" />
     <DeploymentItem filename="PgnParserTest\Test Files\Real Files\" />
   </Deployment>
