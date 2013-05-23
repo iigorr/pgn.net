@@ -14,7 +14,7 @@ namespace ilf.pgn.Test
                 Assert.Inconclusive("Test data not available ");
 
             var parser = new Parser();
-            return parser.ReadFromFile(TestFolder + "chess-informant-sample.pgn");
+            return parser.ReadFromFile(TestFolder + fileName);
 
         }
 
