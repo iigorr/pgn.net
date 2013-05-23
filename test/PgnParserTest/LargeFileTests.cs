@@ -5,6 +5,7 @@ using ilf.pgn.PgnParsers;
 namespace ilf.pgn.Test
 {
     [TestClass]
+    [Ignore]
     public class LargeFileTests
     {
         private const string TestSet = "Large Files\\";
