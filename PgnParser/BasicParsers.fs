@@ -1,8 +1,35 @@
 ﻿module ilf.pgn.PgnParsers.Basic
 
 open FParsec
+open NLog
 
-let TRACE = false
+type Debug() = 
+    do Debug.ConfigureLog()
+    let log : Logger = LogManager.GetCurrentClassLogger()
+
+    static member private ConfigureLog() =
+        let logTarget = new Targets.FileTarget()
+        logTarget.FileName <- Layouts.SimpleLayout("${basedir}/debug.log")
+        logTarget.DeleteOldFileOnStartup <- true
+        let loggingRule = new Config.LoggingRule("*", LogLevel.Debug, logTarget)
+
+        let config = Config.LoggingConfiguration()
+        config.AddTarget("default", logTarget)
+        config.LoggingRules.Add(loggingRule)
+
+
+        LogManager.Configuration <- config
+        LogManager.Configuration.Reload()
+        |> ignore
+
+    member val DebugMode : bool = false with get, set
+    member val ParserLvl : int = 4 with get, set
+    member this.Log (message: string) = fun (logLvl : LogLevel) -> log.Log(logLvl, message)
+
+    static member val Default = Debug()
+
+let deb = Debug.Default
+
 let ws = spaces
 let ws1 = spaces1
 let str = pstring
@@ -20,14 +47,19 @@ let BP (p: Parser<_,_>) stream =
 
 let NBP (p: Parser<_,_>, name:string) stream =
     p stream // set a breakpoint here
-
+    
 let D (p: Parser<_,_>, name:string) stream =
     System.Console.WriteLine(name);
     p stream
 
-let (<!>) (p: Parser<_,_>) label : Parser<_,_> =
+
+let (<!!>) (p: Parser<_,_>) (label, depth) : Parser<_,_> =
     fun stream ->
-        if TRACE then printfn "%A: Entering %s. \"%s\"" stream.Position label (stream.PeekString(5))
+        if deb.DebugMode && depth >= deb.ParserLvl then deb.Log (sprintf "%A: %sEntering %s. \"%s\""  stream.Position ("->".PadLeft(depth)) label (stream.PeekString(20))) LogLevel.Debug
         let reply = p stream
-        if TRACE then printfn "%A: Leaving %s (%A)" stream.Position label reply.Status
+        if deb.DebugMode && depth >= deb.ParserLvl then deb.Log (sprintf "%A: %sLeaving %s (%A)"  stream.Position ("->".PadLeft(depth)) label reply.Status) LogLevel.Debug
         reply
+
+
+let (<!>) (p: Parser<_,_>) label : Parser<_,_> =
+        p <!!> (label, 0) 
