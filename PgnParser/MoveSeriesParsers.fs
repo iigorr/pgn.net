@@ -14,18 +14,19 @@ let pMoveNumberIndicator =
 let pFullMoveTextEntry =
     opt pMoveNumberIndicator .>> ws >>. pMove .>> ws1 .>>. pMove 
     |>> fun (moveWhite, moveBlack) ->  MovePairEntry(moveWhite, moveBlack) :> MoveTextEntry
-    <!> "pFullMoveTextEntry"
+    <!!> ("pFullMoveTextEntry", 3)
 
 let pSplitMoveTextEntry = 
     opt(pMoveNumberIndicator .>> ws) >>. pMove
     |>> fun move -> SingleMoveEntry(move) :> MoveTextEntry
-    <!> "pSplitMoveTextEntry"
+    <!!> ("pSplitMoveTextEntry", 3)
 
 let pCommentary = 
     between (str "{") (str "}") (many (noneOf "}")) 
     <|> between (str ";") newline (many (noneOf "\n")) //to end of line comment
     |>> charList2String
     |>> fun text -> CommentEntry(text) :> MoveTextEntry
+    <!!> ("pCommentary", 3)
     <?> "Comment ( {...} or ;... )"
 
 let pOneHalf = str "1/2" <|> str "½"
@@ -36,19 +37,19 @@ let pEndOpen = str "*"  |>> fun _ -> GameResult.Open
 
 let pEndOfGame =
     pDraw <|> pWhiteWin <|> pBlackWin <|> pEndOpen |>> fun endType -> GameEndEntry(endType) :> MoveTextEntry
-    <!> "pEndOfGame"
+    <!!> ("pEndOfGame", 3)
     <?> "Game termination marker (1/2-1/2 or 1-0 or 0-1 or *)"
 
 let pNAG =
     pchar '$' >>. pint32 |>> fun code -> NAGEntry(code) :> MoveTextEntry
-    <!> "pNAG"
+    <!!> ("pNAG", 3)
     <?> "NAG ($<num> e.g. $6 or $32)"
 
 let pMoveSeries, pMoveSeriesImpl = createParserForwardedToRef()
 
 let pRAV =
     pchar '(' .>> ws >>. pMoveSeries .>> ws .>> pchar ')' |>> fun moveSeries -> RAVEntry(moveSeries) :> MoveTextEntry
-    <!> "pRAV"
+    <!!> ("pRAV", 4)
     <?> "RAV e.g. \"(6. Bd3)\""
 
 let pMoveSeriesEntry= 
@@ -58,6 +59,6 @@ let pMoveSeriesEntry=
     <|> attempt(pFullMoveTextEntry) 
     <|> attempt(pSplitMoveTextEntry)
     <|> attempt(pEndOfGame)
-    <!> "pMoveSeriesEntry"
+    <!!> ("pMoveSeriesEntry", 4)
 
 do pMoveSeriesImpl := (sepEndBy1 pMoveSeriesEntry ws <!> "pMoveSeries")

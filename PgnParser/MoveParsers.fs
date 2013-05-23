@@ -94,7 +94,7 @@ let pOrigin =
 let pBasicMove = 
     attempt (pOrigin .>>. pTarget) |>> fun (origin, target) -> getMove(Some(origin), target, MoveType.Simple)
     <|> (pTarget |>> fun target -> getMove(None, target, MoveType.Simple))
-    <!> "pBasicMove"
+    <!!> ("pBasicMove", 1)
 
 // parsers for capturing
 let pCapturingSign = (pchar 'x' <|> pchar ':') |>> fun x -> x.ToString()
@@ -138,7 +138,7 @@ let pCapturingMove =
             match enpassant with
             | None -> move
             | _ -> move.Type <- MoveType.CaptureEnPassant; move
-    <!> "pCapturingMove"
+    <!!> ("pCapturingMove", 1)
 
 
 // special moves: pawn promotion and castle (king-side, queen-side)
@@ -233,7 +233,7 @@ let pMove =
                 | _ -> move
 
 
-    <!> "pMove"
+    <!!> ("pMove", 2)
     <?> "Move (e.g. Qc4 or e2e4 or 0-0-0 etc.)"
 
 let appyPMove (p: string)= run pMove p

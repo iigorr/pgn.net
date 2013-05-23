@@ -32,7 +32,7 @@ let makeGame (tagList : PgnTag list, moveTextList : MoveTextEntry list) =
 let pGame = 
     pTagList .>> ws .>>.  pMoveSeries 
     |>>  makeGame
-    <!> "pGame"
+    <!!> ("pGame", 5)
 
 let pDatabase = 
     ws >>. sepEndBy pGame ws .>> eof

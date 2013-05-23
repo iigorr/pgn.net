@@ -32,6 +32,20 @@
     <WarningLevel>3</WarningLevel>
     <DocumentationFile>bin\Release\PgnParser.XML</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" Condition=" Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')" />
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="BasicParsers.fs" />
+    <Compile Include="TagParsers.fs" />
+    <Compile Include="MoveParsers.fs" />
+    <Compile Include="MoveSeriesParsers.fs" />
+    <Compile Include="GameParsers.fs" />
+    <Compile Include="Parser.fs" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="FParsec">
       <HintPath>..\lib\FParsec.dll</HintPath>
@@ -44,28 +58,17 @@
       <Private>False</Private>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.2.0.1.2\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="BasicParsers.fs" />
-    <Compile Include="TagParsers.fs" />
-    <Compile Include="MoveParsers.fs" />
-    <Compile Include="MoveSeriesParsers.fs" />
-    <Compile Include="GameParsers.fs" />
-    <Compile Include="Parser.fs" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\pgn.net\pgn.net.fsproj">
       <Name>pgn.net</Name>
       <Project>{4785baec-b14a-4fcc-8318-11d49b451439}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
-  <PropertyGroup>
-    <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
-  </PropertyGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" Condition=" Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')" />
 </Project>
