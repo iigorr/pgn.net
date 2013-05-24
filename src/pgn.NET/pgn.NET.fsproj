@@ -5,12 +5,12 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>9bbb599a-38ef-4aaa-a891-214736b79e13</ProjectGuid>
+    <ProjectGuid>d3976d6a-6eee-4a56-8c40-7f910b29a316</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>pgn.Data</RootNamespace>
-    <AssemblyName>pgn.Data</AssemblyName>
+    <RootNamespace>pgn.NET</RootNamespace>
+    <AssemblyName>pgn.NET</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <Name>pgn.Data</Name>
+    <Name>pgn.NET</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,7 +20,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Debug\pgn.Data.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\pgn.NET.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,9 +29,25 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Release\pgn.Data.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\pgn.NET.XML</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" Condition=" Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')" />
   <ItemGroup>
+    <Compile Include="Parser.fs" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="FParsec">
+      <HintPath>..\packages\FParsec.0.9.2.0\lib\net40\FParsec.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FParsecCS">
+      <HintPath>..\packages\FParsec.0.9.2.0\lib\net40\FParsecCS.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>True</Private>
@@ -39,19 +55,17 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
+    <ProjectReference Include="..\pgn.Data\pgn.Data.fsproj">
+      <Name>pgn.Data</Name>
+      <Project>{9bbb599a-38ef-4aaa-a891-214736b79e13}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\pgn.Parse\pgn.Parse.fsproj">
+      <Name>pgn.Parse</Name>
+      <Project>{90538968-8127-451b-945d-59707a910b63}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Basic.fs" />
-    <Compile Include="PgnTag.fs" />
-    <Compile Include="Move.fs" />
-    <Compile Include="MoveSeries.fs" />
-    <Compile Include="Game.fs" />
-    <Compile Include="Database.fs" />
-  </ItemGroup>
-  <PropertyGroup>
-    <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
-  </PropertyGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" Condition=" Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

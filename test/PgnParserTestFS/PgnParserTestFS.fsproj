@@ -53,14 +53,14 @@
     <Compile Include="GameParserTest.fs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\pgn.net\pgn.net.fsproj">
-      <Name>pgn.net</Name>
-      <Project>{4785baec-b14a-4fcc-8318-11d49b451439}</Project>
+    <ProjectReference Include="..\..\src\pgn.Data\pgn.Data.fsproj">
+      <Name>pgn.Data</Name>
+      <Project>{9bbb599a-38ef-4aaa-a891-214736b79e13}</Project>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\PgnParser\PgnParser.fsproj">
-      <Name>PgnParser</Name>
-      <Project>{5a0392f9-1ca1-4349-a04e-341fb8600c72}</Project>
+    <ProjectReference Include="..\..\src\pgn.Parse\pgn.Parse.fsproj">
+      <Name>pgn.Parse</Name>
+      <Project>{90538968-8127-451b-945d-59707a910b63}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>

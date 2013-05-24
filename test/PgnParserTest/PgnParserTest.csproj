@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FParsec">
+      <HintPath>..\..\src\packages\FParsec.0.9.2.0\lib\net40\FParsec.dll</HintPath>
+    </Reference>
+    <Reference Include="FParsecCS">
+      <HintPath>..\..\src\packages\FParsec.0.9.2.0\lib\net40\FParsecCS.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -58,16 +64,8 @@
     <Compile Include="TestUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\pgn.net\pgn.net.fsproj">
-      <Project>{4785baec-b14a-4fcc-8318-11d49b451439}</Project>
-      <Name>pgn.net</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\PgnParser\PgnParser.fsproj">
-      <Project>{5a0392f9-1ca1-4349-a04e-341fb8600c72}</Project>
-      <Name>PgnParser</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Test Files\empty-file.pgn">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -98,6 +96,20 @@
     <None Include="Test Files\time-annotated-games.pgn">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\pgn.Data\pgn.Data.fsproj">
+      <Project>{9bbb599a-38ef-4aaa-a891-214736b79e13}</Project>
+      <Name>pgn.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\pgn.NET\pgn.NET.fsproj">
+      <Project>{d3976d6a-6eee-4a56-8c40-7f910b29a316}</Project>
+      <Name>pgn.NET</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\pgn.Parse\pgn.Parse.fsproj">
+      <Project>{90538968-8127-451b-945d-59707a910b63}</Project>
+      <Name>pgn.Parse</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

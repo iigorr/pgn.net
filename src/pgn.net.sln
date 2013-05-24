@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PgnParser", "PgnParser\PgnParser.fsproj", "{5A0392F9-1CA1-4349-A04E-341FB8600C72}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PgnParserTest", "..\test\PgnParserTest\PgnParserTest.csproj", "{55130566-754C-4378-B148-4DFA7EDC9505}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PgnParserTestFS", "..\test\PgnParserTestFS\PgnParserTestFS.fsproj", "{5F14D923-AF29-433E-B813-6ED2E51969A3}"
@@ -14,16 +12,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "pgn.Data", "pgn.Data\pgn.Data.fsproj", "{9BBB599A-38EF-4AAA-A891-214736B79E13}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "pgn.NET", "pgn.NET\pgn.NET.fsproj", "{D3976D6A-6EEE-4A56-8C40-7F910B29A316}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "pgn.Parse", "pgn.Parse\pgn.Parse.fsproj", "{90538968-8127-451B-945D-59707A910B63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5A0392F9-1CA1-4349-A04E-341FB8600C72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A0392F9-1CA1-4349-A04E-341FB8600C72}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A0392F9-1CA1-4349-A04E-341FB8600C72}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A0392F9-1CA1-4349-A04E-341FB8600C72}.Release|Any CPU.Build.0 = Release|Any CPU
 		{55130566-754C-4378-B148-4DFA7EDC9505}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{55130566-754C-4378-B148-4DFA7EDC9505}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55130566-754C-4378-B148-4DFA7EDC9505}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -36,6 +34,14 @@ Global
 		{9BBB599A-38EF-4AAA-A891-214736B79E13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BBB599A-38EF-4AAA-A891-214736B79E13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BBB599A-38EF-4AAA-A891-214736B79E13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3976D6A-6EEE-4A56-8C40-7F910B29A316}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3976D6A-6EEE-4A56-8C40-7F910B29A316}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3976D6A-6EEE-4A56-8C40-7F910B29A316}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3976D6A-6EEE-4A56-8C40-7F910B29A316}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90538968-8127-451B-945D-59707A910B63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90538968-8127-451B-945D-59707A910B63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90538968-8127-451B-945D-59707A910B63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90538968-8127-451B-945D-59707A910B63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
