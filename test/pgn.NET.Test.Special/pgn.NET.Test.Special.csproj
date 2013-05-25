@@ -58,15 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Test Files\Large Files\ficsgamesdb_2012_titled_movetimes_772441.pgn">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Test Files\Large Files\IB1313.pgn">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Test Files\Large Files\twic944.pgn">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\pgn.Data\pgn.Data.fsproj">
@@ -85,6 +76,9 @@
       <Project>{987aeab8-ad12-4e23-ac6a-e365ad7c3bb0}</Project>
       <Name>pgn.NET.Test</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Test Files\Large Files\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
