@@ -19,6 +19,13 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "pgn.Parse.Test", "..\test\p
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pgn.NET.Test.Special", "..\test\pgn.NET.Test.Special\pgn.NET.Test.Special.csproj", "{00E154F1-8363-487A-90F6-33E58C9E8D39}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{98EA874C-BAF4-4E0D-AE15-E90A0F4FA1BA}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = pgn.net.vsmdi
