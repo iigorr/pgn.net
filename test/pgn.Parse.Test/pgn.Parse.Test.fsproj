@@ -1,16 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>5f14d923-af29-433e-b813-6ed2e51969a3</ProjectGuid>
+    <ProjectGuid>273f6243-57a4-43c4-89d2-bd13165e9076</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>PgnParserTestFS</RootNamespace>
-    <AssemblyName>PgnParserTestFS</AssemblyName>
+    <RootNamespace>pgn.Parse.Test</RootNamespace>
+    <AssemblyName>pgn.Parse.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <Name>PgnParserTestFS</Name>
+    <Name>pgn.Parse.Test</Name>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,7 +21,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Debug\PgnParserTestFS.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\pgn.Parse.Test.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,14 +30,29 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Release\PgnParserTestFS.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\pgn.Parse.Test.XML</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" Condition=" Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')" />
+  <ItemGroup>
+    <Compile Include="TestBase.fs" />
+    <Compile Include="TagParserTest.fs" />
+    <Compile Include="MoveParsersTest.fs" />
+    <Compile Include="MoveSieriesParserTests.fs" />
+    <Compile Include="GameParserTest.fs" />
+    <None Include="packages.config" />
+    <None Include="App.config" />
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="FParsec">
-      <HintPath>..\lib\FParsec.dll</HintPath>
+      <HintPath>..\..\src\packages\FParsec.0.9.2.0\lib\net40\FParsec.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="FParsecCS">
-      <HintPath>..\lib\FParsecCS.dll</HintPath>
+      <HintPath>..\..\src\packages\FParsec.0.9.2.0\lib\net40\FParsecCS.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
@@ -44,15 +60,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="TestBase.fs" />
-    <Compile Include="TagParserTest.fs" />
-    <Compile Include="MoveParsersTest.fs" />
-    <Compile Include="MoveSieriesParserTests.fs" />
-    <Compile Include="GameParserTest.fs" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\src\pgn.Data\pgn.Data.fsproj">
       <Name>pgn.Data</Name>
       <Project>{9bbb599a-38ef-4aaa-a891-214736b79e13}</Project>
@@ -64,10 +71,6 @@
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
-  <PropertyGroup>
-    <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
-  </PropertyGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" Condition=" Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

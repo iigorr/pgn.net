@@ -8,7 +8,7 @@ namespace ilf.pgn.Test
         public static Database TestFile(string fileName)
         {
             if (!System.IO.File.Exists(TestFolder + fileName))
-                Assert.Inconclusive("Test data not available ");
+                Assert.Inconclusive("Test data not available (" + TestFolder + fileName + ")");
 
             var parser = new Parser();
             return parser.ReadFromFile(TestFolder + fileName);
