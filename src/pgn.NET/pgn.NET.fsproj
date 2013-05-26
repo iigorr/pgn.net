@@ -52,9 +52,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
-    <ProjectReference Include="..\pgn.Data\pgn.Data.fsproj">
+    <ProjectReference Include="..\pgn.Data\pgn.Data.csproj">
       <Name>pgn.Data</Name>
-      <Project>{9bbb599a-38ef-4aaa-a891-214736b79e13}</Project>
+      <Project>{29143ecd-e5d3-41d4-9c62-81d82597d895}</Project>
       <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\pgn.Parse\pgn.Parse.fsproj">

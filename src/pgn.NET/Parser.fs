@@ -2,7 +2,7 @@
 
 open FParsec
 open System.IO
-open ilf.pgn.Exception
+open ilf.pgn.Exceptions
 open ilf.pgn.PgnParsers.Game
 
 type Parser() =
