@@ -1,7 +1,9 @@
 ﻿module internal ilf.pgn.PgnParsers.Move
 
+open System
 open FParsec
 open ilf.pgn.Data
+open ilf.pgn.PgnParsers.Bootstrap
 open ilf.pgn.PgnParsers.Basic
 
 
@@ -47,14 +49,14 @@ let pRank =
     <?> "Rank (1..8)"
 
 type MoveInfo(piece, file, rank) =
-    member val Piece : Piece option = piece with get, set
-    member val File  : File option = file with get, set
-    member val Rank  : int option = rank with get, set
+    member val Piece : Nullable<Piece> = toNullable(piece) with get, set
+    member val File  : Nullable<File> = toNullable(file) with get, set
+    member val Rank  : Nullable<int> = toNullable(rank) with get, set
 
 let getSquare(moveInfo : MoveInfo) =
     match moveInfo.File, moveInfo.Rank with
-    | Some(x), Some(y) -> Some(Square(x, y))
-    | _, _ -> None
+    | x, y when x.HasValue && y.HasValue -> Square(x.Value, y.Value)
+    | _, _ -> null
 
 let getMove(originInfo: MoveInfo option, targetInfo: MoveInfo, moveType: MoveType) = 
     match originInfo, targetInfo with
@@ -113,10 +115,10 @@ let pSimplifiedPawnCapture =  // e.g. dxe or de
     |>> fun (file1, file2) -> 
         new Move (
             Type = MoveType.Capture,
-            Piece = Some(Piece.Pawn),
-            TargetPiece = Some(Piece.Pawn),
-            OriginFile = Some(file1),
-            TargetFile = Some(file2)
+            Piece = Nullable(Piece.Pawn),
+            TargetPiece = Nullable(Piece.Pawn),
+            OriginFile = Nullable(file1),
+            TargetFile = Nullable(file2)
     )
     <!> "pSimplifiedPawnCapture"
 
@@ -148,7 +150,7 @@ let pCapturingMove =
 let pPawnPromotion = 
     (attempt  pBasicCapturingMove <|> pBasicMove)
     .>>. ((str "=" >>. pPiece) <|> (str "(" >>. pPiece .>> str ")"))
-    |>> fun (move, piece) -> move.PromotedPiece <- Some piece; move
+    |>> fun (move, piece) -> move.PromotedPiece <- Nullable(piece); move
     <!> "pPawnPromotion"
 
 let pCasteKingSide = 
@@ -222,14 +224,14 @@ let pMove =
                 match addInfo with
                 | None -> None, None
                 | Some(x) -> x
-            move.Annotation<- annotation
+            move.Annotation<- toNullable(annotation)
             match indicator with 
             | None -> move
             | Some(i) ->
                 match i with
-                | "+"  | "†"  | "ch" -> move.IsCheck <- Some true; move
-                | "++" | "††" | "dbl ch" -> move.IsCheck <- Some true; move.IsDoubleCheck <- Some true; move
-                | "#"  | "‡" -> move.IsCheckMate <- Some true; move
+                | "+"  | "†"  | "ch" -> move.IsCheck <- Nullable(true); move
+                | "++" | "††" | "dbl ch" -> move.IsCheck <- Nullable(true); move.IsDoubleCheck <- Nullable(true); move
+                | "#"  | "‡" -> move.IsCheckMate <- Nullable(true); move
                 | _ -> move
 
 

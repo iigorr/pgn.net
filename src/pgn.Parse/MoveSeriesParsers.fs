@@ -1,5 +1,6 @@
 ﻿module internal ilf.pgn.PgnParsers.MoveSeries
 
+open System.Collections.Generic
 open FParsec
 open ilf.pgn.Data
 open ilf.pgn.PgnParsers.Basic
@@ -49,7 +50,10 @@ let pMoveSeries, pMoveSeriesImpl = createParserForwardedToRef()
 
 let pRAV =
     pchar '(' .>> ws >>. pMoveSeries .>> ws .>> pchar ')' 
-    |>> fun moveSeries -> RAVEntry(moveSeries) :> MoveTextEntry
+    |>> fun moveSeries -> 
+            let moveSeriesList = List<MoveTextEntry>()
+            moveSeriesList.AddRange(moveSeries)
+            RAVEntry(moveSeriesList) :> MoveTextEntry
     <?> "RAV e.g. \"(6. Bd3)\""
     <!!> ("pRAV", 4)
 
@@ -63,6 +67,6 @@ let pMoveSeriesEntry=
     <!!> ("pMoveSeriesEntry", 4)
 
 do pMoveSeriesImpl := (
-    sepEndBy1 pMoveSeriesEntry ws 
+    sepEndBy1 pMoveSeriesEntry ws
     <!!> ("pMoveSeries", 5)
     )

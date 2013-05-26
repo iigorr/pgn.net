@@ -67,25 +67,25 @@ type TagParserTests() =
         let tag= parse pTag "[Date \"2013.05.15\"]"
         Assert.IsInstanceOfType(tag, typeof<PgnDateTag>)
         Assert.AreEqual("Date", tag.Name)
-        Assert.AreEqual(Some 2013, (tag :?> PgnDateTag).Year)
-        Assert.AreEqual(Some 5, (tag :?> PgnDateTag).Month)
-        Assert.AreEqual(Some 15, (tag :?> PgnDateTag).Day)
+        Assert.AreEqual(2013, (tag :?> PgnDateTag).Year)
+        Assert.AreEqual(5, (tag :?> PgnDateTag).Month)
+        Assert.AreEqual(15, (tag :?> PgnDateTag).Day)
     
     [<TestMethod>]
     member this.pTag_should_accept_only_the_year_as_date() =
         let tag= parse pTag "[Date \"2013\"]"
         Assert.IsInstanceOfType(tag, typeof<PgnDateTag>)
         Assert.AreEqual("Date", tag.Name)
-        Assert.AreEqual(Some 2013, (tag :?> PgnDateTag).Year)
-        Assert.AreEqual(None, (tag :?> PgnDateTag).Month)
-        Assert.AreEqual(None, (tag :?> PgnDateTag).Day)
+        Assert.AreEqual(2013, (tag :?> PgnDateTag).Year)
+        Assert.AreEqual(null, (tag :?> PgnDateTag).Month)
+        Assert.AreEqual(null, (tag :?> PgnDateTag).Day)
 
     [<TestMethod>]
     member this.pTag_should_create_a_PgnRoundTag_object_from_a_valid_tag() =
         let tag= parse pTag "[Round \"13\"]"
         Assert.IsInstanceOfType(tag, typeof<PgnRoundTag>)
         Assert.AreEqual("Round", tag.Name)
-        Assert.AreEqual(Some "13", (tag :?> PgnRoundTag).Round)
+        Assert.AreEqual("13", (tag :?> PgnRoundTag).Round)
 
     [<TestMethod>]
     member this.pTag_should_create_PgnRoundTag_object_from_two_tags_in_sequence() =
@@ -100,7 +100,7 @@ type TagParserTests() =
         let tag= parse pTag "[Round \"4.1\"]"
         Assert.IsInstanceOfType(tag, typeof<PgnRoundTag>)
         Assert.AreEqual("Round", tag.Name)
-        Assert.AreEqual(Some "4.1", (tag :?> PgnRoundTag).Round)
+        Assert.AreEqual("4.1", (tag :?> PgnRoundTag).Round)
 
     [<TestMethod>]
     member this.pTag_should_create_a_PgnResultTag_object_from_a_valid_tag() =

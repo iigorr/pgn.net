@@ -40,6 +40,7 @@
   <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" Condition=" Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Bootstrap.fs" />
     <Compile Include="BasicParsers.fs" />
     <Compile Include="TagParsers.fs" />
     <Compile Include="MoveParsers.fs" />

@@ -1,6 +1,7 @@
 ﻿namespace ilf.pgn.Data
 
 open ilf.pgn
+open System.Collections.Generic
 
 type MoveTextEntryType = 
     | MovePair = 1
@@ -42,7 +43,7 @@ type NAGEntry(code : int)=
     member val Code : int = code with get, set
 
     
-type RAVEntry(moveText : MoveTextEntry list)=
+type RAVEntry(moveText : List<MoveTextEntry>)=
     inherit MoveTextEntry(Type = MoveTextEntryType.RecursiveAnnotationVariation)
 
-    member val MoveText : MoveTextEntry list = moveText with get, set
+    member val MoveText : List<MoveTextEntry> = moveText with get, set

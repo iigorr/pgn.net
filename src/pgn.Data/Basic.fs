@@ -10,6 +10,7 @@ type File =
     | G = 7 
     | H = 8
 
+[<AllowNullLiteral>]
 type Square(file: File, rank: int) = 
     member val File = file with get
     member val Rank = rank with get

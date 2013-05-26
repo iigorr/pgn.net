@@ -1,7 +1,9 @@
 ﻿module internal ilf.pgn.PgnParsers.Tag
 
+open System
 open FParsec
 open ilf.pgn.Data
+open ilf.pgn.PgnParsers.Bootstrap
 open ilf.pgn.PgnParsers.Basic
 
 
@@ -17,14 +19,18 @@ type PgnBasicTag(name: string, value: string) =
 type PgnDateTag(name: string) = 
     inherit PgnTag(name)
     
-    member val Year: int option = None with get, set
-    member val Month: int option = None with get, set
-    member val Day: int option = None with get, set
+    member val Year: Nullable<Int32> = Nullable() with get, set
+    member val Month: Nullable<Int32> = Nullable() with get, set
+    member val Day: Nullable<Int32> = Nullable() with get, set
 
 type PgnRoundTag(name: string, round: string option) = 
     inherit PgnTag(name)
     
-    member val Round: string option = round with get, set
+    member val Round: System.String = 
+        match round with
+        | None -> null
+        | _ -> round.Value
+        with get, set
 
 type PgnResultTag(name: string, result: GameResult) = 
     inherit PgnTag(name)
@@ -56,7 +62,7 @@ let pDay = pMonth
 let pDateTagValue = 
     attempt(pchar '"' >>. pYear .>> pchar '.' .>>. pMonth .>> pchar '.' .>>. pDay .>> pchar '"')
     <|> ((pchar '"' >>. pYear .>> pchar '"') |>> fun year -> ((year, None), None))
-    |>> fun((year, month), day) -> PgnDateTag("Date", Year = year, Month = month, Day=day) :> PgnTag
+    |>> fun((year, month), day) -> PgnDateTag("Date", Year =  toNullable(year), Month = toNullable(month), Day=toNullable(day)) :> PgnTag
     <!> "pDateTagValue"
 
 let pRoundTagValue = 

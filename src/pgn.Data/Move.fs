@@ -1,5 +1,6 @@
 ﻿namespace ilf.pgn.Data
 
+open System
 open ilf.pgn
 
 type MoveType = 
@@ -40,18 +41,18 @@ type MoveAnnotation =
 
 type Move() =
     member val Type = MoveType.Simple with get, set
-    member val TargetPiece : Piece option = None with get, set
-    member val TargetSquare : Square option = None with get, set
-    member val TargetFile : File option = None with get, set
-    member val Piece : Piece option = None with get, set
-    member val OriginSquare : Square option = None with get, set
-    member val OriginFile : File option = None with get, set
-    member val OriginRank : int option = None with get, set
-    member val PromotedPiece : Piece option = None with get, set
-    member val IsCheck : bool option = None with get, set
-    member val IsDoubleCheck : bool option = None with get, set
-    member val IsCheckMate : bool option = None with get, set
-    member val Annotation : MoveAnnotation option = None with get, set
+    member val TargetPiece : Nullable<Piece> = Nullable() with get, set
+    member val TargetSquare : Square = null with get, set
+    member val TargetFile : Nullable<File> = Nullable() with get, set
+    member val Piece : Nullable<Piece> = Nullable() with get, set
+    member val OriginSquare : Square = null with get, set
+    member val OriginFile : Nullable<File> = Nullable() with get, set
+    member val OriginRank : Nullable<int> = Nullable() with get, set
+    member val PromotedPiece : Nullable<Piece> = Nullable() with get, set
+    member val IsCheck : Nullable<bool> = Nullable() with get, set
+    member val IsDoubleCheck : Nullable<bool> = Nullable() with get, set
+    member val IsCheckMate : Nullable<bool> = Nullable() with get, set
+    member val Annotation : Nullable<MoveAnnotation> = Nullable() with get, set
 
     override x.Equals(yobj) =
         match yobj with

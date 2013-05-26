@@ -66,21 +66,21 @@ type GameParserTest() =
     [<TestMethod>]
     member this.pGame_should_set_Date_correctly() =
         let game= parse pGame testGame2
-        Assert.AreEqual(Some(2000), game.Year)
-        Assert.AreEqual(Some(11), game.Month)
-        Assert.AreEqual(Some(2), game.Day)
+        Assert.AreEqual(2000, game.Year)
+        Assert.AreEqual(11, game.Month)
+        Assert.AreEqual(2, game.Day)
 
     [<TestMethod>]
     member this.pGame_should_set_incomplete_date_correctly() =
         let game= parse pGame testGame1
-        Assert.AreEqual(Some(1879), game.Year)
-        Assert.AreEqual(None, game.Month)
-        Assert.AreEqual(None, game.Day)
+        Assert.AreEqual(1879, game.Year)
+        Assert.AreEqual(null, game.Month)
+        Assert.AreEqual(null, game.Day)
 
     [<TestMethod>]
     member this.pGame_should_set_round_correctly() =
         let game= parse pGame testGame2
-        Assert.AreEqual(Some "15", game.Round)
+        Assert.AreEqual("15", game.Round)
 
     [<TestMethod>]
     member this.pGame_should_set_players_correctly() =

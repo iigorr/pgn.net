@@ -6,7 +6,7 @@
     <ProjectGuid>{00E154F1-8363-487A-90F6-33E58C9E8D39}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>pgn.NET.Test.Special</RootNamespace>
+    <RootNamespace>ilf.pgn.Test</RootNamespace>
     <AssemblyName>pgn.NET.Test.Special</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
