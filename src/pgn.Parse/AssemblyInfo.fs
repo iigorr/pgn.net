@@ -13,5 +13,8 @@ open System.Runtime.InteropServices
 [<assembly: AssemblyCopyright("Copyright \169 Igor Lankin 2013")>]
 [<assembly: AssemblyVersion("1.0.0.0")>]
 [<assembly: AssemblyFileVersion("1.0.0.0")>]
-[<assembly: InternalsVisibleTo("PgnParserTestFS")>]
+[<assembly: InternalsVisibleTo("pgn.NET")>]
+[<assembly: InternalsVisibleTo("pgn.Parse.Test")>]
+[<assembly: InternalsVisibleTo("pgn.NET.Test")>]
+[<assembly: InternalsVisibleTo("pgn.NET.Test.Special")>]
 do ()

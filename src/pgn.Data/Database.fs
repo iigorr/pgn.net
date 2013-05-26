@@ -1,4 +1,4 @@
-﻿namespace ilf.pgn
+﻿namespace ilf.pgn.Data
 
 type Database() =
     let _games= new System.Collections.Generic.List<Game>()

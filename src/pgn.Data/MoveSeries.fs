@@ -1,14 +1,14 @@
-﻿namespace ilf.pgn
+﻿namespace ilf.pgn.Data
 
 open ilf.pgn
 
 type MoveTextEntryType = 
-    | MovePair
-    | SingleMove
-    | GameEnd
-    | Comment
-    | NumericAnnotationGlyph
-    | RecursiveAnnotationVariation
+    | MovePair = 1
+    | SingleMove = 2
+    | GameEnd = 3
+    | Comment = 4
+    | NumericAnnotationGlyph = 5
+    | RecursiveAnnotationVariation = 6
 
 type MoveTextEntry()=
     member val Type : MoveTextEntryType = MoveTextEntryType.MovePair with get, set

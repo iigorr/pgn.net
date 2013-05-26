@@ -1,7 +1,8 @@
 ﻿module ilf.pgn.Test.TestBase
 
 open FParsec
-open ilf.pgn
+open ilf.pgn.Data
+open ilf.pgn.Exception
 open ilf.pgn.PgnParsers
 
 open Microsoft.VisualStudio.TestTools.UnitTesting

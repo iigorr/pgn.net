@@ -1,4 +1,4 @@
-﻿module ilf.pgn.PgnParsers.Basic
+﻿module internal ilf.pgn.PgnParsers.Basic
 
 open FParsec
 open NLog

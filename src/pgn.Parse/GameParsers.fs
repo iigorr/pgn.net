@@ -1,7 +1,7 @@
-﻿module ilf.pgn.PgnParsers.Game
+﻿module internal ilf.pgn.PgnParsers.Game
 
 open FParsec
-open ilf.pgn
+open ilf.pgn.Data
 open ilf.pgn.PgnParsers.Basic
 open ilf.pgn.PgnParsers.Tag
 open ilf.pgn.PgnParsers.MoveSeries

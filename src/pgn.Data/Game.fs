@@ -1,4 +1,4 @@
-﻿namespace ilf.pgn
+﻿namespace ilf.pgn.Data
 
 open ilf.pgn
 

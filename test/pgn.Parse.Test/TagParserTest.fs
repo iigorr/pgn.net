@@ -1,6 +1,7 @@
 ﻿namespace ilf.pgn.Test
 
-open ilf.pgn
+open ilf.pgn.Data
+open ilf.pgn.Exception
 open ilf.pgn.PgnParsers.Tag
 open ilf.pgn.Test.TestBase
 

@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ilf.pgn.Data;
 
 namespace ilf.pgn.Test
 {
