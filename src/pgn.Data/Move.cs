@@ -41,20 +41,20 @@
             unchecked
             {
                 int hash = 17;
-                hash = hash * 23 + getHashCode(TargetSquare);
-                hash = hash * 23 + getHashCode(Piece);
-                hash = hash * 23 + getHashCode(OriginSquare);
-                hash = hash * 23 + getHashCode(OriginFile);
-                hash = hash * 23 + getHashCode(OriginRank);
-                hash = hash * 23 + getHashCode(PromotedPiece);
-                hash = hash * 23 + getHashCode(IsCheck);
-                hash = hash * 23 + getHashCode(IsCheckMate);
-                hash = hash * 23 + getHashCode(Annotation);
+                hash = hash * 23 + getNullableHashCode(TargetSquare);
+                hash = hash * 23 + getNullableHashCode(Piece);
+                hash = hash * 23 + getNullableHashCode(OriginSquare);
+                hash = hash * 23 + getNullableHashCode(OriginFile);
+                hash = hash * 23 + getNullableHashCode(OriginRank);
+                hash = hash * 23 + getNullableHashCode(PromotedPiece);
+                hash = hash * 23 + getNullableHashCode(IsCheck);
+                hash = hash * 23 + getNullableHashCode(IsCheckMate);
+                hash = hash * 23 + getNullableHashCode(Annotation);
                 return hash;
             }
         }
 
-        private int getHashCode(object obj)
+        private int getNullableHashCode(object obj)
         {
             return obj == null ? 1 : obj.GetHashCode();
         }
