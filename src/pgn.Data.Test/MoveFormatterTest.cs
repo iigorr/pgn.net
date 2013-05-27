@@ -183,5 +183,71 @@ namespace ilf.pgn.Data.Format.Test
 
             Assert.AreEqual("e4xd5e.p.", sut.Format(move).ToString());
         }
+
+        [TestMethod]
+        public void Format_should_format_piece_promotion()
+        {
+            var sut = new MoveFormatter();
+            var move = new Move
+            {
+                Type = MoveType.Simple,
+                Piece = Piece.Pawn,
+                TargetSquare = new Square(File.E, 8),
+                PromotedPiece = Piece.Queen
+            };
+
+            Assert.AreEqual("e8=Q", sut.Format(move).ToString());
+        }
+
+        [TestMethod]
+        public void Format_should_format_piece_promotion_after_capture()
+        {
+            var sut = new MoveFormatter();
+            var move = new Move
+            {
+                Type = MoveType.Capture,
+                Piece = Piece.Pawn,
+                OriginSquare = new Square(File.D, 7),
+                TargetPiece = Piece.Rook,
+                TargetSquare = new Square(File.E, 8),
+                PromotedPiece = Piece.Queen
+            };
+
+            Assert.AreEqual("d7xRe8=Q", sut.Format(move).ToString());
+        }
+
+        [TestMethod]
+        public void Format_should_format_check_annotation()
+        {
+            var sut = new MoveFormatter();
+            var move = new Move
+            {
+                Type = MoveType.Capture,
+                Piece = Piece.Knight,
+                OriginSquare = new Square(File.B, 7),
+                TargetPiece = Piece.Pawn,
+                TargetSquare = new Square(File.C, 5),
+                IsCheck = true
+            };
+
+            Assert.AreEqual("Nb7xc5+", sut.Format(move).ToString());
+        }
+
+        [TestMethod]
+        public void Format_should_format_any_annotation()
+        {
+            var sut = new MoveFormatter();
+            var move = new Move
+            {
+                Type = MoveType.Capture,
+                Piece = Piece.Rook,
+                OriginSquare = new Square(File.B, 1),
+                TargetSquare = new Square(File.B, 8),
+                IsCheckMate = true,
+                Annotation = MoveAnnotation.Brilliant
+            };
+
+            Assert.AreEqual("Rb1xb8#!!", sut.Format(move).ToString());
+        }
     }
 }

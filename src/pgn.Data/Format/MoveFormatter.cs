@@ -19,6 +19,11 @@ namespace ilf.pgn.Data.Format
 
             if (!handled) throw new ArgumentException(String.Format("Unsupported MoveType {0}", move.Type));
 
+            if (move.PromotedPiece != null)
+                sb.Append("=").Append(GetPiece(move.PromotedPiece));
+
+            sb.Append(GetCheckAndMateAnnotation(move));
+            sb.Append(GetAnnotation(move));
             return sb;
         }
 
@@ -48,6 +53,7 @@ namespace ilf.pgn.Data.Format
             var target = GetMoveTarget(move);
 
             sb.Append(origin).Append(target);
+
             return true;
         }
 
@@ -63,7 +69,22 @@ namespace ilf.pgn.Data.Format
 
             return target;
         }
+        private string GetMoveOrigin(Move move)
+        {
+            var piece = GetPiece(move.Piece);
 
+            if (move.OriginSquare != null)
+                return piece + move.OriginSquare;
+
+            var origin = "";
+            if (move.OriginFile != null)
+                origin = move.OriginFile.ToString().ToLower();
+
+            if (move.OriginRank != null)
+                origin += move.OriginRank;
+
+            return piece + origin;
+        }
         private string GetPiece(Piece? piece)
         {
             if (piece == null || piece == Piece.Pawn)
@@ -72,23 +93,50 @@ namespace ilf.pgn.Data.Format
             return ((char)piece).ToString();
         }
 
-
-        private string GetMoveOrigin(Move move)
+        private string GetCheckAndMateAnnotation(Move move)
         {
-            var piece = GetPiece(move.Piece);
-
-            if (move.OriginSquare != null)
-                return piece + move.OriginSquare;
-
-            var originSquare = "";
-            if (move.OriginFile != null)
-                originSquare = move.OriginFile.ToString().ToLower();
-
-            if (move.OriginRank != null)
-                originSquare += move.OriginRank;
-
-            return piece + originSquare;
+            if (move.IsCheckMate == true) return "#";
+            if (move.IsDoubleCheck == true) return "++";
+            if (move.IsCheck == true) return "+";
+            
+            return "";
         }
+
+        private string GetAnnotation(Move move)
+        {
+            if (move.Annotation == null) return "";
+
+            switch (move.Annotation.Value)
+            {
+                case MoveAnnotation.MindBlowing: return "!!!";
+                case MoveAnnotation.Brilliant: return "!!";
+                case MoveAnnotation.Good: return "!";
+                case MoveAnnotation.Interesting: return "!?";
+                case MoveAnnotation.Dubious: return "?!";
+                case MoveAnnotation.Mistake: return "?";
+                case MoveAnnotation.Blunder: return "??";
+                case MoveAnnotation.Abysmal: return "???";
+                case MoveAnnotation.FascinatingButUnsound: return "!!?";
+                case MoveAnnotation.Unclear: return "∞";
+                case MoveAnnotation.WithCompensation: return "=/∞";
+                case MoveAnnotation.EvenPosition: return "=";
+                case MoveAnnotation.SlightAdvantageWhite: return "+/=";
+                case MoveAnnotation.SlightAdvantageBlack: return "=/+";
+                case MoveAnnotation.AdvantageWhite: return "+/−";
+                case MoveAnnotation.AdvantageBlack: return "−/+";
+                case MoveAnnotation.DecisiveAdvantageWhite: return "+−";
+                case MoveAnnotation.DecisiveAdvantageBlack: return "-+";
+                case MoveAnnotation.Space: return "○";
+                case MoveAnnotation.Initiative: return "↑";
+                case MoveAnnotation.Development: return "↑↑";
+                case MoveAnnotation.Counterplay: return "⇄";
+                case MoveAnnotation.Countering: return "∇";
+                case MoveAnnotation.Idea: return "Δ";
+                case MoveAnnotation.TheoreticalNovelty: return "N";
+            }
+            return "";
+        }
+
 
         private bool HandleCastle(Move move, StringBuilder sb)
         {
