@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Database.cs" />
     <Compile Include="Exceptions\PgnFormatException.cs" />
+    <Compile Include="Format\MoveFormatter.cs" />
     <Compile Include="MoveText\CommentEntry.cs" />
     <Compile Include="MoveText\GameEndEntry.cs" />
     <Compile Include="MoveText\MovePairEntry.cs" />

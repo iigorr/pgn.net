@@ -28,7 +28,7 @@
 
         public override string ToString()
         {
-            return this.File.ToString() + this.Rank;
+            return this.File.ToString().ToLower() + this.Rank;
         }
 
         public static bool operator ==(Square a, Square b)

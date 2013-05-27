@@ -2,11 +2,11 @@
 {
     public enum Piece
     {
-        King,
-        Queen,
-        Rook,
-        Bishop,
-        Knight,
-        Pawn
+        King = 'K',
+        Queen = 'Q',
+        Rook = 'R',
+        Bishop = 'B',
+        Knight = 'N',
+        Pawn = 'P'
     }
 }
