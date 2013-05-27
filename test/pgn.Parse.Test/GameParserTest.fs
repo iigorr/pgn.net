@@ -1,7 +1,7 @@
 ﻿namespace ilf.pgn.Test
 
 open ilf.pgn.Data
-open ilf.pgn.Exception
+open ilf.pgn.Exceptions
 open ilf.pgn.PgnParsers.Game
 open ilf.pgn.Test.TestBase
 

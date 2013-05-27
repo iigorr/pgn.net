@@ -2,7 +2,7 @@
 
 open FParsec
 open ilf.pgn.Data
-open ilf.pgn.Exception
+open ilf.pgn.Exceptions
 open ilf.pgn.PgnParsers
 
 open Microsoft.VisualStudio.TestTools.UnitTesting
