@@ -36,5 +36,27 @@
                 && this.Annotation == other.Annotation;
         }
 
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + getHashCode(TargetSquare);
+                hash = hash * 23 + getHashCode(Piece);
+                hash = hash * 23 + getHashCode(OriginSquare);
+                hash = hash * 23 + getHashCode(OriginFile);
+                hash = hash * 23 + getHashCode(OriginRank);
+                hash = hash * 23 + getHashCode(PromotedPiece);
+                hash = hash * 23 + getHashCode(IsCheck);
+                hash = hash * 23 + getHashCode(IsCheckMate);
+                hash = hash * 23 + getHashCode(Annotation);
+                return hash;
+            }
+        }
+
+        private int getHashCode(object obj)
+        {
+            return obj == null ? 1 : obj.GetHashCode();
+        }
     }
 }
