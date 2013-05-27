@@ -41,18 +41,24 @@
   <ItemGroup>
     <Compile Include="Database.cs" />
     <Compile Include="Exceptions\PgnFormatException.cs" />
-    <Compile Include="File.cs" />
+    <Compile Include="MoveText\CommentEntry.cs" />
+    <Compile Include="MoveText\GameEndEntry.cs" />
+    <Compile Include="MoveText\MovePairEntry.cs" />
+    <Compile Include="MoveText\NAGEntry.cs" />
+    <Compile Include="MoveText\RAVEntry.cs" />
+    <Compile Include="MoveText\SingleMoveEntry.cs" />
+    <Compile Include="Move\File.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameInfo.cs" />
-    <Compile Include="GameResult.cs" />
-    <Compile Include="Move.cs" />
-    <Compile Include="MoveAnnotation.cs" />
-    <Compile Include="MoveTextEntryType.cs" />
-    <Compile Include="MoveTextEntry.cs" />
-    <Compile Include="MoveType.cs" />
-    <Compile Include="Piece.cs" />
+    <Compile Include="MoveText\GameResult.cs" />
+    <Compile Include="Move\Move.cs" />
+    <Compile Include="Move\MoveAnnotation.cs" />
+    <Compile Include="MoveText\MoveTextEntryType.cs" />
+    <Compile Include="MoveText\MoveTextEntry.cs" />
+    <Compile Include="Move\MoveType.cs" />
+    <Compile Include="Move\Piece.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Square.cs" />
+    <Compile Include="Move\Square.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
