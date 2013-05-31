@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="MoveFormatterTest.cs" />
+    <Compile Include="MoveTextFormatterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

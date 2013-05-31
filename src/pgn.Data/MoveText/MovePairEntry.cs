@@ -3,6 +3,7 @@ namespace ilf.pgn.Data
 {
     public class MovePairEntry : MoveTextEntry
     {
+        public int? MoveNumber { get; set; }
         public Move White { get; set; }
         public Move Black { get; set; }
 

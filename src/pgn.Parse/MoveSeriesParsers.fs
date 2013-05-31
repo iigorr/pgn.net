@@ -3,6 +3,7 @@
 open System.Collections.Generic
 open FParsec
 open ilf.pgn.Data
+open ilf.pgn.PgnParsers.Bootstrap
 open ilf.pgn.PgnParsers.Basic
 open ilf.pgn.PgnParsers.Move
 
@@ -13,13 +14,13 @@ let pMoveNumberIndicator =
     pint32 .>> ws .>> pPeriods <!> "pMoveNumberIndicator"
     <?> "Move number indicator (e.g. 5. or 13...)"
 let pFullMoveTextEntry =
-    opt pMoveNumberIndicator .>> ws >>. pMove .>> ws1 .>>. pMove 
-    |>> fun (moveWhite, moveBlack) ->  MovePairEntry(moveWhite, moveBlack) :> MoveTextEntry
+    opt pMoveNumberIndicator .>> ws .>>. pMove .>> ws1 .>>. pMove 
+    |>> fun ((moveNum, moveWhite), moveBlack) ->  MovePairEntry(moveWhite, moveBlack, MoveNumber=toNullable(moveNum)) :> MoveTextEntry
     <!!> ("pFullMoveTextEntry", 3)
 
 let pSplitMoveTextEntry = 
-    opt(pMoveNumberIndicator .>> ws) >>. pMove
-    |>> fun move -> SingleMoveEntry(move) :> MoveTextEntry
+    opt(pMoveNumberIndicator .>> ws) .>>. pMove
+    |>> fun (moveNum, move) -> SingleMoveEntry(move, MoveNumber = toNullable(moveNum)) :> MoveTextEntry
     <!!> ("pSplitMoveTextEntry", 3)
 
 let pCommentary = 

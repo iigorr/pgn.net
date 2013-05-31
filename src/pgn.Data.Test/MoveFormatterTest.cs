@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ilf.pgn.Data.Format.Test
