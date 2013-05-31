@@ -93,5 +93,19 @@ namespace ilf.pgn.Data.Format.Test
             Assert.AreEqual("*", sut.Format(new GameEndEntry(GameResult.Open)));
             Assert.AreEqual("½-½", sut.Format(new GameEndEntry(GameResult.Draw)));
         }
+
+        [TestMethod]
+        public void Format_should_format_a_CommentEntry()
+        {
+            var sut = new MoveTextFormatter();
+            Assert.AreEqual("{This is a test comment}", sut.Format(new CommentEntry("This is a test comment")));
+        }
+
+        [TestMethod]
+        public void Format_should_format_a_NAGEntry()
+        {
+            var sut = new MoveTextFormatter();
+            Assert.AreEqual("$5", sut.Format(new NAGEntry(5)));
+        }
     }
 }

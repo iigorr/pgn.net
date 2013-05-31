@@ -17,6 +17,8 @@ namespace ilf.pgn.Data.Format
                     FormatSingleMove((SingleMoveEntry)entry, writer);
                     return;
                 case MoveTextEntryType.GameEnd:
+                case MoveTextEntryType.Comment:
+                case MoveTextEntryType.NumericAnnotationGlyph:
                     writer.Write(entry.ToString());
                     return;
             }

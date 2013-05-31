@@ -9,5 +9,9 @@ namespace ilf.pgn.Data
         {
             Code = code;
         }
+        public override string ToString()
+        {
+            return "$" + Code;
+        }
     }
 }

@@ -9,5 +9,10 @@ namespace ilf.pgn.Data
         {
             Comment = comment;
         }
+
+        public override string ToString()
+        {
+            return "{" + Comment + "}";
+        }
     }
 }
