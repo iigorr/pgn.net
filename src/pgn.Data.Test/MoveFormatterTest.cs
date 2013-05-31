@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.IO;
+using System.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ilf.pgn.Data.Format.Test
 {
@@ -12,11 +14,27 @@ namespace ilf.pgn.Data.Format.Test
         }
 
         [TestMethod]
+        public void Format_should_accept_TextWriter()
+        {
+            var sut = new MoveFormatter();
+            var writer = new StringWriter();
+            writer.Write("Foo ");
+            var move = new Move
+            {
+                Type = MoveType.Simple,
+                TargetSquare = new Square(File.C, 5),
+                Piece = Piece.Rook
+            };
+            sut.Format(move, writer);
+
+            Assert.AreEqual("Foo Rc5", writer.ToString());
+        }
+        [TestMethod]
         public void Format_should_format_castling_moves()
         {
             var sut = new MoveFormatter();
-            Assert.AreEqual("0-0", sut.Format(new Move { Type = MoveType.CastleKingSide }).ToString());
-            Assert.AreEqual("0-0-0", sut.Format(new Move { Type = MoveType.CastleQueenSide }).ToString());
+            Assert.AreEqual("0-0", sut.Format(new Move { Type = MoveType.CastleKingSide }));
+            Assert.AreEqual("0-0-0", sut.Format(new Move { Type = MoveType.CastleQueenSide }));
         }
 
         [TestMethod]
@@ -30,7 +48,7 @@ namespace ilf.pgn.Data.Format.Test
                 Piece = Piece.Rook
             };
 
-            Assert.AreEqual("Rc5", sut.Format(move).ToString());
+            Assert.AreEqual("Rc5", sut.Format(move));
         }
 
         [TestMethod]
@@ -43,7 +61,7 @@ namespace ilf.pgn.Data.Format.Test
                 TargetSquare = new Square(File.C, 5)
             };
 
-            Assert.AreEqual("c5", sut.Format(move).ToString());
+            Assert.AreEqual("c5", sut.Format(move));
         }
 
         [TestMethod]
@@ -57,7 +75,7 @@ namespace ilf.pgn.Data.Format.Test
                 Piece = Piece.Pawn
             };
 
-            Assert.AreEqual("c5", sut.Format(move).ToString());
+            Assert.AreEqual("c5", sut.Format(move));
         }
 
         [TestMethod]
@@ -72,7 +90,7 @@ namespace ilf.pgn.Data.Format.Test
                 OriginSquare = new Square(File.B, 7)
             };
 
-            Assert.AreEqual("Nb7c5", sut.Format(move).ToString());
+            Assert.AreEqual("Nb7c5", sut.Format(move));
         }
 
         [TestMethod]
@@ -87,7 +105,7 @@ namespace ilf.pgn.Data.Format.Test
                 OriginFile = File.B
             };
 
-            Assert.AreEqual("Nbc5", sut.Format(move).ToString());
+            Assert.AreEqual("Nbc5", sut.Format(move));
         }
 
         [TestMethod]
@@ -102,7 +120,7 @@ namespace ilf.pgn.Data.Format.Test
                 OriginRank = 7
             };
 
-            Assert.AreEqual("N7c5", sut.Format(move).ToString());
+            Assert.AreEqual("N7c5", sut.Format(move));
         }
 
         [TestMethod]
@@ -117,7 +135,7 @@ namespace ilf.pgn.Data.Format.Test
                 TargetPiece = Piece.Bishop
             };
 
-            Assert.AreEqual("NxBc5", sut.Format(move).ToString());
+            Assert.AreEqual("NxBc5", sut.Format(move));
         }
 
         [TestMethod]
@@ -133,7 +151,7 @@ namespace ilf.pgn.Data.Format.Test
                 TargetSquare = new Square(File.C, 5)
             };
 
-            Assert.AreEqual("Nb7xBc5", sut.Format(move).ToString());
+            Assert.AreEqual("Nb7xBc5", sut.Format(move));
         }
 
         [TestMethod]
@@ -149,7 +167,7 @@ namespace ilf.pgn.Data.Format.Test
                 TargetSquare = new Square(File.C, 5)
             };
 
-            Assert.AreEqual("Nb7xc5", sut.Format(move).ToString());
+            Assert.AreEqual("Nb7xc5", sut.Format(move));
         }
 
         [TestMethod]
@@ -165,7 +183,7 @@ namespace ilf.pgn.Data.Format.Test
                 TargetSquare = new Square(File.D, 5)
             };
 
-            Assert.AreEqual("exd5", sut.Format(move).ToString());
+            Assert.AreEqual("exd5", sut.Format(move));
         }
 
         [TestMethod]
@@ -181,7 +199,7 @@ namespace ilf.pgn.Data.Format.Test
                 TargetSquare = new Square(File.D, 5)
             };
 
-            Assert.AreEqual("e4xd5e.p.", sut.Format(move).ToString());
+            Assert.AreEqual("e4xd5e.p.", sut.Format(move));
         }
 
         [TestMethod]
@@ -196,7 +214,7 @@ namespace ilf.pgn.Data.Format.Test
                 PromotedPiece = Piece.Queen
             };
 
-            Assert.AreEqual("e8=Q", sut.Format(move).ToString());
+            Assert.AreEqual("e8=Q", sut.Format(move));
         }
 
         [TestMethod]
@@ -213,7 +231,7 @@ namespace ilf.pgn.Data.Format.Test
                 PromotedPiece = Piece.Queen
             };
 
-            Assert.AreEqual("d7xRe8=Q", sut.Format(move).ToString());
+            Assert.AreEqual("d7xRe8=Q", sut.Format(move));
         }
 
         [TestMethod]
@@ -230,7 +248,7 @@ namespace ilf.pgn.Data.Format.Test
                 IsCheck = true
             };
 
-            Assert.AreEqual("Nb7xc5+", sut.Format(move).ToString());
+            Assert.AreEqual("Nb7xc5+", sut.Format(move));
         }
 
         [TestMethod]
@@ -247,7 +265,7 @@ namespace ilf.pgn.Data.Format.Test
                 Annotation = MoveAnnotation.Brilliant
             };
 
-            Assert.AreEqual("Rb1xb8#!!", sut.Format(move).ToString());
+            Assert.AreEqual("Rb1xb8#!!", sut.Format(move));
         }
     }
 }

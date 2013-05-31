@@ -1,4 +1,6 @@
-﻿namespace ilf.pgn.Data
+﻿using ilf.pgn.Data.Format;
+
+namespace ilf.pgn.Data
 {
     public class Move
     {
@@ -57,6 +59,11 @@
         private int getNullableHashCode(object obj)
         {
             return obj == null ? 1 : obj.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return MoveFormatter.Default.Format(this);
         }
     }
 }

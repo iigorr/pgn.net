@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.IO;
 using System.Text;
 
 namespace ilf.pgn.Data.Format
@@ -7,27 +9,33 @@ namespace ilf.pgn.Data.Format
     {
         public readonly static MoveFormatter Default = new MoveFormatter();
 
-        public StringBuilder Format(Move move, StringBuilder sb = null)
+        public void Format(Move move, TextWriter writer)
         {
-            if (sb == null) sb = new StringBuilder();
-
             var handled =
-                HandleCastle(move, sb) ||
-                HandleSimpleMove(move, sb) ||
-                HandleCapturingMove(move, sb);
-
+                HandleCastle(move, writer) ||
+                HandleSimpleMove(move, writer) ||
+                HandleCapturingMove(move, writer);
 
             if (!handled) throw new ArgumentException(String.Format("Unsupported MoveType {0}", move.Type));
 
             if (move.PromotedPiece != null)
-                sb.Append("=").Append(GetPiece(move.PromotedPiece));
+            {
+                writer.Write("=");
+                writer.Write(GetPiece(move.PromotedPiece));
+            }
 
-            sb.Append(GetCheckAndMateAnnotation(move));
-            sb.Append(GetAnnotation(move));
-            return sb;
+            writer.Write(GetCheckAndMateAnnotation(move));
+            writer.Write(GetAnnotation(move));
         }
 
-        private bool HandleCapturingMove(Move move, StringBuilder sb)
+        public string Format(Move move)
+        {
+            var writer = new StringWriter();
+            Format(move, writer);
+            return writer.ToString();
+        }
+
+        private bool HandleCapturingMove(Move move, TextWriter writer)
         {
             if (move.Type != MoveType.Capture && move.Type != MoveType.CaptureEnPassant) return false;
 
@@ -35,24 +43,31 @@ namespace ilf.pgn.Data.Format
             var target = GetMoveTarget(move);
 
             if (origin == String.Empty)
-                sb.Append(target).Append("x");
+            {
+                writer.Write(target);
+                writer.Write("x");
+            }
             else
-                sb.Append(origin).Append("x").Append(target);
-
+            {
+                writer.Write(origin);
+                writer.Write("x");
+                writer.Write(target);
+            }
             if (move.Type == MoveType.CaptureEnPassant)
-                sb.Append("e.p.");
+                writer.Write("e.p.");
 
             return true;
         }
 
-        private bool HandleSimpleMove(Move move, StringBuilder sb)
+        private bool HandleSimpleMove(Move move, TextWriter writer)
         {
             if (move.Type != MoveType.Simple) return false;
 
             var origin = GetMoveOrigin(move);
             var target = GetMoveTarget(move);
 
-            sb.Append(origin).Append(target);
+            writer.Write(origin);
+            writer.Write(target);
 
             return true;
         }
@@ -90,7 +105,7 @@ namespace ilf.pgn.Data.Format
             if (piece == null || piece == Piece.Pawn)
                 return string.Empty;
 
-            return ((char)piece).ToString();
+            return ((char)piece).ToString(CultureInfo.InvariantCulture);
         }
 
         private string GetCheckAndMateAnnotation(Move move)
@@ -98,7 +113,7 @@ namespace ilf.pgn.Data.Format
             if (move.IsCheckMate == true) return "#";
             if (move.IsDoubleCheck == true) return "++";
             if (move.IsCheck == true) return "+";
-            
+
             return "";
         }
 
@@ -138,16 +153,16 @@ namespace ilf.pgn.Data.Format
         }
 
 
-        private bool HandleCastle(Move move, StringBuilder sb)
+        private bool HandleCastle(Move move, TextWriter writer)
         {
             switch (move.Type)
             {
                 case MoveType.CastleKingSide:
-                    sb.Append("0-0");
+                    writer.Write("0-0");
                     return true;
 
                 case MoveType.CastleQueenSide:
-                    sb.Append("0-0-0");
+                    writer.Write("0-0-0");
                     return true;
             }
 
