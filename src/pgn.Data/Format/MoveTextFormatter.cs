@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 
 namespace ilf.pgn.Data.Format
 {
@@ -6,7 +7,7 @@ namespace ilf.pgn.Data.Format
     {
         private readonly MoveFormatter _moveFormatter = new MoveFormatter();
 
-        public void Format(MoveTextEntry entry, StringWriter writer)
+        public void Format(MoveTextEntry entry, TextWriter writer)
         {
             switch (entry.Type)
             {
@@ -15,6 +16,9 @@ namespace ilf.pgn.Data.Format
                     return;
                 case MoveTextEntryType.SingleMove:
                     FormatSingleMove((SingleMoveEntry)entry, writer);
+                    return;
+                case MoveTextEntryType.RecursiveAnnotationVariation:
+                    FormatRAVEntry((RAVEntry)entry, writer);
                     return;
                 case MoveTextEntryType.GameEnd:
                 case MoveTextEntryType.Comment:
@@ -31,7 +35,26 @@ namespace ilf.pgn.Data.Format
             return writer.ToString();
         }
 
-        private void FormatPair(MovePairEntry movePair, StringWriter writer)
+        public void Format(List<MoveTextEntry> moveText, TextWriter writer)
+        {
+            //no foreach here as last one is special case (no trailing space)
+            for (int i = 0; i < moveText.Count - 1; ++i)
+            {
+                Format(moveText[i], writer);
+                writer.Write(" ");
+            }
+            Format(moveText[moveText.Count - 1], writer);
+        }
+
+        public string Format(List<MoveTextEntry> moveText)
+        {
+            var writer = new StringWriter();
+            Format(moveText, writer);
+            return writer.ToString();
+        }
+
+
+        private void FormatPair(MovePairEntry movePair, TextWriter writer)
         {
             if (movePair.MoveNumber != null)
             {
@@ -43,7 +66,7 @@ namespace ilf.pgn.Data.Format
             _moveFormatter.Format(movePair.Black, writer);
         }
 
-        private void FormatSingleMove(SingleMoveEntry entry, StringWriter writer)
+        private void FormatSingleMove(SingleMoveEntry entry, TextWriter writer)
         {
             if (entry.MoveNumber != null)
             {
@@ -54,6 +77,12 @@ namespace ilf.pgn.Data.Format
             _moveFormatter.Format(entry.Move, writer);
         }
 
+        private void FormatRAVEntry(RAVEntry entry, TextWriter writer)
+        {
+            writer.Write("(");
+            this.Format(entry.MoveText, writer);
+            writer.Write(")");
+        }
 
     }
 }

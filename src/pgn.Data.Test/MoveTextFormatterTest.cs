@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ilf.pgn.Data.Format.Test
@@ -13,7 +14,7 @@ namespace ilf.pgn.Data.Format.Test
 
         public MoveTextFormatterTest()
         {
-            _move1= new Move
+            _move1 = new Move
             {
                 Type = MoveType.Capture,
                 TargetSquare = new Square(File.D, 5),
@@ -79,7 +80,7 @@ namespace ilf.pgn.Data.Format.Test
         public void Format_should_format_continued_single_move()
         {
             var sut = new MoveTextFormatter();
-            var entry = new SingleMoveEntry(_move2) { MoveNumber = 6, IsContinued = true};
+            var entry = new SingleMoveEntry(_move2) { MoveNumber = 6, IsContinued = true };
 
             Assert.AreEqual("6... Nd4", sut.Format(entry));
         }
@@ -107,5 +108,62 @@ namespace ilf.pgn.Data.Format.Test
             var sut = new MoveTextFormatter();
             Assert.AreEqual("$5", sut.Format(new NAGEntry(5)));
         }
+
+        [TestMethod]
+        public void Format_should_format_a_RAVEntry()
+        {
+            var sut = new MoveTextFormatter();
+            var singleMoveEntry = new SingleMoveEntry(_move2) { MoveNumber = 6, IsContinued = true };
+            var ravEntry = new RAVEntry(new List<MoveTextEntry> { singleMoveEntry });
+            Assert.AreEqual("(6... Nd4)", sut.Format(ravEntry));
+        }
+
+        [TestMethod]
+        public void Format_should_format_move_text()
+        {
+            var sut = new MoveTextFormatter();
+            var entry1 =
+                new SingleMoveEntry(new Move
+                    {
+                        Type = MoveType.Capture,
+                        Piece = Piece.Knight,
+                        TargetSquare = new Square(File.E, 5),
+                        Annotation = MoveAnnotation.Good
+                    }) { MoveNumber = 37 };
+
+            var entry2 = new NAGEntry(13);
+
+            var rav1 = new CommentEntry("comment");
+            var rav2 =
+                new SingleMoveEntry(new Move
+                    {
+                        Type = MoveType.Simple,
+                        Piece = Piece.Knight,
+                        TargetSquare = new Square(File.E, 3),
+                        Annotation = MoveAnnotation.Blunder
+                    }) { MoveNumber = 37 };
+
+            var entry3 = new RAVEntry(new List<MoveTextEntry> { rav1, rav2 });
+
+            var entry4 =
+                new SingleMoveEntry(new Move
+                    {
+                        Type = MoveType.Simple,
+                        Piece = Piece.Rook,
+                        TargetSquare = new Square(File.D, 8)
+                    }) { MoveNumber = 37, IsContinued = true };
+
+            var entry5 = new MovePairEntry(
+                new Move { Type = MoveType.Simple, TargetSquare = new Square(File.H, 4) },
+                new Move { Type = MoveType.Simple, Piece = Piece.Rook, TargetSquare = new Square(File.D, 5) }) { MoveNumber = 38 };
+
+            var entry6 = new GameEndEntry(GameResult.Draw);
+            var entry7 = new CommentEntry("game ends in draw, whooot");
+
+            var moveText = new List<MoveTextEntry> { entry1, entry2, entry3, entry4, entry5, entry6, entry7 };
+
+            Assert.AreEqual("37. Nxe5! $13 ({comment} 37. Ne3??) 37... Rd8 38. h4 Rd5 ½-½ {game ends in draw, whooot}", sut.Format(moveText));
+        }
+
     }
 }

@@ -7,7 +7,7 @@ namespace ilf.pgn.Data
         public List<MoveTextEntry> MoveText { get; set; }
 
         public RAVEntry(List<MoveTextEntry> moveText)
-            : base(MoveTextEntryType.NumericAnnotationGlyph)
+            : base(MoveTextEntryType.RecursiveAnnotationVariation)
         {
             MoveText = moveText;
         }
