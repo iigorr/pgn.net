@@ -60,6 +60,7 @@ type MoveSeriesParserTest() =
          
         Assert.AreEqual(move, entry.Move)
         Assert.AreEqual(13, entry.MoveNumber)
+        Assert.AreEqual(false, entry.IsContinued)
 
 
     [<TestMethod>]
@@ -69,7 +70,7 @@ type MoveSeriesParserTest() =
          
         Assert.AreEqual(move, entry.Move)
         Assert.AreEqual(13, entry.MoveNumber)
-
+        Assert.AreEqual(true, entry.IsContinued)
 
     [<TestMethod>]
     member this.pMoveSeries_should_accept_a_moveSeries() =

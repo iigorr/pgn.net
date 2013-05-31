@@ -8,19 +8,26 @@ open ilf.pgn.PgnParsers.Basic
 open ilf.pgn.PgnParsers.Move
 
 
-let pPeriods =  many1Chars (pchar '.') <|> str "…" 
+let pPeriods = 
+    (str ".." .>> manyChars (pchar '.') >>% true) //two or more dots => Continued move pair
+    <|> (str "…" >>% true) // => Continued move pair
+    <|> (pchar '.' >>% false) // => Non-Continued move pair (move start)
 
 let pMoveNumberIndicator = 
-    pint32 .>> ws .>> pPeriods <!> "pMoveNumberIndicator"
+    attempt(pint32 .>> ws .>>. pPeriods |>> fun (num, contd) -> (Some(num), contd))
+    <|> preturn (None, false)
+    <!> "pMoveNumberIndicator"
     <?> "Move number indicator (e.g. 5. or 13...)"
+
 let pFullMoveTextEntry =
-    opt pMoveNumberIndicator .>> ws .>>. pMove .>> ws1 .>>. pMove 
-    |>> fun ((moveNum, moveWhite), moveBlack) ->  MovePairEntry(moveWhite, moveBlack, MoveNumber=toNullable(moveNum)) :> MoveTextEntry
+    pMoveNumberIndicator .>> ws .>>. pMove .>> ws1 .>>. pMove 
+    |>> fun (((moveNum, contd), moveWhite), moveBlack) ->  
+            MovePairEntry(moveWhite, moveBlack, MoveNumber=toNullable(moveNum)) :> MoveTextEntry
     <!!> ("pFullMoveTextEntry", 3)
 
 let pSplitMoveTextEntry = 
-    opt(pMoveNumberIndicator .>> ws) .>>. pMove
-    |>> fun (moveNum, move) -> SingleMoveEntry(move, MoveNumber = toNullable(moveNum)) :> MoveTextEntry
+    pMoveNumberIndicator .>> ws .>>. pMove
+    |>> fun ((moveNum, contd), move) -> SingleMoveEntry(move, MoveNumber = toNullable(moveNum), IsContinued=contd) :> MoveTextEntry
     <!!> ("pSplitMoveTextEntry", 3)
 
 let pCommentary = 
