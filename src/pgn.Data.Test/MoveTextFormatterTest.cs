@@ -65,5 +65,33 @@ namespace ilf.pgn.Data.Format.Test
 
             Assert.AreEqual("6. exd5 Nd4", sut.Format(movePair));
         }
+
+        [TestMethod]
+        public void Format_should_format_starting_single_move()
+        {
+            var sut = new MoveTextFormatter();
+            var entry = new SingleMoveEntry(_move1) { MoveNumber = 6 };
+
+            Assert.AreEqual("6. exd5", sut.Format(entry));
+        }
+
+        [TestMethod]
+        public void Format_should_format_continued_single_move()
+        {
+            var sut = new MoveTextFormatter();
+            var entry = new SingleMoveEntry(_move2) { MoveNumber = 6, IsContinued = true};
+
+            Assert.AreEqual("6... Nd4", sut.Format(entry));
+        }
+
+        [TestMethod]
+        public void Format_should_format_a_GameEndEntry()
+        {
+            var sut = new MoveTextFormatter();
+            Assert.AreEqual("1-0", sut.Format(new GameEndEntry(GameResult.White)));
+            Assert.AreEqual("0-1", sut.Format(new GameEndEntry(GameResult.Black)));
+            Assert.AreEqual("*", sut.Format(new GameEndEntry(GameResult.Open)));
+            Assert.AreEqual("½-½", sut.Format(new GameEndEntry(GameResult.Draw)));
+        }
     }
 }
