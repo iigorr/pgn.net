@@ -4,7 +4,7 @@ using System.IO;
 
 namespace ilf.pgn.Data.Format
 {
-    public class MoveFormatter
+    class MoveFormatter
     {
         public readonly static MoveFormatter Default = new MoveFormatter();
 

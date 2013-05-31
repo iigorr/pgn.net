@@ -3,7 +3,7 @@ using System.IO;
 
 namespace ilf.pgn.Data.Format
 {
-    public class MoveTextFormatter
+    class MoveTextFormatter
     {
         private readonly MoveFormatter _moveFormatter = new MoveFormatter();
 
