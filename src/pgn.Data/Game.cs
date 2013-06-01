@@ -29,6 +29,22 @@ namespace ilf.pgn.Data
         public List<GameInfo> AdditionalInfo { get; set; }
         public List<MoveTextEntry> MoveText { get; set; }
 
+        public IEnumerable<Move> GetMoves()
+        {
+            foreach (var entry in MoveText)
+            {
+                if (entry.Type == MoveTextEntryType.MovePair)
+                {
+                    yield return ((MovePairEntry)entry).White;
+                    yield return ((MovePairEntry)entry).Black;
+                }
+                else if (entry.Type == MoveTextEntryType.SingleMove)
+                {
+                    yield return ((SingleMoveEntry)entry).Move;
+                }
+            }
+        }
+
         public override string ToString()
         {
             return new Formatter().Format(this);

@@ -54,12 +54,20 @@
     <Compile Include="MoveFormatterTest.cs" />
     <Compile Include="MoveTextFormatterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="GameTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\pgn.Data\pgn.Data.csproj">
       <Project>{29143ecd-e5d3-41d4-9c62-81d82597d895}</Project>
       <Name>pgn.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\pgn.NET\pgn.NET.fsproj">
+      <Project>{d3976d6a-6eee-4a56-8c40-7f910b29a316}</Project>
+      <Name>pgn.NET</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
