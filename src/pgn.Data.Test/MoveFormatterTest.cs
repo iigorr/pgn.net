@@ -22,7 +22,7 @@ namespace ilf.pgn.Data.Format.Test
             {
                 Type = MoveType.Simple,
                 TargetSquare = new Square(File.C, 5),
-                Piece = Piece.Rook
+                Piece = PieceType.Rook
             };
             sut.Format(move, writer);
 
@@ -44,7 +44,7 @@ namespace ilf.pgn.Data.Format.Test
             {
                 Type = MoveType.Simple,
                 TargetSquare = new Square(File.C, 5),
-                Piece = Piece.Rook
+                Piece = PieceType.Rook
             };
 
             Assert.AreEqual("Rc5", sut.Format(move));
@@ -71,7 +71,7 @@ namespace ilf.pgn.Data.Format.Test
             {
                 Type = MoveType.Simple,
                 TargetSquare = new Square(File.C, 5),
-                Piece = Piece.Pawn
+                Piece = PieceType.Pawn
             };
 
             Assert.AreEqual("c5", sut.Format(move));
@@ -85,7 +85,7 @@ namespace ilf.pgn.Data.Format.Test
             {
                 Type = MoveType.Simple,
                 TargetSquare = new Square(File.C, 5),
-                Piece = Piece.Knight,
+                Piece = PieceType.Knight,
                 OriginSquare = new Square(File.B, 7)
             };
 
@@ -100,7 +100,7 @@ namespace ilf.pgn.Data.Format.Test
             {
                 Type = MoveType.Simple,
                 TargetSquare = new Square(File.C, 5),
-                Piece = Piece.Knight,
+                Piece = PieceType.Knight,
                 OriginFile = File.B
             };
 
@@ -115,7 +115,7 @@ namespace ilf.pgn.Data.Format.Test
             {
                 Type = MoveType.Simple,
                 TargetSquare = new Square(File.C, 5),
-                Piece = Piece.Knight,
+                Piece = PieceType.Knight,
                 OriginRank = 7
             };
 
@@ -130,8 +130,8 @@ namespace ilf.pgn.Data.Format.Test
             {
                 Type = MoveType.Capture,
                 TargetSquare = new Square(File.C, 5),
-                Piece = Piece.Knight,
-                TargetPiece = Piece.Bishop
+                Piece = PieceType.Knight,
+                TargetPiece = PieceType.Bishop
             };
 
             Assert.AreEqual("NxBc5", sut.Format(move));
@@ -144,9 +144,9 @@ namespace ilf.pgn.Data.Format.Test
             var move = new Move
             {
                 Type = MoveType.Capture,
-                Piece = Piece.Knight,
+                Piece = PieceType.Knight,
                 OriginSquare = new Square(File.B, 7),
-                TargetPiece = Piece.Bishop,
+                TargetPiece = PieceType.Bishop,
                 TargetSquare = new Square(File.C, 5)
             };
 
@@ -160,9 +160,9 @@ namespace ilf.pgn.Data.Format.Test
             var move = new Move
             {
                 Type = MoveType.Capture,
-                Piece = Piece.Knight,
+                Piece = PieceType.Knight,
                 OriginSquare = new Square(File.B, 7),
-                TargetPiece = Piece.Pawn,
+                TargetPiece = PieceType.Pawn,
                 TargetSquare = new Square(File.C, 5)
             };
 
@@ -176,9 +176,9 @@ namespace ilf.pgn.Data.Format.Test
             var move = new Move
             {
                 Type = MoveType.Capture,
-                Piece = Piece.Pawn,
+                Piece = PieceType.Pawn,
                 OriginFile = File.E,
-                TargetPiece = Piece.Pawn,
+                TargetPiece = PieceType.Pawn,
                 TargetSquare = new Square(File.D, 5)
             };
 
@@ -192,9 +192,9 @@ namespace ilf.pgn.Data.Format.Test
             var move = new Move
             {
                 Type = MoveType.CaptureEnPassant,
-                Piece = Piece.Pawn,
+                Piece = PieceType.Pawn,
                 OriginSquare = new Square(File.E, 4),
-                TargetPiece = Piece.Pawn,
+                TargetPiece = PieceType.Pawn,
                 TargetSquare = new Square(File.D, 5)
             };
 
@@ -208,9 +208,9 @@ namespace ilf.pgn.Data.Format.Test
             var move = new Move
             {
                 Type = MoveType.Simple,
-                Piece = Piece.Pawn,
+                Piece = PieceType.Pawn,
                 TargetSquare = new Square(File.E, 8),
-                PromotedPiece = Piece.Queen
+                PromotedPiece = PieceType.Queen
             };
 
             Assert.AreEqual("e8=Q", sut.Format(move));
@@ -223,11 +223,11 @@ namespace ilf.pgn.Data.Format.Test
             var move = new Move
             {
                 Type = MoveType.Capture,
-                Piece = Piece.Pawn,
+                Piece = PieceType.Pawn,
                 OriginSquare = new Square(File.D, 7),
-                TargetPiece = Piece.Rook,
+                TargetPiece = PieceType.Rook,
                 TargetSquare = new Square(File.E, 8),
-                PromotedPiece = Piece.Queen
+                PromotedPiece = PieceType.Queen
             };
 
             Assert.AreEqual("d7xRe8=Q", sut.Format(move));
@@ -240,9 +240,9 @@ namespace ilf.pgn.Data.Format.Test
             var move = new Move
             {
                 Type = MoveType.Capture,
-                Piece = Piece.Knight,
+                Piece = PieceType.Knight,
                 OriginSquare = new Square(File.B, 7),
-                TargetPiece = Piece.Pawn,
+                TargetPiece = PieceType.Pawn,
                 TargetSquare = new Square(File.C, 5),
                 IsCheck = true
             };
@@ -257,7 +257,7 @@ namespace ilf.pgn.Data.Format.Test
             var move = new Move
             {
                 Type = MoveType.Capture,
-                Piece = Piece.Rook,
+                Piece = PieceType.Rook,
                 OriginSquare = new Square(File.B, 1),
                 TargetSquare = new Square(File.B, 8),
                 IsCheckMate = true,

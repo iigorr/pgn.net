@@ -1,6 +1,6 @@
 ﻿namespace ilf.pgn.Data
 {
-    public enum Piece
+    public enum PieceType
     {
         King = 'K',
         Queen = 'Q',

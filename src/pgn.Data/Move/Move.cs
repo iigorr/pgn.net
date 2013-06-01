@@ -5,14 +5,14 @@ namespace ilf.pgn.Data
     public class Move
     {
         public MoveType Type { get; set; }
-        public Piece? TargetPiece { get; set; }
+        public PieceType? TargetPiece { get; set; }
         public Square TargetSquare { get; set; }
         public File? TargetFile { get; set; }
-        public Piece? Piece { get; set; }
+        public PieceType? Piece { get; set; }
         public Square OriginSquare { get; set; }
         public File? OriginFile { get; set; }
         public int? OriginRank { get; set; }
-        public Piece? PromotedPiece { get; set; }
+        public PieceType? PromotedPiece { get; set; }
         public bool? IsCheck { get; set; }
         public bool? IsDoubleCheck { get; set; }
         public bool? IsCheckMate { get; set; }

@@ -11,13 +11,13 @@ open ilf.pgn.PgnParsers.Basic
 let pieceSymbol = ["P"; "N"; "S"; "B"; "R"; "Q"; "K"]
 let findPiece(a: string) =
     match a.ToUpper() with
-    | "P" -> Piece.Pawn
-    | "N" -> Piece.Knight
-    | "S" -> Piece.King
-    | "B" -> Piece.Bishop
-    | "R" -> Piece.Rook
-    | "Q" -> Piece.Queen
-    | "K" -> Piece.King
+    | "P" -> PieceType.Pawn
+    | "N" -> PieceType.Knight
+    | "S" -> PieceType.King
+    | "B" -> PieceType.Bishop
+    | "R" -> PieceType.Rook
+    | "Q" -> PieceType.Queen
+    | "K" -> PieceType.King
     | _ -> raise <| System.ArgumentException("Invalid piece character " + a)
 
 let fileSymbol = [ 'a' .. 'h'] |> List.map (fun x -> x.ToString())
@@ -49,7 +49,7 @@ let pRank =
     <?> "Rank (1..8)"
 
 type MoveInfo(piece, file, rank) =
-    member val Piece : Nullable<Piece> = toNullable(piece) with get, set
+    member val Piece : Nullable<PieceType> = toNullable(piece) with get, set
     member val File  : Nullable<File> = toNullable(file) with get, set
     member val Rank  : Nullable<int> = toNullable(rank) with get, set
 
@@ -83,7 +83,7 @@ let getMove(originInfo: MoveInfo option, targetInfo: MoveInfo, moveType: MoveTyp
 // target square of a move
 let pTarget = 
     attempt(pPiece .>>. pFile .>>. pRank) // Qd5
-    <|> (pFile .>>. pRank |>> fun (f, r) -> ((Piece.Pawn, f),r)) //Pawn move, e.g. d5
+    <|> (pFile .>>. pRank |>> fun (f, r) -> ((PieceType.Pawn, f),r)) //Pawn move, e.g. d5
     |>> fun ((piece, file), rank) ->  MoveInfo(Some(piece), Some(file), Some(rank))
     <!> "pTarget"
 
@@ -115,8 +115,8 @@ let pSimplifiedPawnCapture =  // e.g. dxe or de
     |>> fun (file1, file2) -> 
         new Move (
             Type = MoveType.Capture,
-            Piece = Nullable(Piece.Pawn),
-            TargetPiece = Nullable(Piece.Pawn),
+            Piece = Nullable(PieceType.Pawn),
+            TargetPiece = Nullable(PieceType.Pawn),
             OriginFile = Nullable(file1),
             TargetFile = Nullable(file2)
     )

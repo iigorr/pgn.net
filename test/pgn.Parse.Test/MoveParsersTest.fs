@@ -36,14 +36,14 @@ type MoveParserTest() =
     [<TestMethod>]
     member this.pTarget_should_yield_a_MoveInfo_object() =
         let moveInfo = parse pTarget "Qf5"
-        Assert.AreEqual(Piece.Queen, moveInfo.Piece)
+        Assert.AreEqual(PieceType.Queen, moveInfo.Piece)
         Assert.AreEqual(File.F, moveInfo.File)
         Assert.AreEqual(5, moveInfo.Rank)
 
     [<TestMethod>]
     member this.pOrigin_should_yield_a_MoveInfo_object() =
         let moveInfo = parse pOrigin "Nd"
-        Assert.AreEqual(Piece.Knight, moveInfo.Piece)
+        Assert.AreEqual(PieceType.Knight, moveInfo.Piece)
         Assert.AreEqual(File.D, moveInfo.File)
         Assert.AreEqual(None, moveInfo.Rank)
 
@@ -125,18 +125,18 @@ type MoveParserTest() =
     [<TestMethod>]
     member this.pCapturing_move_should_parse_normal_move_correctly() =
         let move = parse pCapturingMove "Qd5xBh5"
-        Assert.AreEqual(Piece.Queen, move.Piece)
+        Assert.AreEqual(PieceType.Queen, move.Piece)
         Assert.AreEqual(MoveType.Capture, move.Type)
-        Assert.AreEqual(Piece.Bishop, move.TargetPiece)
+        Assert.AreEqual(PieceType.Bishop, move.TargetPiece)
         Assert.AreEqual(Square(File.D, 5), move.OriginSquare)
         Assert.AreEqual(Square(File.H, 5), move.TargetSquare)
 
     [<TestMethod>]
     member this.pCapturing_move_should_parse_move_correctly_with_origin_piece() =
         let move = parse pCapturingMove "QxBh5"
-        Assert.AreEqual(Piece.Queen, move.Piece)
+        Assert.AreEqual(PieceType.Queen, move.Piece)
         Assert.AreEqual(MoveType.Capture, move.Type)
-        Assert.AreEqual(Piece.Bishop, move.TargetPiece)
+        Assert.AreEqual(PieceType.Bishop, move.TargetPiece)
         Assert.AreEqual(None, move.OriginSquare)
         Assert.AreEqual(Square(File.H, 5), move.TargetSquare)
 
@@ -145,7 +145,7 @@ type MoveParserTest() =
         let move = parse pCapturingMove "a1xBh8"
         Assert.AreEqual(None, move.Piece)
         Assert.AreEqual(MoveType.Capture, move.Type)
-        Assert.AreEqual(Piece.Bishop, move.TargetPiece)
+        Assert.AreEqual(PieceType.Bishop, move.TargetPiece)
         Assert.AreEqual(Square(File.A, 1), move.OriginSquare)
         Assert.AreEqual(Square(File.H, 8), move.TargetSquare)
 
@@ -163,7 +163,7 @@ type MoveParserTest() =
     [<TestMethod>]
     member this.pBasicMove_should_correctly_parse_simple_target_move() =
         let move = parse pBasicMove "Rc5"
-        Assert.AreEqual(Piece.Rook, move.Piece)
+        Assert.AreEqual(PieceType.Rook, move.Piece)
         Assert.AreEqual(MoveType.Simple, move.Type)
         Assert.AreEqual(Square(File.C, 5), move.TargetSquare)
     
@@ -184,7 +184,7 @@ type MoveParserTest() =
     [<TestMethod>]
     member this.pBasicMove_should_correctly_parse_disambiguated_moves() =
         let move = parse pBasicMove "Ngf3"
-        Assert.AreEqual(Piece.Knight, move.Piece)
+        Assert.AreEqual(PieceType.Knight, move.Piece)
         Assert.AreEqual(Square(File.F, 3), move.TargetSquare)
         Assert.AreEqual(File.G, move.OriginFile)
 
@@ -205,7 +205,7 @@ type MoveParserTest() =
     member this.pPawnPromotion_should_correctly_parse_promoting_move() =
         let move = parse pPawnPromotion "d8=Q"
         Assert.AreEqual(Square(File.D, 8), move.TargetSquare)
-        Assert.AreEqual(Piece.Queen, move.PromotedPiece)
+        Assert.AreEqual(PieceType.Queen, move.PromotedPiece)
 
 
     [<TestMethod>]
@@ -260,7 +260,7 @@ type MoveParserTest() =
     member this.pMove_should_correctly_parse_simple_move() =
         let move = parse pMove "Rc5"
         Assert.AreEqual(MoveType.Simple, move.Type);
-        Assert.AreEqual(Piece.Rook, move.Piece);
+        Assert.AreEqual(PieceType.Rook, move.Piece);
         Assert.AreEqual(Square(File.C, 5), move.TargetSquare);
 
     [<TestMethod>]
@@ -274,14 +274,14 @@ type MoveParserTest() =
     member this.pMove_should_correctly_parse_simple_move_with_different_case() =
         let move = parse pMove "QF1"
         Assert.AreEqual(MoveType.Simple, move.Type);
-        Assert.AreEqual(Piece.Queen, move.Piece);
+        Assert.AreEqual(PieceType.Queen, move.Piece);
         Assert.AreEqual(Square(File.F, 1), move.TargetSquare);
 
     [<TestMethod>]
     member this.pMove_should_correctly_parse_capturing_move() =
         let move = parse pMove "c5xQD5"
         Assert.AreEqual(MoveType.Capture, move.Type);
-        Assert.AreEqual(Piece.Queen, move.TargetPiece);
+        Assert.AreEqual(PieceType.Queen, move.TargetPiece);
         Assert.AreEqual(Square(File.D, 5), move.TargetSquare);
         Assert.AreEqual(Square(File.C, 5), move.OriginSquare);
 
@@ -289,8 +289,8 @@ type MoveParserTest() =
     member this.pMove_should_correctly_parse_capturing_move_with_colon_sign() =
         let move = parse pMove "Qc5:Bd5"
         Assert.AreEqual(MoveType.Capture, move.Type);
-        Assert.AreEqual(Piece.Queen, move.Piece);
-        Assert.AreEqual(Piece.Bishop, move.TargetPiece);
+        Assert.AreEqual(PieceType.Queen, move.Piece);
+        Assert.AreEqual(PieceType.Bishop, move.TargetPiece);
         Assert.AreEqual(Square(File.D, 5), move.TargetSquare);
         Assert.AreEqual(Square(File.C, 5), move.OriginSquare);
 
@@ -311,7 +311,7 @@ type MoveParserTest() =
     member this.pMove_should_correctly_parse_disambigued_move() =
         let move = parse pMove "N5f3"
         Assert.AreEqual(MoveType.Simple, move.Type);
-        Assert.AreEqual(Piece.Knight, move.Piece);
+        Assert.AreEqual(PieceType.Knight, move.Piece);
         Assert.AreEqual(Square(File.F, 3), move.TargetSquare);
         Assert.AreEqual(5, move.OriginRank);
 
@@ -320,7 +320,7 @@ type MoveParserTest() =
         let move = parse pMove "c8(Q)"
         Assert.AreEqual(MoveType.Simple, move.Type);
         Assert.AreEqual(Square(File.C, 8), move.TargetSquare);
-        Assert.AreEqual(Piece.Queen, move.PromotedPiece);
+        Assert.AreEqual(PieceType.Queen, move.PromotedPiece);
 
     [<TestMethod>]
     member this.pMove_should_correctly_parse_capturing_promotion_move() =
@@ -328,14 +328,14 @@ type MoveParserTest() =
         Assert.AreEqual(MoveType.Capture, move.Type);
         Assert.AreEqual(Square(File.C, 8), move.TargetSquare);
         Assert.AreEqual(Square(File.D, 7), move.OriginSquare);
-        Assert.AreEqual(Piece.Queen, move.PromotedPiece);
+        Assert.AreEqual(PieceType.Queen, move.PromotedPiece);
 
     [<TestMethod>]
     member this.pMove_should_correctly_parse_promotion_move_wiht_check() =
         let move = parse pMove "c8=Q+"
         Assert.AreEqual(MoveType.Simple, move.Type);
         Assert.AreEqual(Square(File.C, 8), move.TargetSquare);
-        Assert.AreEqual(Piece.Queen, move.PromotedPiece);
+        Assert.AreEqual(PieceType.Queen, move.PromotedPiece);
         Assert.IsTrue(move.IsCheck.Value);
 
     [<TestMethod>]

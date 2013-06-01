@@ -37,6 +37,12 @@ type PgnResultTag(name: string, result: GameResult) =
     
     member val Result: GameResult = result with get, set
 
+type FenTag(name: string, setup: BoardSetup) =
+    inherit PgnTag(name)
+
+    member val Setup: BoardSetup = setup with get, set
+
+
 let sevenTagRosterTagNames= ["Event"; "Site"; "Date"; "Round"; "White"; "Black"; "Result"];
 let suplementTagNames = 
             ["WhiteTitle"; "BlackTitle"; "WhiteElo"; "BlackElo"; "WhiteUSCF"; "BlackUSCF"; "WhiteNA"; "BlackNA"; "WhiteType"; "BlackType"; 
@@ -82,6 +88,17 @@ let pResultTagVaue =
     |>> fun result -> PgnResultTag("Result", result) :> PgnTag
     <!> "pResultTagVaue"
 
+//let pFenPieces = 
+//    pchar 'k' 
+//let pPiecePositions =
+//    let setup= BoardSetup()
+    
+    
+    
+//let pFenTagValue = 
+//    pchar '"' >>. pPiecePositions
+//    <!> "pFenTagValue"
+//    
  // Basic tag (e.g. [Site "Boston"]
 let pBasicTagValue = 
     between (pchar '"') (pchar '"') (pNotChar '"')
@@ -96,6 +113,7 @@ let tagContent =
     (str "Date" .>> ws >>. pDateTagValue)
     <|> (str "Round" .>> ws >>. pRoundTagValue)
     <|> (str "Result" .>> ws >>. pResultTagVaue)
+    //<|> (str "FEN" .>> ws >>. pFenTagVaue)
     <|> pBasicTag 
     <!> "pTagContent"
 

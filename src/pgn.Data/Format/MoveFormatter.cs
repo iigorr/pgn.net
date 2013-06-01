@@ -99,12 +99,12 @@ namespace ilf.pgn.Data.Format
 
             return piece + origin;
         }
-        private string GetPiece(Piece? piece)
+        private string GetPiece(PieceType? pieceType)
         {
-            if (piece == null || piece == Piece.Pawn)
+            if (pieceType == null || pieceType == PieceType.Pawn)
                 return string.Empty;
 
-            return ((char)piece).ToString(CultureInfo.InvariantCulture);
+            return ((char)pieceType).ToString(CultureInfo.InvariantCulture);
         }
 
         private string GetCheckAndMateAnnotation(Move move)

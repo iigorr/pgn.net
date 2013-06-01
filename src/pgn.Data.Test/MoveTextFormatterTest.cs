@@ -25,7 +25,7 @@ namespace ilf.pgn.Data.Format.Test
             {
                 Type = MoveType.Simple,
                 TargetSquare = new Square(File.D, 4),
-                Piece = Piece.Knight
+                Piece = PieceType.Knight
             };
         }
 
@@ -126,7 +126,7 @@ namespace ilf.pgn.Data.Format.Test
                 new SingleMoveEntry(new Move
                     {
                         Type = MoveType.Capture,
-                        Piece = Piece.Knight,
+                        Piece = PieceType.Knight,
                         TargetSquare = new Square(File.E, 5),
                         Annotation = MoveAnnotation.Good
                     }) { MoveNumber = 37 };
@@ -138,7 +138,7 @@ namespace ilf.pgn.Data.Format.Test
                 new SingleMoveEntry(new Move
                     {
                         Type = MoveType.Simple,
-                        Piece = Piece.Knight,
+                        Piece = PieceType.Knight,
                         TargetSquare = new Square(File.E, 3),
                         Annotation = MoveAnnotation.Blunder
                     }) { MoveNumber = 37 };
@@ -149,13 +149,13 @@ namespace ilf.pgn.Data.Format.Test
                 new SingleMoveEntry(new Move
                     {
                         Type = MoveType.Simple,
-                        Piece = Piece.Rook,
+                        Piece = PieceType.Rook,
                         TargetSquare = new Square(File.D, 8)
                     }) { MoveNumber = 37, IsContinued = true };
 
             var entry5 = new MovePairEntry(
                 new Move { Type = MoveType.Simple, TargetSquare = new Square(File.H, 4) },
-                new Move { Type = MoveType.Simple, Piece = Piece.Rook, TargetSquare = new Square(File.D, 5) }) { MoveNumber = 38 };
+                new Move { Type = MoveType.Simple, Piece = PieceType.Rook, TargetSquare = new Square(File.D, 5) }) { MoveNumber = 38 };
 
             var entry6 = new GameEndEntry(GameResult.Draw);
             var entry7 = new CommentEntry("game ends in draw, whooot");
