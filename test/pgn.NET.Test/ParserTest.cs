@@ -97,5 +97,14 @@ namespace ilf.pgn.Test
 
             Assert.AreEqual(1, db.Games.Count);
         }
+
+        [TestMethod]
+        public void ReadFromString_should_read_game_from_string()
+        {
+            var parser = new Parser();
+            var db = parser.ReadFromString(NormalGame);
+
+            Assert.AreEqual(1, db.Games.Count);
+        }
     }
 }

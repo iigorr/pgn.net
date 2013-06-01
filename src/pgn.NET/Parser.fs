@@ -22,3 +22,13 @@ type Parser() =
             | Failure(errorMsg, _, _) -> raise (PgnFormatException errorMsg)
 
         db
+
+    member this.ReadFromString(input: string) =
+        let parserResult = run pDatabase input
+        
+        let db =
+            match parserResult with
+            | Success(result, _, _)   -> result
+            | Failure(errorMsg, _, _) -> raise (PgnFormatException errorMsg)
+
+        db
