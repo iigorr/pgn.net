@@ -5,7 +5,7 @@ namespace ilf.pgn.Data.Format
 {
     public class Formatter
     {
-        private MoveTextFormatter _moveTextFormatter = new MoveTextFormatter();
+        private readonly MoveTextFormatter _moveTextFormatter = new MoveTextFormatter();
         public string Format(Game game)
         {
             var writer = new StringWriter();

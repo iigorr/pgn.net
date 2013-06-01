@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using ilf.pgn.Data.Format;
 
 namespace ilf.pgn.Data
 {
@@ -27,5 +28,10 @@ namespace ilf.pgn.Data
 
         public List<GameInfo> AdditionalInfo { get; set; }
         public List<MoveTextEntry> MoveText { get; set; }
+
+        public override string ToString()
+        {
+            return new Formatter().Format(this);
+        }
     }
 }
