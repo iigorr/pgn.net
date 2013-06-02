@@ -43,6 +43,9 @@
     <Compile Include="Bootstrap.fs" />
     <Compile Include="BasicParsers.fs" />
     <Compile Include="BasicChessParsers.fs" />
+    <Compile Include="PgnTags.fs" />
+    <Compile Include="DateTagParser.fs" />
+    <Compile Include="FenTagParser.fs" />
     <Compile Include="TagParsers.fs" />
     <Compile Include="MoveParsers.fs" />
     <Compile Include="MoveSeriesParsers.fs" />

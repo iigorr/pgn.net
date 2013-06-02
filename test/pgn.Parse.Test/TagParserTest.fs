@@ -2,6 +2,7 @@
 
 open ilf.pgn.Data
 open ilf.pgn.Exceptions
+open ilf.pgn.PgnParsers.PgnTags
 open ilf.pgn.PgnParsers.Tag
 open ilf.pgn.Test.TestBase
 
