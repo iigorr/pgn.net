@@ -13,6 +13,7 @@ let setTag(game : Game, tag : PgnTag) =
     | "White" -> game.WhitePlayer <- (tag :?> PgnBasicTag).Value
     | "Black" -> game.BlackPlayer <- (tag :?> PgnBasicTag).Value
     | "Result" -> game.Result <- (tag :?> PgnResultTag).Result
+    | "FEN" -> game.BoardSetup <- (tag :?> FenTag).Setup
     | _ -> 
         let basicTag = (tag :?> PgnBasicTag)
         game.AdditionalInfo.Add(GameInfo(basicTag.Name, basicTag.Value))

@@ -102,6 +102,8 @@ namespace ilf.pgn.Data
         /// </value>
         public List<MoveTextEntry> MoveText { get; set; }
 
+        public BoardSetup BoardSetup { get; set; }
+
         /// <summary>
         /// Gets the moves from the move text.
         /// </summary>

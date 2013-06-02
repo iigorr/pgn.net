@@ -46,12 +46,26 @@ type GameParserTest() =
 30.Qe4 c5 31.Qxe8 Rxe8 32.e4 Rfe5 33.f4 R5e6 34.e5 Be7 35.b3 f6 36.Nf3 fxe5
 37.Nxe5 Rd8 38.h4 Rd5  1/2-1/2"
 
+    let testGame3 = "
+[Event \"?\"]
+[Site \"?\"]
+[Date \"2013.06.02\"]
+[Round \"?\"]
+[White \"\"]
+[Black \"\"]
+[Result \"*\"]
+[SetUp \"1\"]
+[FEN \"4k3/8/8/8/8/8/4P3/4K3 w - - 5 39\"]
+
+*"
+
     [<TestMethod>]
     member this.pGame_should_accept_a_standard_pgn_game() =
         let game= parse pGame testGame1
-        Assert.AreEqual("Tarrasch, Siegbert", game.WhitePlayer);
-        Assert.AreEqual(25, game.MoveText.Count); //24 move pairs and finish tag
-        Assert.AreEqual(MoveTextEntryType.GameEnd, game.MoveText.Item(24).Type);
+        Assert.AreEqual("Tarrasch, Siegbert", game.WhitePlayer)
+        Assert.AreEqual(25, game.MoveText.Count) //24 move pairs and finish tag
+        Assert.AreEqual(MoveTextEntryType.GameEnd, game.MoveText.Item(24).Type)
+        Assert.AreEqual(null, game.BoardSetup)
 
     [<TestMethod>]
     member this.pGame_should_set_event_correctly() =
@@ -110,3 +124,25 @@ type GameParserTest() =
     [<TestMethod; ExpectedException(typeof<PgnFormatException>)>]
     member this.pGame_should_disallow_non_game_data_before_end_of_file() =
         tryParse pDatabase (testGame2 + "   x")
+
+    [<TestMethod>]
+    member this.pGame_should_parse_a_new_game_with_board_setup() =
+        let game= parse pGame testGame3
+        let setup= game.BoardSetup //[FEN \"4k3/8/8/8/8/8/4P3/4K3 w - - 5 39\"]"
+        System.Console.WriteLine(setup.ToString());
+        Assert.AreEqual(Piece.BlackKing, setup.[File.E, 1])
+        Assert.AreEqual(Piece.WhitePawn, setup.[File.E, 7])
+        Assert.AreEqual(Piece.WhiteKing, setup.[File.E, 8])
+
+        Assert.AreEqual(true, setup.IsWhiteMove)
+        
+        Assert.AreEqual(false, setup.CanWhiteCastleKingSide)
+        Assert.AreEqual(false, setup.CanWhiteCastleQueenSide)
+        Assert.AreEqual(false, setup.CanBlackCastleKingSide)
+        Assert.AreEqual(false, setup.CanBlackCastleQueenSide)
+
+        Assert.AreEqual(null, setup.EnPassantSquare)
+
+        Assert.AreEqual(5, setup.HalfMoveClock)
+        Assert.AreEqual(39, setup.FullMoveCount)
+

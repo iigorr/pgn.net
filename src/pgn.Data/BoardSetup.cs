@@ -65,8 +65,8 @@ namespace ilf.pgn.Data
         /// <returns>The piece at the specified square or <c>null</c> if the square is empty.</returns>
         public Piece this[int pos]
         {
-            get { return this[pos / 8, pos % 8]; }
-            set { this[pos / 8, pos % 8] = value; }
+            get { return this[pos % 8, pos / 8]; }
+            set { this[pos % 8, pos / 8] = value; }
         }
 
         /// <summary>
@@ -135,5 +135,53 @@ namespace ilf.pgn.Data
         /// The full move count.
         /// </value>
         public int FullMoveCount { get; set; }
+
+        public override string ToString()
+        {
+            var output = "";
+            for (int i = 7; i >= 0; --i)
+            {
+                output += "---------------------------------\n";
+                output += "|";
+                for (int j = 0; j < 8; ++j)
+                    output += PieceToString(this[j, i]) + "|";
+                output += "\n";
+            }
+            output += "\n---------------------------------";
+            return output;
+        }
+
+        private string PieceToString(Piece p)
+        {
+            if (p == null) return "   ";
+
+            var str="";
+            switch (p.PieceType)
+            {
+                case PieceType.Pawn:
+                    str = " p ";
+                    break;
+                case PieceType.Knight:
+                    str = " n ";
+                    break;
+                case PieceType.Bishop:
+                    str = " b ";
+                    break;
+                case PieceType.Rook:
+                    str = " r ";
+                    break;
+                case PieceType.Queen:
+                    str = " q ";
+                    break;
+                case PieceType.King:
+                    str = " k ";
+                    break;
+            }
+
+            if (p.Color == Color.White)
+                return str.ToUpper();
+
+            return str;
+        }
     }
 }
