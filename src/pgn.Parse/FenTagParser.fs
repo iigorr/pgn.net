@@ -51,7 +51,7 @@ let pFenCastlingInfo =
         |>> fun(((K, Q), k), q) -> [K; Q; k; q]
     )
 
-let pFenEnPassantInfo = 
+let pFenEnPassantSquare = 
     attempt(pchar '-' >>% null)
     <|> (pFile .>>. pRank |>> fun (f, r) -> Square(f, r))
 
@@ -59,11 +59,28 @@ let pFenTagValue =
     pchar '"' >>. pPiecePositions .>> ws
     .>>. ((pchar 'w' >>% true) <|> (pchar 'b' >>% false)) .>> ws
     .>>. pFenCastlingInfo .>> ws
-    .>>. pFenEnPassantInfo .>> ws
+    .>>. pFenEnPassantSquare .>> ws
     .>>. pint32 .>> ws
     .>>. pint32 .>> ws 
     .>> pchar '"'
-    |>> fun (((((pieces, whiteMove), castlingInfo), enPassantInfo), halfMoves), fullMoves) ->  
-            FenTag("FEN", BoardSetup()) :> PgnTag;
+    |>> fun (((((pieces, whiteMove), castlingInfo), enPassantSquare), halfMoves), fullMoves) -> 
+            let boardSetup= new BoardSetup();
+            for i in 0 .. 63 do
+                boardSetup.[i] <- pieces.[i]
+            
+            boardSetup.IsWhiteMove <- whiteMove
+            
+            boardSetup.CanWhiteCastleKingSide <- castlingInfo.[0]
+            boardSetup.CanWhiteCastleQueenSide <- castlingInfo.[1]
+            boardSetup.CanBlackCastleKingSide <- castlingInfo.[2]
+            boardSetup.CanBlackCastleQueenSide <- castlingInfo.[3]
+
+            boardSetup.EnPassantSquare <- enPassantSquare
+
+            boardSetup.HalfMoveClock <- halfMoves
+
+            boardSetup.FullMoveCount <- fullMoves
+
+            FenTag("FEN", boardSetup) :> PgnTag;
 
     <!> "pFenTagValue"

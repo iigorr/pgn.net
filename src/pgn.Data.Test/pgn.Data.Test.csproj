@@ -55,6 +55,7 @@
     <Compile Include="MoveTextFormatterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GameTest.cs" />
+    <Compile Include="BoardSetupTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\pgn.Data\pgn.Data.csproj">

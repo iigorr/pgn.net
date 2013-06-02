@@ -114,3 +114,47 @@ type TagParserTests() =
     member this.pTag_should_create_a_FenTag_object_from_a_valid_tag() =
         let tag= parse pTag "[FEN \"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\"]"
         Assert.IsInstanceOfType(tag, typeof<FenTag>)
+
+        let setup= (tag :?> FenTag).Setup
+
+        Assert.AreEqual(Piece.BlackRook, setup.[File.A, 1])
+        Assert.AreEqual(Piece.BlackPawn, setup.[File.B, 8])
+        Assert.AreEqual(null, setup.[File.C, 1])
+        Assert.AreEqual(Piece.WhiteKing, setup.[File.H, 5])
+
+        Assert.AreEqual(true, setup.IsWhiteMove)
+        
+        Assert.AreEqual(true, setup.CanWhiteCastleKingSide)
+        Assert.AreEqual(true, setup.CanWhiteCastleQueenSide)
+        Assert.AreEqual(true, setup.CanBlackCastleKingSide)
+        Assert.AreEqual(true, setup.CanBlackCastleQueenSide)
+
+        Assert.AreEqual(null, setup.EnPassantSquare)
+
+        Assert.AreEqual(0, setup.HalfMoveClock)
+        Assert.AreEqual(1, setup.FullMoveCount)
+
+
+    [<TestMethod>]
+    member this.pTag_should_create_a_FenTag_object_from_another_valid_tag() =
+        let tag= parse pTag "[FEN \"rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR b Kq c6 1 2\"]"
+        Assert.IsInstanceOfType(tag, typeof<FenTag>)
+
+        let setup= (tag :?> FenTag).Setup
+
+        Assert.AreEqual(Piece.BlackRook, setup.[File.A, 1])
+        Assert.AreEqual(Piece.BlackPawn, setup.[File.B, 8])
+        Assert.AreEqual(Piece.BlackPawn, setup.[File.D, 3])
+        Assert.AreEqual(Piece.WhiteKing, setup.[File.H, 5])
+
+        Assert.AreEqual(false, setup.IsWhiteMove)
+        
+        Assert.AreEqual(true, setup.CanWhiteCastleKingSide)
+        Assert.AreEqual(false, setup.CanWhiteCastleQueenSide)
+        Assert.AreEqual(false, setup.CanBlackCastleKingSide)
+        Assert.AreEqual(true, setup.CanBlackCastleQueenSide)
+
+        Assert.AreEqual(Square(File.C, 6), setup.EnPassantSquare)
+
+        Assert.AreEqual(1, setup.HalfMoveClock)
+        Assert.AreEqual(2, setup.FullMoveCount)

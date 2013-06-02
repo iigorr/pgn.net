@@ -23,5 +23,10 @@
         }
         public PieceType PieceType { get; private set; }
         public Color Color { get; private set; }
+
+        public override string ToString()
+        {
+            return Color.ToString() + " " + PieceType.ToString();
+        }
     }
 }
