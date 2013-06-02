@@ -1,4 +1,5 @@
-﻿module internal ilf.pgn.PgnParsers.Bootstrap
+﻿[<AutoOpen>]
+module internal ilf.pgn.PgnParsers.Bootstrap
 
 open NLog
 open System 

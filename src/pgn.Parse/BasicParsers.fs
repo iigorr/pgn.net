@@ -1,7 +1,7 @@
-﻿module internal ilf.pgn.PgnParsers.Basic
+﻿[<AutoOpen>]
+module internal ilf.pgn.PgnParsers.BasicCommons
 
 open FParsec
-open ilf.pgn.PgnParsers.Bootstrap
 
 let ws = spaces
 let ws1 = spaces1

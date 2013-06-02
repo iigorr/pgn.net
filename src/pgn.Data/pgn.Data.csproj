@@ -32,8 +32,11 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Basics\Color.cs" />
+    <Compile Include="Basics\Piece.cs" />
     <Compile Include="BoardSetup.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Exceptions\PgnFormatException.cs" />
@@ -46,7 +49,7 @@
     <Compile Include="MoveText\NAGEntry.cs" />
     <Compile Include="MoveText\RAVEntry.cs" />
     <Compile Include="MoveText\SingleMoveEntry.cs" />
-    <Compile Include="Move\File.cs" />
+    <Compile Include="Basics\File.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameInfo.cs" />
     <Compile Include="MoveText\GameResult.cs" />
@@ -55,9 +58,9 @@
     <Compile Include="MoveText\MoveTextEntryType.cs" />
     <Compile Include="MoveText\MoveTextEntry.cs" />
     <Compile Include="Move\MoveType.cs" />
-    <Compile Include="Move\PieceType.cs" />
+    <Compile Include="Basics\PieceType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Move\Square.cs" />
+    <Compile Include="Basics\Square.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

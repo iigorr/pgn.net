@@ -50,7 +50,7 @@ type TagParserTests() =
             "Opening"; "Variation"; "SubVariation";
             "ECO"; "NIC"; "Time"; "UTCTime"; "UTCDate";
             "TimeControl";
-            "SetUp"; "FEN";
+            "SetUp";
             "Termination";
             "Annotator"; "Mode"; "PlyCount"]
         let parseTag x = tryParse pTag ("["+ x + " \"Foo\"]")
@@ -109,7 +109,7 @@ type TagParserTests() =
         Assert.AreEqual("Result", tag.Name)
         Assert.AreEqual(GameResult.White, (tag :?> PgnResultTag).Result)
 
-//    [<TestMethod>]
-//    member this.pTag_should_create_a_FenTag_object_from_a_valid_tag() =
-//        let tag= parse pTag "[FEN \"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\"]"
-//        Assert.IsInstanceOfType(tag, typeof<FenTag>)
+    [<TestMethod>]
+    member this.pTag_should_create_a_FenTag_object_from_a_valid_tag() =
+        let tag= parse pTag "[FEN \"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\"]"
+        Assert.IsInstanceOfType(tag, typeof<FenTag>)

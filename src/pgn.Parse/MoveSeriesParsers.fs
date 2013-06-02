@@ -1,11 +1,9 @@
-﻿module internal ilf.pgn.PgnParsers.MoveSeries
+﻿[<AutoOpen>]
+module internal ilf.pgn.PgnParsers.MoveSeries
 
 open System.Collections.Generic
 open FParsec
 open ilf.pgn.Data
-open ilf.pgn.PgnParsers.Bootstrap
-open ilf.pgn.PgnParsers.Basic
-open ilf.pgn.PgnParsers.Move
 
 
 let pPeriods = 

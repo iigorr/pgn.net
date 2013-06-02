@@ -1,12 +1,8 @@
-﻿module internal ilf.pgn.PgnParsers.Game
+﻿[<AutoOpen>]
+module internal ilf.pgn.PgnParsers.Game
 
 open FParsec
 open ilf.pgn.Data
-open ilf.pgn.PgnParsers.Basic
-open ilf.pgn.PgnParsers.Tag
-open ilf.pgn.PgnParsers.MoveSeries
-
-
 
 let setTag(game : Game, tag : PgnTag) =
     match tag.Name with

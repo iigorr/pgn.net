@@ -42,6 +42,7 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Bootstrap.fs" />
     <Compile Include="BasicParsers.fs" />
+    <Compile Include="BasicChessParsers.fs" />
     <Compile Include="TagParsers.fs" />
     <Compile Include="MoveParsers.fs" />
     <Compile Include="MoveSeriesParsers.fs" />
