@@ -7,7 +7,7 @@
     <ProjectGuid>{B06A9F96-62F5-49C9-BFA8-58664D9A7462}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>pgn.NET</RootNamespace>
+    <RootNamespace>ilf.pgn</RootNamespace>
     <AssemblyName>pgn.NET</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

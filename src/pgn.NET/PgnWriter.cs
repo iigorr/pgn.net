@@ -2,7 +2,7 @@
 using ilf.pgn.Data;
 using ilf.pgn.Data.Format;
 
-namespace pgn.NET
+namespace ilf.pgn
 {
     public class PgnWriter
     {

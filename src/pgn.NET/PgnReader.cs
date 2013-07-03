@@ -2,7 +2,7 @@
 using ilf.pgn.Data;
 using ilf.pgn.PgnParsers;
 
-namespace pgn.NET
+namespace ilf.pgn
 {
     public class PgnReader
     {
