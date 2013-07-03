@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ilf.pgn.PgnParsers;
+using pgn.NET;
 
 namespace ilf.pgn.Test
 {
@@ -11,7 +13,7 @@ namespace ilf.pgn.Test
         [TestMethod]
         public void EmptyFile()
         {
-            var parser = new Parser();
+            var parser = new PgnReader();
             var db = parser.ReadFromFile(TestFolder + "empty-file.pgn");
             Assert.AreEqual(0, db.Games.Count);
         }

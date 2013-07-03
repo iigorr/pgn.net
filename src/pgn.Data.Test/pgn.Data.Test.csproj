@@ -16,6 +16,8 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="pgn.Parse">
+      <HintPath>..\pgn.Parse\bin\Debug\pgn.Parse.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -62,8 +67,8 @@
       <Project>{29143ecd-e5d3-41d4-9c62-81d82597d895}</Project>
       <Name>pgn.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\pgn.NET\pgn.NET.fsproj">
-      <Project>{d3976d6a-6eee-4a56-8c40-7f910b29a316}</Project>
+    <ProjectReference Include="..\pgn.NET\pgn.NET.csproj">
+      <Project>{B06A9F96-62F5-49C9-BFA8-58664D9A7462}</Project>
       <Name>pgn.NET</Name>
     </ProjectReference>
   </ItemGroup>
@@ -90,6 +95,7 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -17,6 +17,8 @@
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
     <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\src\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,10 +66,6 @@
       <Project>{29143ecd-e5d3-41d4-9c62-81d82597d895}</Project>
       <Name>pgn.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\pgn.NET\pgn.NET.fsproj">
-      <Project>{d3976d6a-6eee-4a56-8c40-7f910b29a316}</Project>
-      <Name>pgn.NET</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\pgn.Parse\pgn.Parse.fsproj">
       <Project>{90538968-8127-451b-945d-59707a910b63}</Project>
       <Name>pgn.Parse</Name>
@@ -100,6 +98,7 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

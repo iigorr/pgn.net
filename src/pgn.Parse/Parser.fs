@@ -1,11 +1,11 @@
-﻿namespace ilf.pgn
+﻿namespace ilf.pgn.PgnParsers
 
 open FParsec
 open System.IO
 open ilf.pgn.Exceptions
 open ilf.pgn.PgnParsers.Game
 
-type Parser() =
+type internal Parser() =
     member this.ReadFromFile(file:string) =  
         let stream = new FileStream(file, FileMode.Open)
         let result = this.ReadFromStream(stream)

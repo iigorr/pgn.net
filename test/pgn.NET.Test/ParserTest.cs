@@ -2,6 +2,7 @@
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ilf.pgn.Data;
+using pgn.NET;
 
 namespace ilf.pgn.Test
 {
@@ -40,21 +41,21 @@ namespace ilf.pgn.Test
         [TestMethod]
         public void Parser_constructor_should_work()
         {
-            new Parser();
+            new PgnReader();
         }
 
         [TestMethod]
         [ExpectedException(typeof(FileNotFoundException))]
         public void ReadFromFile_should_throw_Exception_if_file_is_not_found()
         {
-            var parser = new Parser();
+            var parser = new PgnReader();
             Assert.IsInstanceOfType(parser.ReadFromFile("blub_non-existent.pgn"), typeof(Database));
         }
 
         [TestMethod]
         public void ReadFromFile_should_return_a_Database()
         {
-            var parser = new Parser();
+            var parser = new PgnReader();
             PrepareFile("test.pgn", NormalGame);
             Assert.IsInstanceOfType(parser.ReadFromFile("test.pgn"), typeof(Database));
         }
@@ -62,7 +63,7 @@ namespace ilf.pgn.Test
         [TestMethod]
         public void ReadFromStream_should_return_a_Database()
         {
-            var parser = new Parser();
+            var parser = new PgnReader();
             var stream = PrepareStream(NormalGame);
             Assert.IsInstanceOfType(parser.ReadFromStream(stream), typeof(Database));
         }
@@ -70,7 +71,7 @@ namespace ilf.pgn.Test
         [TestMethod]
         public void ReadFromStream_should_return_empty_Database_if_data_is_empty()
         {
-            var parser = new Parser();
+            var parser = new PgnReader();
             var stream = PrepareStream("");
             var db = parser.ReadFromStream(stream);
 
@@ -81,7 +82,7 @@ namespace ilf.pgn.Test
         [TestMethod]
         public void ReadFromStream_should_return_read_game_from_stream()
         {
-            var parser = new Parser();
+            var parser = new PgnReader();
             var stream = PrepareStream(NormalGame);
             var db = parser.ReadFromStream(stream);
 
@@ -91,7 +92,7 @@ namespace ilf.pgn.Test
         [TestMethod]
         public void ReadFromFile_should_return_read_game_from_file()
         {
-            var parser = new Parser();
+            var parser = new PgnReader();
             PrepareFile("one-game.pgn", NormalGame);
             var db = parser.ReadFromFile("one-game.pgn");
 
@@ -101,7 +102,7 @@ namespace ilf.pgn.Test
         [TestMethod]
         public void ReadFromString_should_read_game_from_string()
         {
-            var parser = new Parser();
+            var parser = new PgnReader();
             var db = parser.ReadFromString(NormalGame);
 
             Assert.AreEqual(1, db.Games.Count);

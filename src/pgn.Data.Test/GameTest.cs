@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using pgn.NET;
 
 namespace ilf.pgn.Data.Test
 {
@@ -29,7 +30,7 @@ namespace ilf.pgn.Data.Test
         [TestMethod]
         public void Moves_should_return_an_enumeration_of_moves()
         {
-            var parser = new Parser();
+            var parser = new PgnReader();
             var db= parser.ReadFromString(TestGameString);
             var game = db.Games[0];
 
