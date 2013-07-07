@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using pgn.NET;
 
 namespace ilf.pgn.Data.Test
 {

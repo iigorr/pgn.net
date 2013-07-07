@@ -38,7 +38,7 @@ namespace ilf.pgn.Data.Test
         public void Index_accessor_should_set_and_get_Pieces_via_integer()
         {
             var sut = new BoardSetup();
-            sut[4] = Piece.BlackKnight;
+            sut[32] = Piece.BlackKnight;
 
             Assert.AreEqual(Piece.BlackKnight, sut[File.A, 5]);
         }
@@ -48,8 +48,8 @@ namespace ilf.pgn.Data.Test
         {
             var sut = new BoardSetup();
             sut[0] = Piece.BlackPawn;
-            sut[8] = Piece.WhiteKing;
-            sut[31] = Piece.BlackRook;
+            sut[1] = Piece.WhiteKing;
+            sut[59] = Piece.BlackRook;
             sut[36] = Piece.WhiteQueen;
             sut[63] = Piece.BlackBishop;
 

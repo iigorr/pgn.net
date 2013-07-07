@@ -56,7 +56,7 @@ namespace ilf.pgn.Data
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="Piece"/> at the specified position. Counting starts at A1 file-wise. 0=A1, 1=A2, ..7=A8, 8=B1, ..., 64=H8
+        /// Gets or sets the <see cref="Piece"/> at the specified position. Counting starts at A1 rank-wise. 0=A1, 1=B1, ..., 7=H1, 8=A2, ..., 64=H8
         /// </summary>
         /// <value>
         /// The <see cref="Piece"/>. Use <c>null</c> to unset.
