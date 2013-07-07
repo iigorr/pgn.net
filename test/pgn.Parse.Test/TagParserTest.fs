@@ -118,9 +118,10 @@ type TagParserTests() =
         let setup= (tag :?> FenTag).Setup
 
         Assert.AreEqual(Piece.BlackRook, setup.[File.A, 1])
-        Assert.AreEqual(Piece.BlackPawn, setup.[File.B, 8])
-        Assert.AreEqual(null, setup.[File.C, 1])
-        Assert.AreEqual(Piece.WhiteKing, setup.[File.H, 5])
+        Assert.AreEqual(Piece.WhiteKnight, setup.[File.B, 8])
+        Assert.AreEqual(Piece.BlackBishop, setup.[File.C, 1])
+        Assert.AreEqual(null, setup.[File.C, 5])
+        Assert.AreEqual(Piece.WhiteKing, setup.[File.E, 8])
 
         Assert.AreEqual(true, setup.IsWhiteMove)
         
@@ -143,9 +144,11 @@ type TagParserTests() =
         let setup= (tag :?> FenTag).Setup
 
         Assert.AreEqual(Piece.BlackRook, setup.[File.A, 1])
-        Assert.AreEqual(Piece.BlackPawn, setup.[File.B, 8])
-        Assert.AreEqual(Piece.BlackPawn, setup.[File.D, 3])
-        Assert.AreEqual(Piece.WhiteKing, setup.[File.H, 5])
+        Assert.AreEqual(Piece.BlackPawn, setup.[File.B, 2])
+        Assert.AreEqual(Piece.BlackPawn, setup.[File.C, 4])
+        Assert.AreEqual(Piece.WhitePawn, setup.[File.E, 5])
+        Assert.AreEqual(null, setup.[File.E, 7])
+        Assert.AreEqual(Piece.WhiteKing, setup.[File.E, 8])
 
         Assert.AreEqual(false, setup.IsWhiteMove)
         

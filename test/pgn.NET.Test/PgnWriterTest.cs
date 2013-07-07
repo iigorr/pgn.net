@@ -3,7 +3,6 @@ using System.IO;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ilf.pgn.Data;
-using pgn.NET;
 
 namespace ilf.pgn.Test
 {
@@ -24,7 +23,7 @@ namespace ilf.pgn.Test
 
         public PgnWriterTest()
         {
-            _testGame = new Game()
+            _testGame = new Game
                 {
                     Event = "Breslau",
                     Site = "Breslau",
@@ -32,8 +31,9 @@ namespace ilf.pgn.Test
                     WhitePlayer = "Tarrasch, Siegbert",
                     BlackPlayer = "Mendelsohn, J.",
                     Result = GameResult.White,
+                    MoveText =
+                        new List<MoveTextEntry> {new CommentEntry("some moves"), new GameEndEntry(GameResult.White)},
                 };
-            _testGame.MoveText = new List<MoveTextEntry> { new CommentEntry("some moves"), new GameEndEntry(GameResult.White) };
         }
 
         [TestMethod]

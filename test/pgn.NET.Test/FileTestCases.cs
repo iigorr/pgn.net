@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ilf.pgn.PgnParsers;
-using pgn.NET;
 
 namespace ilf.pgn.Test
 {
