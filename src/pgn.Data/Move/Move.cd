@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ilf.pgn.Data.Move">
+    <Position X="4.25" Y="1.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAgAAABAAgAAEEgEACwAAAEAAAAIAAAUAAIAAAAAA=</HashCode>
+      <FileName>Move\Move.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Piece" />
+      <Property Name="OriginSquare" />
+      <Property Name="TargetSquare" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ilf.pgn.Data.Square">
+    <Position X="7.25" Y="2.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAEgAAAAAAAAAAEAIAAAAAAAAAAAiA=</HashCode>
+      <FileName>Basics\Square.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="ilf.pgn.Data.PieceType" Collapsed="true">
+    <Position X="7.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAEggAAAAEAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Basics\PieceType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ilf.pgn.Data.Piece">
+    <Position X="1.25" Y="1" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>gBAAAAACAAAEAAgEAAAAQAAQgAAAQhAAAAAAgAAAAGA=</HashCode>
+      <FileName>Basics\Piece.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Color" />
+      <Property Name="PieceType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ilf.pgn.Data.Square">
+    <Position X="6.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAEgAAAAAAAAAAEAIAAAAAAAAAAAiA=</HashCode>
+      <FileName>Basics\Square.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="File" />
+    </ShowAsAssociation>
+  </Class>
+  <Enum Name="ilf.pgn.Data.Color">
+    <Position X="3.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Basics\Color.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ilf.pgn.Data.File">
+    <Position X="9.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvkEAAAA=</HashCode>
+      <FileName>Basics\File.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ilf.pgn.Data.PieceType">
+    <Position X="3.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAEggAAAAEAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Basics\PieceType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ilf.pgn.Data.Database" Collapsed="true">
+    <Position X="4.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Database.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Games" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ilf.pgn.Data.Game">
+    <Position X="4.75" Y="2.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>gAAAAIAEJEAAgAAEAAQAAAQAAgAAAAAEBAAAAAIAAAA=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="BoardSetup" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="AdditionalInfo" />
+      <Property Name="MoveText" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ilf.pgn.Data.GameInfo" Collapsed="true">
+    <Position X="2" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>GameInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ilf.pgn.Data.BoardSetup" Collapsed="true">
+    <Position X="2" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAACAAAgAAgAgEGAAAAAgAAAAADAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BoardSetup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ilf.pgn.Data.MoveTextEntry" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>MoveText\MoveTextEntry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
