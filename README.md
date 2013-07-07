@@ -16,7 +16,7 @@ Example usage:
 ``` csharp
 //READ FILE
 var reader = new PgnReader();
-var gameDb = reader.ReadFromFile("YourGame.pgn");
+var gameDb = reader.ReadFromFile("Tarrasch.pgn");
 
 Game game = gameDb.Games[0];
 
