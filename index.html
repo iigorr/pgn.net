@@ -1,40 +1,70 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>pgn.net by iigorr</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="pgn.net : Portable Game Notation (PGN) implementation in .NET" />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>pgn.net</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1 class="header">pgn.net</h1>
-        <p class="header">Portable Game Notation (PGN) implementation in .NET</p>
 
-        <ul>
-          <li class="download"><a class="buttons" href="https://github.com/iigorr/pgn.net/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/iigorr/pgn.net/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/iigorr/pgn.net">View On GitHub</a></li>
-        </ul>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/iigorr/pgn.net">View on GitHub</a>
 
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/iigorr">iigorr</a></p>
+          <h1 id="project_title">pgn.net</h1>
+          <h2 id="project_tagline">Portable Game Notation (PGN) implementation in .NET</h2>
 
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/iigorr/pgn.net/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/iigorr/pgn.net/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
 
-      </header>
-      <section>
-        <h3>
-<a name="pgnnet" class="anchor" href="#pgnnet"><span class="octicon octicon-link"></span></a>pgn.net</h3>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="pgnnet" class="anchor" href="#pgnnet"><span class="octicon octicon-link"></span></a>pgn.net</h1>
+
+<p>Portable Game Notation (PGN) implementation in .NET</p>
 
 <h2>
-<a name="contribution" class="anchor" href="#contribution"><span class="octicon octicon-link"></span></a>Contribution</h2>
+<a name="about-pgn" class="anchor" href="#about-pgn"><span class="octicon octicon-link"></span></a>About PGN</h2>
+
+<p>Read more about <a href="http://en.wikipedia.org/wiki/Portable_Game_Notation">PGN on Wikipedia</a>.</p>
+
+<p>Here is an excellent <a href="http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm">spec document</a>.</p>
+
+<h2>
+<a name="about-pgnnet" class="anchor" href="#about-pgnnet"><span class="octicon octicon-link"></span></a>About pgn.NET</h2>
+
+<p>pgn.NET is a library which can be used to handle chess games and read/write them in the PGN format. It is implemented in F# and C# and uses <a href="http://www.quanttec.com/fparsec/">FParsec</a>.</p>
+
+<p>To support as many .pgn file formats as possible the parsers try to be as tolerant as possible. It mostly conforms to <a href="http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm">this specs</a>.
+However, other than the specification says we use UTF-8 as encoding, cause it's the 21st century.</p>
+
+<h2>
+<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How To Use</h2>
+
+<div class="highlight"><pre><span class="c1">//READ FILE</span>
+<span class="kt">var</span> <span class="n">reader</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PgnReader</span><span class="p">();</span>
+<span class="kt">var</span> <span class="n">gameDb</span> <span class="p">=</span> <span class="n">reader</span><span class="p">.</span><span class="n">ReadFromFile</span><span class="p">(</span><span class="s">"Tarrasch.pgn"</span><span class="p">);</span>
+
+<span class="n">Game</span> <span class="n">game</span> <span class="p">=</span> <span class="n">gameDb</span><span class="p">.</span><span class="n">Games</span><span class="p">[</span><span class="m">0</span><span class="p">];</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">game</span><span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="how-to-contribute" class="anchor" href="#how-to-contribute"><span class="octicon octicon-link"></span></a>How To Contribute</h2>
 
 <ol>
 <li>Fork</li>
@@ -43,11 +73,17 @@
 <li>Create Pull Request</li>
 </ol>
       </section>
-      <footer>
-        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">pgn.net maintained by <a href="https://github.com/iigorr">iigorr</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
+
+    
+
   </body>
 </html>
