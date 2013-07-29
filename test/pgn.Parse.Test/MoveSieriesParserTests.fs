@@ -46,7 +46,7 @@ type MoveSeriesParserTest() =
 
     [<TestMethod>]
     member this.pMoveSeriesEntry_should_accept_a_split_move_white() =
-        let entry = (parse pMoveSeriesEntry "1. e2e4") :?> SingleMoveEntry
+        let entry = (parse pMoveSeriesEntry "1. e2e4") :?> HalfMoveEntry
         let moveWhite = parse pMove "e2e4" 
          
         Assert.AreEqual(moveWhite, entry.Move)
@@ -55,7 +55,7 @@ type MoveSeriesParserTest() =
 
     [<TestMethod>]
     member this.pMoveSeriesEntry_should_accept_a_single_move_by_white() =
-        let entry = (parse pMoveSeriesEntry "13.Nxd4") :?> SingleMoveEntry
+        let entry = (parse pMoveSeriesEntry "13.Nxd4") :?> HalfMoveEntry
         let move = parse pMove "Nxd4"
          
         Assert.AreEqual(move, entry.Move)
@@ -65,7 +65,7 @@ type MoveSeriesParserTest() =
 
     [<TestMethod>]
     member this.pMoveSeriesEntry_should_accept_a_continued_move_by_black() =
-        let entry = (parse pMoveSeriesEntry "13... Ba6") :?> SingleMoveEntry
+        let entry = (parse pMoveSeriesEntry "13... Ba6") :?> HalfMoveEntry
         let move = parse pMove "Ba6"
          
         Assert.AreEqual(move, entry.Move)

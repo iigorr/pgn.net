@@ -57,14 +57,14 @@
       <FileName>MoveText\RAVEntry.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ilf.pgn.Data.SingleMoveEntry">
+  <Class Name="ilf.pgn.Data.HalfMoveEntry">
     <Position X="9.5" Y="2.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAAEAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
-      <FileName>MoveText\SingleMoveEntry.cs</FileName>
+      <FileName>MoveText\HalfMoveEntry.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

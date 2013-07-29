@@ -15,7 +15,7 @@ namespace ilf.pgn.Data.Format
                     FormatPair((MovePairEntry)entry, writer);
                     return;
                 case MoveTextEntryType.SingleMove:
-                    FormatSingleMove((SingleMoveEntry)entry, writer);
+                    FormatSingleMove((HalfMoveEntry)entry, writer);
                     return;
                 case MoveTextEntryType.RecursiveAnnotationVariation:
                     FormatRAVEntry((RAVEntry)entry, writer);
@@ -66,7 +66,7 @@ namespace ilf.pgn.Data.Format
             _moveFormatter.Format(movePair.Black, writer);
         }
 
-        private void FormatSingleMove(SingleMoveEntry entry, TextWriter writer)
+        private void FormatSingleMove(HalfMoveEntry entry, TextWriter writer)
         {
             if (entry.MoveNumber != null)
             {

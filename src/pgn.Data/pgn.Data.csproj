@@ -49,7 +49,7 @@
     <Compile Include="MoveText\MovePairEntry.cs" />
     <Compile Include="MoveText\NAGEntry.cs" />
     <Compile Include="MoveText\RAVEntry.cs" />
-    <Compile Include="MoveText\SingleMoveEntry.cs" />
+    <Compile Include="MoveText\HalfMoveEntry.cs" />
     <Compile Include="Basics\File.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameInfo.cs" />

@@ -25,7 +25,7 @@ let pFullMoveTextEntry =
 
 let pSplitMoveTextEntry = 
     pMoveNumberIndicator .>> ws .>>. pMove
-    |>> fun ((moveNum, contd), move) -> SingleMoveEntry(move, MoveNumber = toNullable(moveNum), IsContinued=contd) :> MoveTextEntry
+    |>> fun ((moveNum, contd), move) -> HalfMoveEntry(move, MoveNumber = toNullable(moveNum), IsContinued=contd) :> MoveTextEntry
     <!!> ("pSplitMoveTextEntry", 3)
 
 let pCommentary = 

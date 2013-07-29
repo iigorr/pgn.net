@@ -119,7 +119,7 @@ namespace ilf.pgn.Data
                 }
                 else if (entry.Type == MoveTextEntryType.SingleMove)
                 {
-                    yield return ((SingleMoveEntry)entry).Move;
+                    yield return ((HalfMoveEntry)entry).Move;
                 }
             }
         }

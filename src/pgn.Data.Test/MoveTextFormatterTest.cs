@@ -71,7 +71,7 @@ namespace ilf.pgn.Data.Format.Test
         public void Format_should_format_starting_single_move()
         {
             var sut = new MoveTextFormatter();
-            var entry = new SingleMoveEntry(_move1) { MoveNumber = 6 };
+            var entry = new HalfMoveEntry(_move1) { MoveNumber = 6 };
 
             Assert.AreEqual("6. exd5", sut.Format(entry));
         }
@@ -80,7 +80,7 @@ namespace ilf.pgn.Data.Format.Test
         public void Format_should_format_continued_single_move()
         {
             var sut = new MoveTextFormatter();
-            var entry = new SingleMoveEntry(_move2) { MoveNumber = 6, IsContinued = true };
+            var entry = new HalfMoveEntry(_move2) { MoveNumber = 6, IsContinued = true };
 
             Assert.AreEqual("6... Nd4", sut.Format(entry));
         }
@@ -113,8 +113,8 @@ namespace ilf.pgn.Data.Format.Test
         public void Format_should_format_a_RAVEntry()
         {
             var sut = new MoveTextFormatter();
-            var singleMoveEntry = new SingleMoveEntry(_move2) { MoveNumber = 6, IsContinued = true };
-            var ravEntry = new RAVEntry(new List<MoveTextEntry> { singleMoveEntry });
+            var halfMoveEntry = new HalfMoveEntry(_move2) { MoveNumber = 6, IsContinued = true };
+            var ravEntry = new RAVEntry(new List<MoveTextEntry> { halfMoveEntry });
             Assert.AreEqual("(6... Nd4)", sut.Format(ravEntry));
         }
 
@@ -123,7 +123,7 @@ namespace ilf.pgn.Data.Format.Test
         {
             var sut = new MoveTextFormatter();
             var entry1 =
-                new SingleMoveEntry(new Move
+                new HalfMoveEntry(new Move
                     {
                         Type = MoveType.Capture,
                         Piece = PieceType.Knight,
@@ -135,7 +135,7 @@ namespace ilf.pgn.Data.Format.Test
 
             var rav1 = new CommentEntry("comment");
             var rav2 =
-                new SingleMoveEntry(new Move
+                new HalfMoveEntry(new Move
                     {
                         Type = MoveType.Simple,
                         Piece = PieceType.Knight,
@@ -146,7 +146,7 @@ namespace ilf.pgn.Data.Format.Test
             var entry3 = new RAVEntry(new List<MoveTextEntry> { rav1, rav2 });
 
             var entry4 =
-                new SingleMoveEntry(new Move
+                new HalfMoveEntry(new Move
                     {
                         Type = MoveType.Simple,
                         Piece = PieceType.Rook,
