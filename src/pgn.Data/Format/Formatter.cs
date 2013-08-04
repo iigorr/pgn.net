@@ -3,9 +3,17 @@ using System.IO;
 
 namespace ilf.pgn.Data.Format
 {
+    /// <summary>
+    /// Formatter for Chess games in PGN format.
+    /// </summary>
     public class Formatter
     {
         private readonly MoveTextFormatter _moveTextFormatter = new MoveTextFormatter();
+        /// <summary>
+        /// Formats the specified game as PGN string.
+        /// </summary>
+        /// <param name="game">The game.</param>
+        /// <returns>The PGN string.</returns>
         public string Format(Game game)
         {
             var writer = new StringWriter();
@@ -13,6 +21,11 @@ namespace ilf.pgn.Data.Format
             return writer.ToString();
         }
 
+        /// <summary>
+        /// Formats the specified game and writes it to the writer.
+        /// </summary>
+        /// <param name="game">The game.</param>
+        /// <param name="writer">The writer.</param>
         public void Format(Game game, TextWriter writer)
         {
             FormatTag("Event", game.Event, writer);
@@ -30,6 +43,11 @@ namespace ilf.pgn.Data.Format
             _moveTextFormatter.Format(game.MoveText, writer);
         }
 
+        /// <summary>
+        /// Formats the date tag of the game and writes it to the string. e.g [Date "2013.??.??].
+        /// </summary>
+        /// <param name="game">The game.</param>
+        /// <param name="writer">The writer.</param>
         private void FormatDate(Game game, TextWriter writer)
         {
             writer.Write("[Date \"");
@@ -41,6 +59,11 @@ namespace ilf.pgn.Data.Format
             writer.WriteLine("\"]");
         }
 
+        /// <summary>
+        /// Gets the game result representation and writes it using the writer.
+        /// </summary>
+        /// <param name="result">The result.</param>
+        /// <returns>The game result representation.</returns>
         private string GetResultString(GameResult result)
         {
             switch (result)
@@ -53,6 +76,12 @@ namespace ilf.pgn.Data.Format
         }
 
 
+        /// <summary>
+        /// Formats a pgn tag tag.
+        /// </summary>
+        /// <param name="name">The tag name.</param>
+        /// <param name="value">The tag value.</param>
+        /// <param name="writer">The writer.</param>
         private void FormatTag(string name, object value, TextWriter writer)
         {
             writer.Write("[");

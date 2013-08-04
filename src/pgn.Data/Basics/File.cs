@@ -1,5 +1,8 @@
 ﻿namespace ilf.pgn.Data
 {
+    /// <summary>
+    /// Represnts the board files. Values are A=1, ..., B=8
+    /// </summary>
     public enum File
     {
         A = 1,

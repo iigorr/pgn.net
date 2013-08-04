@@ -2,6 +2,9 @@
 
 namespace ilf.pgn.Data
 {
+    /// <summary>
+    /// A move (actually Half-Move or Ply). Holds all information about the move and does not check for inconsistency, completeness, contradictions...
+    /// </summary>
     public class Move
     {
         public MoveType Type { get; set; }
@@ -18,6 +21,13 @@ namespace ilf.pgn.Data
         public bool? IsCheckMate { get; set; }
         public MoveAnnotation? Annotation { get; set; }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" /> is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
         public override bool Equals(object obj)
         {
             var other = obj as Move;
@@ -38,6 +48,12 @@ namespace ilf.pgn.Data
                 && this.Annotation == other.Annotation;
         }
 
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
         public override int GetHashCode()
         {
             unchecked
@@ -56,6 +72,11 @@ namespace ilf.pgn.Data
             }
         }
 
+        /// <summary>
+        /// Gets the default hash code for an object or 1 if object is null.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <returns></returns>
         private int getNullableHashCode(object obj)
         {
             return obj == null ? 1 : obj.GetHashCode();
