@@ -1,7 +1,7 @@
 ﻿namespace ilf.pgn.Data
 {
     /// <summary>
-    /// Possible move annotations 
+    /// Possible move annotations.
     /// </summary>
     public enum MoveAnnotation
     {
