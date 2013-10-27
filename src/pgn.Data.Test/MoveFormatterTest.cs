@@ -266,5 +266,40 @@ namespace ilf.pgn.Data.Format.Test
 
             Assert.AreEqual("Rb1xb8#!!", sut.Format(move));
         }
+
+
+        [TestMethod]
+        public void Format_should_ommit_redudant_piece_definition___N7c5_and_not_N7Nc5()
+        {
+            var sut = new MoveFormatter();
+            var move = new Move
+            {
+                Type = MoveType.Simple,
+                TargetSquare = new Square(File.C, 5),
+                Piece = PieceType.Knight,
+                TargetPiece = PieceType.Knight,
+                OriginRank = 7
+            };
+
+            Assert.AreEqual("N7c5", sut.Format(move));
+
+        }
+
+        [TestMethod]
+        public void Format_should_include_captured_piece_even_if_its_the_same()
+        {
+            var sut = new MoveFormatter();
+            var move = new Move
+            {
+                Type = MoveType.Capture,
+                Piece = PieceType.Knight,
+                OriginSquare = new Square(File.B, 7),
+                TargetPiece = PieceType.Knight,
+                TargetSquare = new Square(File.C, 5)
+            };
+
+            Assert.AreEqual("Nb7xNc5", sut.Format(move));
+
+        }
     }
 }

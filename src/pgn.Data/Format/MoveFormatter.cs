@@ -129,7 +129,10 @@ namespace ilf.pgn.Data.Format
         /// <returns>The string representation of the target.</returns>
         private string GetMoveTarget(Move move)
         {
-            var piece = GetPiece(move.TargetPiece);
+            var piece = "";
+
+            if (move.Type != MoveType.Simple) // do not render target piece on a simple move 
+                piece = GetPiece(move.TargetPiece);
 
             var target = "";
             if (move.TargetSquare != null)
