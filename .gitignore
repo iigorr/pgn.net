@@ -109,3 +109,5 @@ UpgradeLog*.XML
 /*.DotSettings
 
 /src/pgn.NET/pgn.net.dll
+
+/src/pgn.NET/*.nupkg
