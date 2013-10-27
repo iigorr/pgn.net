@@ -111,3 +111,5 @@ UpgradeLog*.XML
 /src/pgn.NET/pgn.net.dll
 
 /src/pgn.NET/*.nupkg
+
+/src/pgn.NET/pgn.net.xml
