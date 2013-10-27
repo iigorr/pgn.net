@@ -31,4 +31,7 @@ Please file any issues here: https://github.com/iigorr/pgn.net/issues
     <copyright>Copyright 2013</copyright>
     <tags>pgn chess library parser dotnet</tags>
   </metadata>
+  <files>
+    <file src=".\bin\$configuration$\$id$.xml" />
+  </files>
 </package>
