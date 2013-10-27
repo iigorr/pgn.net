@@ -60,6 +60,7 @@
   <ItemGroup>
     <None Include="merge.bat" />
     <None Include="packages.config" />
+    <None Include="release.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
