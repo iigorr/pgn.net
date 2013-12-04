@@ -42,6 +42,7 @@
     <Compile Include="MoveText\CommentEntry.cs" />
     <Compile Include="MoveText\GameEndEntry.cs" />
     <Compile Include="MoveText\MovePairEntry.cs" />
+    <Compile Include="MoveText\MoveTextEntryList.cs" />
     <Compile Include="MoveText\NAGEntry.cs" />
     <Compile Include="MoveText\RAVEntry.cs" />
     <Compile Include="MoveText\HalfMoveEntry.cs" />
