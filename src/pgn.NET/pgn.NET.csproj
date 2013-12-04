@@ -54,9 +54,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="merge.bat" />
     <None Include="merge.ps1" />
-    <None Include="packages.config" />
     <None Include="release.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
