@@ -1,8 +1,10 @@
 ﻿[<AutoOpen>]
 module internal ilf.pgn.PgnParsers.Bootstrap
 
-open NLog
 open System 
+
+#if DEBUG
+open NLog
 
 type DebugMode =
     | File
@@ -46,7 +48,7 @@ type Debug() =
 
     static member val Default = Debug()
 
-
+#endif
 
 let toNullable =
     function

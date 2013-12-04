@@ -25,6 +25,7 @@ let D (p: Parser<_,_>, name:string) stream =
     System.Console.WriteLine(name);
     p stream
 
+#if DEBUG
 let deb= Debug.Default
 let (<!!>) (p: Parser<_,_>) (label, depth) : Parser<_,_> =
     fun stream ->
@@ -38,7 +39,11 @@ let (<!!>) (p: Parser<_,_>) (label, depth) : Parser<_,_> =
             let duration = System.DateTime.Now - startTime
             deb.Log (sprintf "%A: %sLeaving %s (%A) (%f)"  stream.Position ("->".PadLeft(2*depth)) label reply.Status duration.TotalMilliseconds) depth
             reply
-
+#else
+let (<!!>) (p: Parser<_,_>) (label, depth) : Parser<_,_> =
+    fun stream ->
+        p stream
+#endif
 
 
 let (<!>) (p: Parser<_,_>) label : Parser<_,_> =
