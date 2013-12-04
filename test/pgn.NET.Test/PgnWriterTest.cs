@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ilf.pgn.Data;
+using ilf.pgn.Data.MoveText;
 
 namespace ilf.pgn.Test
 {
@@ -32,7 +33,7 @@ namespace ilf.pgn.Test
                     BlackPlayer = "Mendelsohn, J.",
                     Result = GameResult.White,
                     MoveText =
-                        new List<MoveTextEntry> {new CommentEntry("some moves"), new GameEndEntry(GameResult.White)},
+                        new MoveTextEntryList {new CommentEntry("some moves"), new GameEndEntry(GameResult.White)},
                 };
         }
 
