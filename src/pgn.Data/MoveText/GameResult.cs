@@ -5,9 +5,13 @@
     /// </summary>
     public enum GameResult
     {
+        /// <summary>White wins</summary>
         White,
+        /// <summary>Black wins</summary>
         Black,
+        /// <summary>Draw</summary>
         Draw,
+        /// <summary>Game result open (unfinished game)</summary>
         Open
     }
 }

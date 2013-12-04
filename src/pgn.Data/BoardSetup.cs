@@ -136,6 +136,12 @@ namespace ilf.pgn.Data
         /// </value>
         public int FullMoveCount { get; set; }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents the board setup.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents the board setup.
+        /// </returns>
         public override string ToString()
         {
             var output = "";

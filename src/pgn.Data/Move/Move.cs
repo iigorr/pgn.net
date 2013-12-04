@@ -4,21 +4,102 @@ namespace ilf.pgn.Data
 {
     /// <summary>
     /// A move (actually Half-Move or Ply). Holds all information about the move and does not check for inconsistency, completeness, contradictions...
+    /// NOTE: The same move may be expressed in different ways: Qd5xe6 or Qd5xKe6 or QxKe6 etc...
+    /// NOTE: The move class does not check for correctness of moves. Illegal moves may be constructed here.
     /// </summary>
     public class Move
     {
+        /// <summary>
+        /// Gets or sets the move type.
+        /// </summary>
+        /// <value>
+        /// The type.
+        /// </value>
         public MoveType Type { get; set; }
+        /// <summary>
+        /// Gets or sets the target piece, i.e. the captured piece.
+        /// </summary>
+        /// <value>
+        /// The target piece.
+        /// </value>
         public PieceType? TargetPiece { get; set; }
+        /// <summary>
+        /// Gets or sets the target square.
+        /// </summary>
+        /// <value>
+        /// The target square.
+        /// </value>
         public Square TargetSquare { get; set; }
+        /// <summary>
+        /// Gets or sets the target file.
+        /// </summary>
+        /// <value>
+        /// The target file.
+        /// </value>
         public File? TargetFile { get; set; }
+        /// <summary>
+        /// Gets or sets the moved piece.
+        /// </summary>
+        /// <value>
+        /// The piece.
+        /// </value>
         public PieceType? Piece { get; set; }
+        /// <summary>
+        /// Gets or sets the origin square.
+        /// </summary>
+        /// <value>
+        /// The origin square.
+        /// </value>
         public Square OriginSquare { get; set; }
+        /// <summary>
+        /// Gets or sets the origin file.
+        /// </summary>
+        /// <value>
+        /// The origin file.
+        /// </value>
         public File? OriginFile { get; set; }
+        /// <summary>
+        /// Gets or sets the origin rank.
+        /// </summary>
+        /// <value>
+        /// The origin rank.
+        /// </value>
         public int? OriginRank { get; set; }
+        /// <summary>
+        /// Gets or sets the promoted piece in case of a pawn reaching the other side.
+        /// </summary>
+        /// <value>
+        /// The promoted piece.
+        /// </value>
         public PieceType? PromotedPiece { get; set; }
+        /// <summary>
+        /// Indicates whether the move results in check.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if the move results in check; <c>false</c> or <c>null</c> otherwise.
+        /// </value>
         public bool? IsCheck { get; set; }
+        /// <summary>
+        /// Indicates whether the move results in double check.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if the move results in double check; <c>false</c> or <c>null</c> otherwise.
+        /// </value>
         public bool? IsDoubleCheck { get; set; }
+
+        /// <summary>
+        /// Indicates whether the move results in checkmate.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if the move results in checkmate; <c>false</c> or <c>null</c> otherwise.
+        /// </value>
         public bool? IsCheckMate { get; set; }
+        /// <summary>
+        /// Gets or sets the move annotation.
+        /// </summary>
+        /// <value>
+        /// The annotation.
+        /// </value>
         public MoveAnnotation? Annotation { get; set; }
 
         /// <summary>

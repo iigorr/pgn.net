@@ -5,6 +5,7 @@
     /// </summary>
     public enum MoveAnnotation
     {
+#pragma warning disable 1591
         MindBlowing,
         Brilliant,
         Good,
@@ -31,5 +32,6 @@
         Idea,
         TheoreticalNovelty,
         UnknownAnnotation,
+#pragma warning restore 1591
     }
 }
