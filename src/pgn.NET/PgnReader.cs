@@ -10,6 +10,11 @@ namespace ilf.pgn
     public class PgnReader
     {
         /// <summary>
+        /// Creates a PgnReader. Not much more really. 
+        /// </summary>
+        public PgnReader() { }
+
+        /// <summary>
         /// Reads a pgn database from a fileName.
         /// </summary>
         /// <param name="fileName">The fileName name.</param>
