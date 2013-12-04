@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>pgn.net</id>
+    <version>1.0.1.0</version>
+    <title>pgn.NET</title>
+    <authors>iigorr@lankin.net</authors>
+    <owners>iigorr@lankin.net</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/iigorr/pgn.net</projectUrl>
+    <iconUrl>https://raw.github.com/iigorr/pgn.net/master/pgn.NET.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Portable Game Notation (PGN) implementation in .NET</description>
+    <releaseNotes>
+<![CDATA[Release 1.0
+
+This is the initial release of pgn.NET, a library to parse PGN chess databases which includes
+
+* Data model for chess games (Game, Board, move text, move, piece)
+* PgnReader (Parser) for the PGN format (http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm).
+  - The parser tries to be as tolerant as possible (there are many variation of the pgn format),
+    so most pgn files should be readable. If not, please file an issue here: https://github.com/iigorr/pgn.net/issues
+  - Support for iso-8859 and UTF-8
+  - Support for Recursive Annotation Variation (RAV)
+  - Support for Forsyth-Edwards-Notation (FEN, http://de.wikipedia.org/wiki/Forsyth-Edwards-Notation)
+* PgnWriter, formatter for PGN games. 
+
+Please file any issues here: https://github.com/iigorr/pgn.net/issues
+]]>
+    </releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags>pgn chess library parser dotnet</tags>
+  </metadata>
+</package>
