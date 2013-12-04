@@ -58,6 +58,9 @@ namespace ilf.pgn.Data.Format
         /// <param name="writer">The writer.</param>
         public void Format(List<MoveTextEntry> moveText, TextWriter writer)
         {
+            if (moveText.Count == 0)
+                return;
+
             //no foreach here as last one is special case (no trailing space)
             for (int i = 0; i < moveText.Count - 1; ++i)
             {

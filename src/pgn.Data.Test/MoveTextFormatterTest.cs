@@ -49,6 +49,8 @@ namespace ilf.pgn.Data.Format.Test
             Assert.AreEqual("Foo exd5 Nd4", writer.ToString());
         }
 
+
+
         [TestMethod]
         public void Format_should_format_move_pair()
         {
@@ -163,6 +165,14 @@ namespace ilf.pgn.Data.Format.Test
             var moveText = new List<MoveTextEntry> { entry1, entry2, entry3, entry4, entry5, entry6, entry7 };
 
             Assert.AreEqual("37. Nxe5! $13 ({comment} 37. Ne3??) 37... Rd8 38. h4 Rd5 ½-½ {game ends in draw, whooot}", sut.Format(moveText));
+        }
+
+        [TestMethod]
+        public void Format_should_deal_with_empty_move_text()
+        {
+            var sut = new MoveTextFormatter();
+            var moveText = new List<MoveTextEntry>();
+            Assert.AreEqual("", sut.Format(moveText));
         }
 
     }
