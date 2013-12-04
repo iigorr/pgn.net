@@ -36,10 +36,6 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NLog, Version=2.1.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NLog.2.1.0\lib\net45\NLog.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="merge.bat" />
+    <None Include="merge.ps1" />
     <None Include="packages.config" />
     <None Include="release.ps1" />
   </ItemGroup>
