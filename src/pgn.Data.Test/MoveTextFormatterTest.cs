@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ilf.pgn.Data.MoveText;
 
 namespace ilf.pgn.Data.Format.Test
 {
@@ -116,7 +117,7 @@ namespace ilf.pgn.Data.Format.Test
         {
             var sut = new MoveTextFormatter();
             var halfMoveEntry = new HalfMoveEntry(_move2) { MoveNumber = 6, IsContinued = true };
-            var ravEntry = new RAVEntry(new List<MoveTextEntry> { halfMoveEntry });
+            var ravEntry = new RAVEntry(new MoveTextEntryList { halfMoveEntry });
             Assert.AreEqual("(6... Nd4)", sut.Format(ravEntry));
         }
 
@@ -145,7 +146,7 @@ namespace ilf.pgn.Data.Format.Test
                         Annotation = MoveAnnotation.Blunder
                     }) { MoveNumber = 37 };
 
-            var entry3 = new RAVEntry(new List<MoveTextEntry> { rav1, rav2 });
+            var entry3 = new RAVEntry(new MoveTextEntryList { rav1, rav2 });
 
             var entry4 =
                 new HalfMoveEntry(new Move

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using ilf.pgn.Data.Format;
+using ilf.pgn.Data.MoveText;
 
 namespace ilf.pgn.Data
 {
@@ -15,7 +16,7 @@ namespace ilf.pgn.Data
         public Game()
         {
             AdditionalInfo = new List<GameInfo>();
-            MoveText = new List<MoveTextEntry>();
+            MoveText = new MoveTextEntryList();
         }
         /// <summary>
         /// Gets or sets the event.
@@ -100,29 +101,13 @@ namespace ilf.pgn.Data
         /// <value>
         /// The move text.
         /// </value>
-        public List<MoveTextEntry> MoveText { get; set; }
-
-        public BoardSetup BoardSetup { get; set; }
+        public MoveTextEntryList MoveText { get; set; }
 
         /// <summary>
-        /// Gets the moves from the move text.
+        /// Gets or sets the board setup.
         /// </summary>
-        /// <returns>Enumerations of the game moves.</returns>
-        public IEnumerable<Move> GetMoves()
-        {
-            foreach (var entry in MoveText)
-            {
-                if (entry.Type == MoveTextEntryType.MovePair)
-                {
-                    yield return ((MovePairEntry)entry).White;
-                    yield return ((MovePairEntry)entry).Black;
-                }
-                else if (entry.Type == MoveTextEntryType.SingleMove)
-                {
-                    yield return ((HalfMoveEntry)entry).Move;
-                }
-            }
-        }
+        public BoardSetup BoardSetup { get; set; }
+
 
         /// <summary>
         /// Returns the PGN representation of the game as <see cref="System.String" />.

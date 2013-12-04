@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using ilf.pgn.Data.MoveText;
 
 namespace ilf.pgn.Data
 {
@@ -13,13 +13,13 @@ namespace ilf.pgn.Data
         /// <value>
         /// The move text.
         /// </value>
-        public List<MoveTextEntry> MoveText { get; set; }
+        public MoveTextEntryList MoveText { get; set; }
 
         /// <summary>
         /// Initializes a <see cref="RAVEntry"/>.
         /// </summary>
         /// <param name="moveText">The inner move text of the RAV.</param>
-        public RAVEntry(List<MoveTextEntry> moveText)
+        public RAVEntry(MoveTextEntryList moveText)
             : base(MoveTextEntryType.RecursiveAnnotationVariation)
         {
             MoveText = moveText;

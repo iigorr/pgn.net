@@ -57,7 +57,7 @@ let pMoveSeries, pMoveSeriesImpl = createParserForwardedToRef()
 let pRAV =
     pchar '(' .>> ws >>. pMoveSeries .>> ws .>> pchar ')' 
     |>> fun moveSeries -> 
-            let moveSeriesList = List<MoveTextEntry>()
+            let moveSeriesList = MoveText.MoveTextEntryList()
             moveSeriesList.AddRange(moveSeries)
             RAVEntry(moveSeriesList) :> MoveTextEntry
     <?> "RAV e.g. \"(6. Bd3)\""

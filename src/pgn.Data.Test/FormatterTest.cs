@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ilf.pgn.Data.MoveText;
 
 namespace ilf.pgn.Data.Format.Test
 {
@@ -30,7 +31,7 @@ namespace ilf.pgn.Data.Format.Test
                     BlackPlayer = "Mendelsohn, J.",
                     Result = GameResult.White,
                 };
-            _testGame.MoveText = new List<MoveTextEntry> { new CommentEntry("some moves"), new GameEndEntry(GameResult.White) };
+            _testGame.MoveText = new MoveTextEntryList { new CommentEntry("some moves"), new GameEndEntry(GameResult.White) };
         }
         [TestMethod]
         public void can_construct()

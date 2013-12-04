@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace ilf.pgn.Data.MoveText
 {
@@ -12,16 +11,16 @@ namespace ilf.pgn.Data.MoveText
         /// <summary>
         /// Gets the number of half-moves (moves by black *or* white)
         /// </summary>
-        public int HalfMoveCount
+        public int MoveCount
         {
             get
             {
                 int count = 0;
                 foreach (var entry in this)
                 {
-                    if (entry is MovePairEntry)
+                    if (entry.Type == MoveTextEntryType.MovePair)
                         count += 2;
-                    else if (entry is HalfMoveEntry)
+                    else if (entry.Type == MoveTextEntryType.SingleMove)
                         count += 1;
                 }
 
@@ -34,8 +33,27 @@ namespace ilf.pgn.Data.MoveText
         /// </summary>
         public int FullMoveCount
         {
-            get { return HalfMoveCount / 2; }
+            get { return MoveCount / 2; }
         }
 
+        /// <summary>
+        /// Gets the moves from the move text.
+        /// </summary>
+        /// <returns>Enumerations of the moves.</returns>
+        public IEnumerable<Move> GetMoves()
+        {
+            foreach (var entry in this)
+            {
+                if (entry.Type == MoveTextEntryType.MovePair)
+                {
+                    yield return ((MovePairEntry)entry).White;
+                    yield return ((MovePairEntry)entry).Black;
+                }
+                else if (entry.Type == MoveTextEntryType.SingleMove)
+                {
+                    yield return ((HalfMoveEntry)entry).Move;
+                }
+            }
+        }
     }
 }
