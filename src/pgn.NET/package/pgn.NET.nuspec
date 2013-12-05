@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>pgn.net</id>
-    <version>1.1.0.0</version>
+    <version>1.1.0.1</version>
     <title>pgn.NET</title>
     <authors>iigorr@lankin.net</authors>
     <owners>iigorr@lankin.net</owners>
@@ -21,6 +21,7 @@
 * Introduce MoveTextEntryList, a MoveEntry list which provides simplifed access to moves. 
 * Change type of Game.MoveText and RAVEntry.MoveText to MoveTextEntryList
 * Add missing API doc
+* Add support for frameworks: net40, net45, wp71
 
 Please file any issues here: https://github.com/iigorr/pgn.net/issues
 ]]>

@@ -59,3 +59,4 @@ This is the initial release of pgn.NET, a library to parse PGN chess databases w
 * Introduce MoveTextEntryList, a MoveEntry list which provides simplifed access to moves. 
 * Change type of Game.MoveText and RAVEntry.MoveText to MoveTextEntryList
 * Add missing API doc
+* Add support for frameworks: net40, net45, wp71
