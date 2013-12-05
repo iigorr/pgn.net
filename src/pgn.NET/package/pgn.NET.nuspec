@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>pgn.net</id>
-    <version>1.1.0.1</version>
+    <version>1.1.0.2</version>
     <title>pgn.NET</title>
     <authors>iigorr@lankin.net</authors>
     <owners>iigorr@lankin.net</owners>
@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
       Portable Game Notation (PGN) implementation in .NET
-      https://github.com/iigorr/pgn.ne
+      https://github.com/iigorr/pgn.net
     </description>
     <releaseNotes>
 <![CDATA[Release 1.1
