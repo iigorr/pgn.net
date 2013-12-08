@@ -2,15 +2,18 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{29143ECD-E5D3-41D4-9C62-81D82597D895}</ProjectGuid>
+    <ProjectGuid>{B5391779-EF41-41C5-BBD7-6C43836E5807}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ilf.pgn.Data</RootNamespace>
+    <RootNamespace>pgn.Data</RootNamespace>
     <AssemblyName>pgn.Data</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile4</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,47 +31,40 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\pgn.Data.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Basics\Color.cs" />
+    <Compile Include="Basics\File.cs" />
     <Compile Include="Basics\Piece.cs" />
+    <Compile Include="Basics\PieceType.cs" />
+    <Compile Include="Basics\Square.cs" />
     <Compile Include="BoardSetup.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Exceptions\PgnFormatException.cs" />
     <Compile Include="Format\Formatter.cs" />
     <Compile Include="Format\MoveFormatter.cs" />
     <Compile Include="Format\MoveTextFormatter.cs" />
-    <Compile Include="MoveText\CommentEntry.cs" />
-    <Compile Include="MoveText\GameEndEntry.cs" />
-    <Compile Include="MoveText\MovePairEntry.cs" />
-    <Compile Include="MoveText\MoveTextEntryList.cs" />
-    <Compile Include="MoveText\NAGEntry.cs" />
-    <Compile Include="MoveText\RAVEntry.cs" />
-    <Compile Include="MoveText\HalfMoveEntry.cs" />
-    <Compile Include="Basics\File.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameInfo.cs" />
+    <Compile Include="MoveText\CommentEntry.cs" />
+    <Compile Include="MoveText\GameEndEntry.cs" />
     <Compile Include="MoveText\GameResult.cs" />
+    <Compile Include="MoveText\HalfMoveEntry.cs" />
+    <Compile Include="MoveText\MovePairEntry.cs" />
+    <Compile Include="MoveText\MoveTextEntry.cs" />
+    <Compile Include="MoveText\MoveTextEntryList.cs" />
+    <Compile Include="MoveText\MoveTextEntryType.cs" />
+    <Compile Include="MoveText\NAGEntry.cs" />
+    <Compile Include="MoveText\RAVEntry.cs" />
     <Compile Include="Move\Move.cs" />
     <Compile Include="Move\MoveAnnotation.cs" />
-    <Compile Include="MoveText\MoveTextEntryType.cs" />
-    <Compile Include="MoveText\MoveTextEntry.cs" />
     <Compile Include="Move\MoveType.cs" />
-    <Compile Include="Basics\PieceType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Basics\Square.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Basics\Basics.cd" />
-    <None Include="MoveText\MoveText.cd" />
-    <None Include="Move\Move.cd" />
-    <None Include="Overview.cd" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

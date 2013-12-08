@@ -175,7 +175,7 @@ namespace ilf.pgn.Data.Format
             if (pieceType == null || pieceType == PieceType.Pawn)
                 return string.Empty;
 
-            return ((char)pieceType).ToString(CultureInfo.InvariantCulture);
+            return ((char)pieceType).ToString();
         }
 
         /// <summary>
