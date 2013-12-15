@@ -14,6 +14,7 @@ namespace ilf.pgn
         /// </summary>
         public PgnReader() { }
 
+#if !PORTABLE
         /// <summary>
         /// Reads a pgn database from a fileName.
         /// </summary>
@@ -24,6 +25,7 @@ namespace ilf.pgn
             var p = new Parser();
             return p.ReadFromFile(fileName);
         }
+#endif
 
         /// <summary>
         /// Reads a pgn database from a stream.

@@ -62,16 +62,16 @@ namespace ilf.pgn.Data.Test
             Assert.AreEqual(2, sut.MoveCount);
         }
 
-        [TestMethod]
-        public void Moves_should_return_an_enumeration_of_moves()
-        {
-            var parser = new PgnReader();
-            var db = parser.ReadFromString(TestGameString);
-            var moveText = db.Games[0].MoveText;
+        //[TestMethod]
+        //public void Moves_should_return_an_enumeration_of_moves()
+        //{
+        //    var parser = new PgnReader();
+        //    var db = parser.ReadFromString(TestGameString);
+        //    var moveText = db.Games[0].MoveText;
 
-            var moves = (from c in moveText.GetMoves() select c).ToList();
-            Assert.AreEqual(new Square(File.E, 4), moves[0].TargetSquare);
-            Assert.AreEqual(new Square(File.E, 5), moves[1].TargetSquare);
-        }
+        //    var moves = (from c in moveText.GetMoves() select c).ToList();
+        //    Assert.AreEqual(new Square(File.E, 4), moves[0].TargetSquare);
+        //    Assert.AreEqual(new Square(File.E, 5), moves[1].TargetSquare);
+        //}
     }
 }

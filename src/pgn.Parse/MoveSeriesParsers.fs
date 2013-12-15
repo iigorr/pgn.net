@@ -29,8 +29,8 @@ let pSplitMoveTextEntry =
     <!!> ("pSplitMoveTextEntry", 3)
 
 let pCommentary = 
-    between (str "{") (str "}") (many (noneOf "}")) 
-    <|> between (str ";") newline (many (noneOf "\n")) //to end of line comment
+    between (str "{") (str "}") (many (noneOf ("}".ToCharArray()))) 
+    <|> between (str ";") newline (many (noneOf ("\n".ToCharArray()))) //to end of line comment
     |>> charList2String
     |>> fun text -> CommentEntry(text) :> MoveTextEntry
     <!!> ("pCommentary", 3)

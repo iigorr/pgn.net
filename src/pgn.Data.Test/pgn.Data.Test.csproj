@@ -37,9 +37,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="pgn.Parse">
-      <HintPath>..\pgn.Parse\bin\Debug\pgn.Parse.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -64,17 +61,13 @@
     <Compile Include="BoardSetupTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\pgn.Data\pgn.Data.csproj">
-      <Project>{29143ecd-e5d3-41d4-9c62-81d82597d895}</Project>
-      <Name>pgn.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\pgn.NET\pgn.NET.csproj">
-      <Project>{B06A9F96-62F5-49C9-BFA8-58664D9A7462}</Project>
-      <Name>pgn.NET</Name>
-    </ProjectReference>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <ProjectReference Include="..\pgn.Data\pgn.Data.csproj">
+      <Project>{b5391779-ef41-41c5-bbd7-6c43836e5807}</Project>
+      <Name>pgn.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -27,7 +27,7 @@ let pTagName =
 let pRoundTagValue = 
     attempt(pchar '"' .>> pchar '?' .>> pchar '"' >>. preturn None)
     <|> attempt(pchar '"' .>> pchar '"' >>. preturn None)
-    <|> (pchar '"' >>. many (noneOf "\"")  .>> pchar '"' |>> fun x -> Some(charList2String(x))) 
+    <|> (pchar '"' >>. many (noneOf("\"".ToCharArray()))  .>> pchar '"' |>> fun x -> Some(charList2String(x))) 
     |>> fun round -> PgnRoundTag("Round", round) :> PgnTag
     <!> "pRoundTagValue"
 

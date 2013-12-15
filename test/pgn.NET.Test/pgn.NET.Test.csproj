@@ -25,7 +25,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;PORTABLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -34,7 +34,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;PORTABLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -68,7 +68,7 @@
       <Name>pgn.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\pgn.NET\pgn.NET.csproj">
-      <Project>{b06a9f96-62f5-49c9-bfa8-58664d9a7462}</Project>
+      <Project>{b81257d2-7601-47ab-b809-b17418406134}</Project>
       <Name>pgn.NET</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\pgn.Parse\pgn.Parse.fsproj">

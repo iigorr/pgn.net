@@ -4,6 +4,9 @@ module internal ilf.pgn.PgnParsers.Bootstrap
 open System 
 
 #if DEBUG
+
+#if PORTABLE
+#else
 open NLog
 
 type DebugMode =
@@ -48,6 +51,7 @@ type Debug() =
 
     static member val Default = Debug()
 
+#endif
 #endif
 
 let toNullable =

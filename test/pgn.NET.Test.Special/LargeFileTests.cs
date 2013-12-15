@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ilf.pgn.Test
 {
+
+#if !PORTABLE
     [TestClass]
     [Ignore] //comment out this line to run the long-running tests
     public class LargeFileTests
@@ -42,4 +44,5 @@ namespace ilf.pgn.Test
             Console.WriteLine("ficsgamesdb_2012_titled_movetimes_772441.pgn Took: " + duration.TotalMilliseconds + " sec.");
         }
     }
+#endif
 }

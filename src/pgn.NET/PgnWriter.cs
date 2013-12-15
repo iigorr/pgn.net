@@ -19,6 +19,7 @@ namespace ilf.pgn
             _stream = stream;
         }
 
+#if !PORTABLE
         /// <summary>
         /// Initializes a new instance of the <see cref="PgnWriter"/>.
         /// </summary>
@@ -27,6 +28,7 @@ namespace ilf.pgn
         {
             _stream=new FileStream(fileName, FileMode.OpenOrCreate);
         }
+#endif
 
         /// <summary>
         /// Writes the specified pgn database.
@@ -41,7 +43,7 @@ namespace ilf.pgn
             {
                 formatter.Format(game, writer);
             }
-            writer.Close();
+            writer.Flush();
         }
     }
 }

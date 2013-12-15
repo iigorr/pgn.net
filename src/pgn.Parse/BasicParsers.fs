@@ -21,11 +21,12 @@ let BP (p: Parser<_,_>) stream =
 let NBP (p: Parser<_,_>, name:string) stream =
     p stream // set a breakpoint here
     
-let D (p: Parser<_,_>, name:string) stream =
-    System.Console.WriteLine(name);
-    p stream
-
 #if DEBUG
+#if PORTABLE
+let (<!!>) (p: Parser<_,_>) (label, depth) : Parser<_,_> =
+    fun stream ->
+        p stream
+#else
 let deb= Debug.Default
 let (<!!>) (p: Parser<_,_>) (label, depth) : Parser<_,_> =
     fun stream ->
@@ -39,12 +40,16 @@ let (<!!>) (p: Parser<_,_>) (label, depth) : Parser<_,_> =
             let duration = System.DateTime.Now - startTime
             deb.Log (sprintf "%A: %sLeaving %s (%A) (%f)"  stream.Position ("->".PadLeft(2*depth)) label reply.Status duration.TotalMilliseconds) depth
             reply
+#endif
+#endif
+
+
+#if DEBUG
 #else
 let (<!!>) (p: Parser<_,_>) (label, depth) : Parser<_,_> =
     fun stream ->
         p stream
 #endif
-
 
 let (<!>) (p: Parser<_,_>) label : Parser<_,_> =
         p <!!> (label, 0) 

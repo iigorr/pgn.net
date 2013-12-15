@@ -43,11 +43,13 @@ namespace ilf.pgn.Test
             new PgnWriter(new MemoryStream(0));
         }
 
+#if !PORTABLE
         [TestMethod]
         public void can_construct_with_file_name()
         {
             new PgnWriter("test.txt");
         }
+#endif
 
         [TestMethod]
         public void Write_should_write_game_correctly()

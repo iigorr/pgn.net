@@ -3,6 +3,8 @@ using ilf.pgn.PgnParsers;
 
 namespace ilf.pgn.Test
 {
+
+#if !PORTABLE
     [TestClass]
     [DeploymentItem(TestFolder, TestFolder)]
     public class FileTestCases
@@ -33,4 +35,5 @@ namespace ilf.pgn.Test
             Assert.AreEqual(4, db.Games.Count);
         }
     }
+#endif
 }

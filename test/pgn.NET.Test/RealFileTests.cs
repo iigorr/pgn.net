@@ -3,6 +3,7 @@ using ilf.pgn.PgnParsers;
 
 namespace ilf.pgn.Test
 {
+#if !PORTABLE
     [TestClass]
     public class RealFileTests
     {
@@ -36,4 +37,5 @@ namespace ilf.pgn.Test
             Assert.AreEqual(6, db.Games.Count);
         }
     }
+#endif
 }

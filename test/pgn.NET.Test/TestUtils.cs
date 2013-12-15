@@ -6,6 +6,7 @@ namespace ilf.pgn.Test
     public class TestUtils
     {
         public const string TestFolder = @"Test Files\";
+#if !PORTABLE
         public static Database TestFile(string fileName)
         {
             if (!System.IO.File.Exists(TestFolder + fileName))
@@ -15,5 +16,6 @@ namespace ilf.pgn.Test
             return parser.ReadFromFile(TestFolder + fileName);
 
         }
+#endif
     }
 }

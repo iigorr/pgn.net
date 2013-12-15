@@ -4,8 +4,6 @@ open System.Reflection
 open System.Runtime.CompilerServices
 open System.Runtime.InteropServices
 
-[<assembly: ComVisible(false)>]
-
 [<assembly: AssemblyTitle("ilf.pgn.PgnParser.dll")>]
 [<assembly: AssemblyDescription("ilf.pgn.PgnParser.dll")>]
 

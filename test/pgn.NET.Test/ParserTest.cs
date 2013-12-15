@@ -43,6 +43,7 @@ namespace ilf.pgn.Test
             new PgnReader();
         }
 
+#if !PORTABLE
         [TestMethod]
         [ExpectedException(typeof(FileNotFoundException))]
         public void ReadFromFile_should_throw_Exception_if_file_is_not_found()
@@ -58,6 +59,7 @@ namespace ilf.pgn.Test
             PrepareFile("test.pgn", NormalGame);
             Assert.IsInstanceOfType(parser.ReadFromFile("test.pgn"), typeof(Database));
         }
+#endif
 
         [TestMethod]
         public void ReadFromStream_should_return_a_Database()
@@ -88,6 +90,7 @@ namespace ilf.pgn.Test
             Assert.AreEqual(1, db.Games.Count);
         }
 
+#if !PORTABLE
         [TestMethod]
         public void ReadFromFile_should_return_read_game_from_file()
         {
@@ -97,6 +100,7 @@ namespace ilf.pgn.Test
 
             Assert.AreEqual(1, db.Games.Count);
         }
+#endif
 
         [TestMethod]
         public void ReadFromString_should_read_game_from_string()
