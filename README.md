@@ -1,4 +1,4 @@
-pgn.net [![Build status](https://ci.appveyor.com/api/projects/status?id=mmyw0sm68bh4w9ac)](https://ci.appveyor.com/project/pgn-net)
+pgn.net 
 =======
 
 Portable Game Notation (PGN) implementation in .NET
