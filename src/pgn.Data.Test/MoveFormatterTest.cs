@@ -32,8 +32,8 @@ namespace ilf.pgn.Data.Format.Test
         public void Format_should_format_castling_moves()
         {
             var sut = new MoveFormatter();
-            Assert.AreEqual("0-0", sut.Format(new Move { Type = MoveType.CastleKingSide }));
-            Assert.AreEqual("0-0-0", sut.Format(new Move { Type = MoveType.CastleQueenSide }));
+            Assert.AreEqual("O-O", sut.Format(new Move { Type = MoveType.CastleKingSide }));
+            Assert.AreEqual("O-O-O", sut.Format(new Move { Type = MoveType.CastleQueenSide }));
         }
 
         [TestMethod]

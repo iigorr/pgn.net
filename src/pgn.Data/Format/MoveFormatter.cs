@@ -111,11 +111,11 @@ namespace ilf.pgn.Data.Format
             switch (move.Type)
             {
                 case MoveType.CastleKingSide:
-                    writer.Write("0-0");
+                    writer.Write("O-O");
                     return true;
 
                 case MoveType.CastleQueenSide:
-                    writer.Write("0-0-0");
+                    writer.Write("O-O-O");
                     return true;
             }
 
