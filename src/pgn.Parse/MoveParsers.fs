@@ -73,7 +73,6 @@ let pSimplifiedPawnCapture =  // e.g. dxe or de
         new Move (
             Type = MoveType.Capture,
             Piece = Nullable(PieceType.Pawn),
-            TargetPiece = Nullable(PieceType.Pawn),
             OriginFile = Nullable(file1),
             TargetFile = Nullable(file2)
     )
