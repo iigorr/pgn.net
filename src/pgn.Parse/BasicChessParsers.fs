@@ -5,18 +5,7 @@ open System
 open FParsec
 open ilf.pgn.Data
 
-//note we allow S (ger. "Springer") for knight was used traditionally and is around in older PGNs
-let pieceSymbol = ["P"; "N"; "S"; "B"; "R"; "Q"; "K"]
-let findPiece(a: string) =
-    match a.ToUpper() with
-    | "P" -> PieceType.Pawn
-    | "N" -> PieceType.Knight
-    | "S" -> PieceType.King
-    | "B" -> PieceType.Bishop
-    | "R" -> PieceType.Rook
-    | "Q" -> PieceType.Queen
-    | "K" -> PieceType.King
-    | _ -> raise <| System.ArgumentException("Invalid piece character " + a)
+
 
 let fileSymbol = [ 'a' .. 'h'] |> List.map (fun x -> x.ToString())
 
@@ -34,9 +23,23 @@ let findFile (a: string) =
 
 let rankSymbol = [1 .. 8] |> List.map (fun x -> x.ToString())
 
+//NOTE: we allow S (ger. "Springer") for knight was used traditionally and is around in older PGNs
+//NOTE: 'b' is not allowed here as it is reserved for the b file
 let pPiece = 
-    pList(strCI, pieceSymbol) |>> findPiece
-    <?> "Piece (N, B, R, Q, K or P)"
+        (pchar 'p' >>% PieceType.Pawn)
+    <|> (pchar 'P' >>% PieceType.Pawn)
+    <|> (pchar 'N' >>% PieceType.Knight)
+    <|> (pchar 'n' >>% PieceType.Knight)
+    <|> (pchar 'S' >>% PieceType.Knight)
+    <|> (pchar 's' >>% PieceType.Knight)
+    <|> (pchar 'B' >>% PieceType.Bishop)
+    <|> (pchar 'R' >>% PieceType.Rook)
+    <|> (pchar 'r' >>% PieceType.Rook)
+    <|> (pchar 'Q' >>% PieceType.Queen)
+    <|> (pchar 'q' >>% PieceType.Queen)
+    <|> (pchar 'K' >>% PieceType.King)
+    <|> (pchar 'k' >>% PieceType.King)
+    <?> "Piece (N, B, R, Q, K, P, n, r, q, k, p)"
 
 let pFile =  
     pList(strCI, fileSymbol) |>> findFile

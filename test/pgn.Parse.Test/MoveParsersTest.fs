@@ -105,8 +105,9 @@ type MoveParserTest() =
 
     [<TestMethod>]
     member this.pCapturingMove_should_accept_a_pawn_capturing_move_with_capturing_file() =
-        tryParse pCapturingMove "cxd5" //pawn on C captures pawn on D5
+        tryParse pCapturingMove "cxd5" //pawn on C captures D5
         tryParse pCapturingMove "c:D5"
+
 
     [<TestMethod>]
     member this.pCapturingMove_should_accept_enpassent_suffix() =
@@ -293,6 +294,14 @@ type MoveParserTest() =
         Assert.AreEqual(PieceType.Bishop, move.TargetPiece);
         Assert.AreEqual(Square(File.D, 5), move.TargetSquare);
         Assert.AreEqual(Square(File.C, 5), move.OriginSquare);
+    
+    [<TestMethod>]
+    member this.pMove_should_correctly_parse_capturing_move_with_origin_file_and_no_target_piece() =
+        let move = parse pMove "bxc6"
+        Assert.AreEqual(MoveType.Capture, move.Type);
+        Assert.AreEqual(Square(File.C, 6), move.TargetSquare);
+        Assert.AreEqual(File.B, move.OriginFile);
+
 
     [<TestMethod>]
     member this.pMove_should_correctly_parse_en_passant() =
