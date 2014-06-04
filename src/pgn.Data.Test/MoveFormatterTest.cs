@@ -138,6 +138,21 @@ namespace ilf.pgn.Data.Format.Test
         }
 
         [TestMethod]
+        public void Format_should_format_a_pawn_capturing_move_with_origin_file_info()
+        {
+            var sut = new MoveFormatter();
+            var move = new Move
+            {
+                Type = MoveType.Capture,
+                TargetSquare = new Square(File.C, 6),
+                OriginFile = File.B,
+                Piece = PieceType.Pawn
+            };
+
+            Assert.AreEqual("bxc6", sut.Format(move));
+        }
+
+        [TestMethod]
         public void Format_should_format_a_capturing_move_with_origin_square()
         {
             var sut = new MoveFormatter();
