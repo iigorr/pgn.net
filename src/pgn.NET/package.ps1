@@ -1,6 +1,6 @@
 ﻿$ErrorActionPreference = "Stop"
 
-$targets = @("net45", "net40", "wp71")
+$targets = @("net45", "net40")
 $packageDir = ".\package\"
 
 function Merge($target) {
