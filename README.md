@@ -21,16 +21,6 @@ However, other than the specification says we use UTF-8 as encoding, cause it's 
 
 ## How To Use
 
-### Installation
-Installation works via nuget:
-``` powershell
-PM> Install-Package pgn.NET
-```
-
-Or you could just clone and reference the assemblies.
-
-### Usage
-
 ``` csharp
 using ilf.pgn;
 using ilf.pgn.Data;
@@ -45,6 +35,24 @@ Game game = gameDb.Games[0];
 
 Console.WriteLine(game);
 ```
+
+## Installation
+You can download the [NuGet Package](https://www.nuget.org/packages/pgn.NET/) or just clone, build and reference the assemblies.
+
+### NuGet package via console:
+``` powershell
+PM> Install-Package pgn.NET
+```
+
+### NuGet package in Visual Studio:
+
+Choose your project and open the NuGet Package Manager:
+![vs step1](resources/package_manager_nuget.png)
+
+Search for "pgn.net" in the online directory, then click "Install" on the pgn.net package:
+![vs step2](resources/search_for_pgn_net.png)
+
+The project should now reference the pgn.NET assembly
 
 
 ## How To Contribute
