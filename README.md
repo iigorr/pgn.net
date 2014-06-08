@@ -17,9 +17,26 @@ pgn.NET is a library which can be used to handle chess games and read/write them
 To support as many .pgn file formats as possible the parsers try to be as tolerant as possible. It mostly conforms to [this specs](http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm).
 However, other than the specification says we use UTF-8 as encoding, cause it's the 21st century.
 
+
+
 ## How To Use
 
+### Installation
+Installation works via nuget:
+``` powershell
+PM> Install-Package pgn.NET
+```
+
+Or you could just clone and reference the assemblies.
+
+### Usage
+
 ``` csharp
+using ilf.pgn;
+using ilf.pgn.Data;
+
+// ...
+
 //READ FILE
 var reader = new PgnReader();
 var gameDb = reader.ReadFromFile("Tarrasch.pgn");
@@ -40,6 +57,20 @@ Console.WriteLine(game);
 
 ## Changelog
 
+### Bugfix Release 1.1.1
+
+* Bugfix: Castle should use the letter O rather than the digit 0 (https://github.com/iigorr/pgn.net/issues/10)
+* Bugfix: parser recognizes bxc6 as "Bishop captures c6" (https://github.com/iigorr/pgn.net/issues/11)
+* FSharp.Core is merged in into the assembly
+* Removed support for wp71 due to FParsec incompatitbilities
+
+### Release 1.1
+* Bugfix: zero-length move text bug (IndexOutOfRange)
+* Introduce MoveTextEntryList, a MoveEntry list which provides simplifed access to moves. 
+* Change type of Game.MoveText and RAVEntry.MoveText to MoveTextEntryList
+* Add missing API doc
+* Add support for frameworks: net40, net45, wp71
+
 ### Release 1.0
 
 This is the initial release of pgn.NET, a library to parse PGN chess databases which includes
@@ -53,10 +84,4 @@ This is the initial release of pgn.NET, a library to parse PGN chess databases w
   - Support for Forsyth-Edwards-Notation (FEN, http://de.wikipedia.org/wiki/Forsyth-Edwards-Notation)
 * PgnWriter, formatter for PGN games. 
 
-### Release 1.1
 
-* Bugfix: zero-length move text bug (IndexOutOfRange)
-* Introduce MoveTextEntryList, a MoveEntry list which provides simplifed access to moves. 
-* Change type of Game.MoveText and RAVEntry.MoveText to MoveTextEntryList
-* Add missing API doc
-* Add support for frameworks: net40, net45, wp71
