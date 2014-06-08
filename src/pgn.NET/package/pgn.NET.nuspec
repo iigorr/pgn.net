@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>pgn.net</id>
-    <version>1.1.0.2</version>
+    <version>1.1.1.0</version>
     <title>pgn.NET</title>
     <authors>iigorr@lankin.net</authors>
     <owners>iigorr@lankin.net</owners>
@@ -15,13 +15,12 @@
       https://github.com/iigorr/pgn.net
     </description>
     <releaseNotes>
-<![CDATA[Release 1.1
+<![CDATA[Bugfix Release 1.1.1
 
-* Bugfix: zero-length move text bug (IndexOutOfRange)
-* Introduce MoveTextEntryList, a MoveEntry list which provides simplifed access to moves. 
-* Change type of Game.MoveText and RAVEntry.MoveText to MoveTextEntryList
-* Add missing API doc
-* Add support for frameworks: net40, net45, wp71
+* Bugfix: Castle should use the letter O rather than the digit 0 (https://github.com/iigorr/pgn.net/issues/10)
+* Bugfix: parser recognizes bxc6 as "Bishop captures c6" (https://github.com/iigorr/pgn.net/issues/11)
+* FSharp.Core is merged in into the assembly
+* Removed support for wp71 due to FParsec incompatitbilities
 
 Please file any issues here: https://github.com/iigorr/pgn.net/issues
 ]]>
