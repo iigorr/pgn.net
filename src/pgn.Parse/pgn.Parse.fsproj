@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>pgn.Parse</RootNamespace>
     <AssemblyName>pgn.Parse</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <Name>pgn.Parse</Name>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -39,6 +39,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" Condition=" Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')" />
   <Import Project="$(SolutionDir)\FSharpCompiler\Microsoft.FSharp.Targets" Condition="Exists('$(SolutionDir)\FSharpCompiler\Microsoft.FSharp.Targets')" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Bootstrap.fs" />
@@ -63,20 +64,20 @@
       <HintPath>..\packages\FParsec.1.0.1\lib\net40-client\FParsecCS.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="NLog">
-      <HintPath>..\packages\NLog.2.0.1.2\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.3.0.0.0\lib\net40\NLog.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\pgn.Data\pgn.Data.csproj">
       <Name>pgn.Data</Name>
       <Project>{29143ecd-e5d3-41d4-9c62-81d82597d895}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
