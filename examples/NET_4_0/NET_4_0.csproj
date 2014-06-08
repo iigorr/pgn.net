@@ -34,8 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="pgn.net">
-      <HintPath>..\packages\pgn.net.1.1.0.2\lib\net40\pgn.net.dll</HintPath>
+    <Reference Include="pgn.net, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\pgn.net.1.1.1.0\lib\net40\pgn.net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
