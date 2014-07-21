@@ -47,10 +47,10 @@ PM> Install-Package pgn.NET
 ### NuGet package in Visual Studio:
 
 Choose your project and open the NuGet Package Manager:
-![vs step1](resources/package_manager_nuget.png)
+![vs step1](https://raw.githubusercontent.com/iigorr/pgn.net/master/resources/package_manager_nuget.png)
 
 Search for "pgn.net" in the online directory, then click "Install" on the pgn.net package:
-![vs step2](resources/search_for_pgn_net.png)
+![vs step2](https://raw.githubusercontent.com/iigorr/pgn.net/master/resources/search_for_pgn_net.png)
 
 The project should now reference the pgn.NET assembly
 
