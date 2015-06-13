@@ -11,7 +11,7 @@ let pDay = pMonth
 let pDateTagValue = 
     attempt(pchar '"' >>. pYear .>> pchar '.' .>>. pMonth .>> pchar '.' .>>. pDay .>> pchar '"')
     <|> ((pchar '"' >>. pYear .>> pchar '"') |>> fun year -> ((year, None), None))
-    |>> fun((year, month), day) -> PgnDateTag("Date", Year =  toNullable(year), Month = toNullable(month), Day=toNullable(day)) :> PgnTag
+    |>> fun((year, month), day) -> PgnDateTag("Date", year, month, day) :> PgnTag
     <!> "pDateTagValue"
 
 let applypDateTagValue p = run pDateTagValue p

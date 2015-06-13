@@ -84,24 +84,24 @@ type TagParserTests() =
     [<TestMethod>]
     member this.pTag_should_create_a_PgnRoundTag_object_from_a_valid_tag() =
         let tag= parse pTag "[Round \"13\"]"
-        Assert.IsInstanceOfType(tag, typeof<PgnRoundTag>)
+        Assert.IsInstanceOfType(tag, typeof<PgnTag>)
         Assert.AreEqual("Round", tag.Name)
-        Assert.AreEqual("13", (tag :?> PgnRoundTag).Round)
+        Assert.AreEqual("13", tag.Value)
 
     [<TestMethod>]
     member this.pTag_should_create_PgnRoundTag_object_from_two_tags_in_sequence() =
         let tag = parse pTag @"[Round ""?""][White ""Tarrasch, Siegbert""]"
 
-        Assert.IsInstanceOfType(tag, typeof<PgnRoundTag>)
+        Assert.IsInstanceOfType(tag, typeof<PgnTag>)
         Assert.AreEqual("Round", tag.Name)
-        Assert.AreEqual(None, (tag :?> PgnRoundTag).Round)
+        Assert.AreEqual("?", tag.Value)
 
     [<TestMethod>]
     member this.pTag_should_accept_non_numeric_rounds() =
         let tag= parse pTag "[Round \"4.1\"]"
-        Assert.IsInstanceOfType(tag, typeof<PgnRoundTag>)
+        Assert.IsInstanceOfType(tag, typeof<PgnTag>)
         Assert.AreEqual("Round", tag.Name)
-        Assert.AreEqual("4.1", (tag :?> PgnRoundTag).Round)
+        Assert.AreEqual("4.1", tag.Value)
 
     [<TestMethod>]
     member this.pTag_should_create_a_PgnResultTag_object_from_a_valid_tag() =

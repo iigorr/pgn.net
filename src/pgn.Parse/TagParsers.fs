@@ -25,10 +25,10 @@ let pTagName =
 
 
 let pRoundTagValue = 
-    attempt(pchar '"' .>> pchar '?' .>> pchar '"' >>. preturn None)
-    <|> attempt(pchar '"' .>> pchar '"' >>. preturn None)
-    <|> (pchar '"' >>. many (noneOf "\"")  .>> pchar '"' |>> fun x -> Some(charList2String(x))) 
-    |>> fun round -> PgnRoundTag("Round", round) :> PgnTag
+    attempt(pchar '"' .>> pchar '?' .>> pchar '"' >>. preturn "?")
+    <|> attempt(pchar '"' .>> pchar '"' >>. preturn "")
+    <|> (pchar '"' >>. many (noneOf "\"")  .>> pchar '"' |>> fun x -> charList2String(x))
+    |>> fun round -> PgnTag("Round", round)
     <!> "pRoundTagValue"
 
 let pResultTagVaue = 
@@ -49,7 +49,7 @@ let pBasicTagValue =
 
 let pBasicTag = 
     pTagName .>> spaces .>>. pBasicTagValue
-    |>> fun (tagName, tagValue) -> PgnBasicTag(tagName, tagValue) :> PgnTag
+    |>> fun (tagName, tagValue) -> PgnTag(tagName, tagValue)
     <!> "pBasicTag"
 
 let tagContent = 

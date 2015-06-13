@@ -5,18 +5,20 @@ open FParsec
 open ilf.pgn.Data
 
 let setTag(game : Game, tag : PgnTag) =
+    game.Tags.Add(tag.Name, tag.Value)
     match tag.Name with
-    | "Event" -> game.Event <- (tag :?> PgnBasicTag).Value
-    | "Site" -> game.Site <- (tag :?> PgnBasicTag).Value
+    | "Event" -> game.Event <- tag.Value
+    | "Site" -> game.Site <- tag.Value
     | "Date" -> game.Year <- (tag :?> PgnDateTag).Year; game.Month <- (tag :?> PgnDateTag).Month; game.Day <- (tag :?> PgnDateTag).Day
-    | "Round" -> game.Round <- (tag :?> PgnRoundTag).Round
-    | "White" -> game.WhitePlayer <- (tag :?> PgnBasicTag).Value
-    | "Black" -> game.BlackPlayer <- (tag :?> PgnBasicTag).Value
+    | "Round" -> game.Round <- tag.Value
+    | "White" -> game.WhitePlayer <- tag.Value
+    | "Black" -> game.BlackPlayer <- tag.Value
     | "Result" -> game.Result <- (tag :?> PgnResultTag).Result
     | "FEN" -> game.BoardSetup <- (tag :?> FenTag).Setup
     | _ -> 
-        let basicTag = (tag :?> PgnBasicTag)
-        game.AdditionalInfo.Add(GameInfo(basicTag.Name, basicTag.Value))
+        game.AdditionalInfo.Add(GameInfo(tag.Name, tag.Value))
+        
+        
 
 
 let makeGame (tagList : PgnTag list, moveTextList : MoveTextEntry list) =

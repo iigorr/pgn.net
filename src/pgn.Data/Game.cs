@@ -10,6 +10,8 @@ namespace ilf.pgn.Data
     /// </summary>
     public class Game
     {
+        private readonly Dictionary<string, string> _tags = new Dictionary<string, string>();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Game"/> class.
         /// </summary>
@@ -94,6 +96,15 @@ namespace ilf.pgn.Data
         /// The additional info.
         /// </value>
         public List<GameInfo> AdditionalInfo { get; set; }
+
+
+        /// <summary>
+        /// All game tags (aka headers).
+        /// </summary>
+        /// <value>
+        /// The tags as a dictionary. Access a tag e.g. via Tags['WhiteElo'], or check via Tags.ContainsKey().
+        /// </value>
+        public Dictionary<string, string> Tags { get { return _tags; } }
 
         /// <summary>
         /// Gets or sets the full move text including moves, comments, annotations, etc.
