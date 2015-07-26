@@ -35,7 +35,7 @@ let pGame =
 
 
 let pDatabase = 
-    sepEndBy pGame ws
+    sepEndBy pGame ws .>> eof
     |>> fun games -> 
             let db = new Database()
             db.Games.AddRange(games)
