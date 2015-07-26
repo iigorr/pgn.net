@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using FParsec;
 using ilf.pgn.Data;
 using ilf.pgn.PgnParsers;
 using Microsoft.FSharp.Core;
@@ -59,8 +58,7 @@ namespace ilf.pgn
         public IEnumerable<Game> ReadGamesFromFile(string file)
         {
             var p = new Parser();
-            var charStream = new CharStream<Unit>(file, System.Text.Encoding.UTF8);
-            foreach (var game in p.ReadGames(charStream))
+            foreach (var game in p.ReadGamesFromFile(file))
                 yield return game;
         }
 
@@ -72,8 +70,7 @@ namespace ilf.pgn
         public IEnumerable<Game> ReadGamesFromStream(Stream stream)
         {
             var p = new Parser();
-            var charStream = new CharStream<Unit>(stream, true, System.Text.Encoding.UTF8);
-            foreach (var game in p.ReadGames(charStream))
+            foreach (var game in p.ReadGamesFromStream(stream))
                 yield return game;
         }
     }

@@ -33,8 +33,16 @@ type internal Parser() =
 
         db
 
-    member this.ReadGames(charStream: CharStream<'a>) =
+    member this.ReadGamesFromStream(stream: System.IO.Stream) =
         seq {
+            let charStream = new CharStream<Unit>(stream, true, System.Text.Encoding.UTF8);
+            while not charStream.IsEndOfStream do
+                 yield this.ParseGame(charStream)
+            }
+
+    member this.ReadGamesFromFile(file: string) =
+        seq {
+            let charStream = new CharStream<Unit>(file, System.Text.Encoding.UTF8);
             while not charStream.IsEndOfStream do
                  yield this.ParseGame(charStream)
             }
