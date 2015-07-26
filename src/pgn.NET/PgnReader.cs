@@ -1,6 +1,10 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using FParsec;
 using ilf.pgn.Data;
 using ilf.pgn.PgnParsers;
+using Microsoft.FSharp.Core;
+using Game = ilf.pgn.Data.Game;
 
 namespace ilf.pgn
 {
@@ -45,6 +49,32 @@ namespace ilf.pgn
         {
             var p = new Parser();
             return p.ReadFromString(input);
+        }
+
+        /// <summary>
+        /// Reads a pgn database from a string.
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <returns>A pgn database.</returns>
+        public IEnumerable<Game> ReadGamesFromFile(string file)
+        {
+            var p = new Parser();
+            var charStream = new CharStream<Unit>(file, System.Text.Encoding.UTF8);
+            foreach (var game in p.ReadGames(charStream))
+                yield return game;
+        }
+
+        /// <summary>
+        /// Reads a pgn database from a string.
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <returns>A pgn database.</returns>
+        public IEnumerable<Game> ReadGamesFromStream(Stream stream)
+        {
+            var p = new Parser();
+            var charStream = new CharStream<Unit>(stream, true, System.Text.Encoding.UTF8);
+            foreach (var game in p.ReadGames(charStream))
+                yield return game;
         }
     }
 }
