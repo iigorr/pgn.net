@@ -29,13 +29,15 @@ let makeGame (tagList : PgnTag list, moveTextList : MoveTextEntry list) =
     game
 
 let pGame = 
-    pTagList .>> ws .>>.  pMoveSeries 
+    ws >>. pTagList .>> ws .>>.  pMoveSeries .>> (ws <|> eof)
     |>>  makeGame
     <!!> ("pGame", 5)
 
+
 let pDatabase = 
-    ws >>. sepEndBy pGame ws .>> eof
+    sepEndBy pGame ws
     |>> fun games -> 
             let db = new Database()
             db.Games.AddRange(games)
             db
+

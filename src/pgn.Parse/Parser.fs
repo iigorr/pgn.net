@@ -15,7 +15,7 @@ type internal Parser() =
 
     member this.ReadFromStream(stream: System.IO.Stream) =
         let parserResult = runParserOnStream pDatabase () "pgn" stream System.Text.Encoding.UTF8
-        
+
         let db =
             match parserResult with
             | Success(result, _, _)   -> result
@@ -25,10 +25,26 @@ type internal Parser() =
 
     member this.ReadFromString(input: string) =
         let parserResult = run pDatabase input
-        
+
         let db =
             match parserResult with
             | Success(result, _, _)   -> result
             | Failure(errorMsg, _, _) -> raise (PgnFormatException errorMsg)
 
         db
+
+    member this.ReadGames(charStream: CharStream<'a>) =
+        seq {
+            while not charStream.IsEndOfStream do
+                 yield this.ParseGame(charStream)
+            }
+
+    member this.ParseGame(charStream: CharStream<'a>) =
+
+        let parserResult = pGame(charStream)
+        let game  =
+            match parserResult.Status with
+            | ReplyStatus.Ok   -> parserResult.Result
+            | _ -> raise (PgnFormatException (ErrorMessageList.ToSortedArray(parserResult.Error) |> Array.map(fun e -> e.ToString()) |> String.concat "\n" ));
+
+        game
