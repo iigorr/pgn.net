@@ -46,8 +46,9 @@ let pTarget =
 
 // origin squalre of move (usually for disambiguation)
 let pOrigin = 
-    opt pPiece .>>. opt pFile .>>. opt pRank 
-    |>> fun ((piece, file), rank) ->  MoveInfo(piece, file, rank)
+    attempt(pPiece .>>. opt pFile .>>. opt pRank)
+    <|> (pFile .>>. opt pRank |>> fun(f, r) -> ((PieceType.Pawn , Some f),r))
+    |>> fun ((piece, file), rank) ->  MoveInfo(Some piece, file, rank)
     <!> "pOrigin"
 
 let pBasicMove = 

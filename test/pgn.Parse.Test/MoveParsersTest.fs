@@ -48,25 +48,26 @@ type MoveParserTest() =
         Assert.AreEqual(None, moveInfo.Rank)
 
     [<TestMethod>]
+    member this.pOrigin_should_yield_a_MoveInfo_object_by_rank() =
+        let moveInfo = parse pOrigin "N5"
+        Assert.AreEqual(PieceType.Knight, moveInfo.Piece)
+        Assert.AreEqual(null, moveInfo.File)
+        Assert.AreEqual(5, moveInfo.Rank)
+
+    [<TestMethod>]
     member this.pOrigin_should_yield_a_MoveInfo_object_on_file_rank() =
         let moveInfo = parse pOrigin "d5"
-        Assert.AreEqual(null, moveInfo.Piece)
+        Assert.AreEqual(PieceType.Pawn, moveInfo.Piece)
         Assert.AreEqual(File.D, moveInfo.File)
         Assert.AreEqual(5, moveInfo.Rank)
 
     [<TestMethod>]
     member this.pOrigin_should_yield_a_MoveInfo_object_on_file_only() =
         let moveInfo = parse pOrigin "d"
-        Assert.AreEqual(null, moveInfo.Piece)
+        Assert.AreEqual(PieceType.Pawn, moveInfo.Piece)
         Assert.AreEqual(File.D, moveInfo.File)
         Assert.AreEqual(null, moveInfo.Rank)
 
-    [<TestMethod>]
-    member this.pOrigin_should_yield_a_MoveInfo_object_on_rank_only() =
-        let moveInfo = parse pOrigin "5"
-        Assert.AreEqual(null, moveInfo.Piece)
-        Assert.AreEqual(null, moveInfo.File)
-        Assert.AreEqual(5, moveInfo.Rank)
 
     [<TestMethod>]
     member this.pCapturingMove_should_accept_a_standard_capturing_move() =
@@ -144,7 +145,7 @@ type MoveParserTest() =
     [<TestMethod>]
     member this.pCapturing_move_should_parse_move_correctly_with_originSquare() =
         let move = parse pCapturingMove "a1xBh8"
-        Assert.AreEqual(None, move.Piece)
+        Assert.AreEqual(PieceType.Pawn, move.Piece)
         Assert.AreEqual(MoveType.Capture, move.Type)
         Assert.AreEqual(PieceType.Bishop, move.TargetPiece)
         Assert.AreEqual(Square(File.A, 1), move.OriginSquare)
@@ -299,6 +300,7 @@ type MoveParserTest() =
     member this.pMove_should_correctly_parse_capturing_move_with_origin_file_and_no_target_piece() =
         let move = parse pMove "bxc6"
         Assert.AreEqual(MoveType.Capture, move.Type);
+        Assert.AreEqual(PieceType.Pawn, move.Piece);
         Assert.AreEqual(Square(File.C, 6), move.TargetSquare);
         Assert.AreEqual(File.B, move.OriginFile);
 
