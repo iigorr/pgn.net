@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>pgn.net</id>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
     <title>pgn.NET</title>
     <authors>iigorr@lankin.net</authors>
     <owners>iigorr@lankin.net</owners>
@@ -15,14 +15,16 @@
       https://github.com/iigorr/pgn.net
     </description>
     <releaseNotes>
-<![CDATA[Release 1.2.0
+<![CDATA[Release 1.2.1
 
-* Added a dictionary to access game tags `Game.Tags`  (https://github.com/iigorr/pgn.net/issues/13)
+* Added Large-File Support. (https://github.com/iigorr/pgn.net/issues/14)
+* Bugfix: Move.Piece difference between simple move and capture (https://github.com/iigorr/pgn.net/issues/15)
+
 
 Please file any issues here: https://github.com/iigorr/pgn.net/issues
 ]]>
     </releaseNotes>
-    <copyright>Copyright 2013</copyright>
+    <copyright>Copyright 2013-2015</copyright>
     <tags>pgn chess library parser dotnet</tags>
   </metadata>
 </package>

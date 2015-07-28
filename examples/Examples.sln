@@ -1,18 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A262EF53-A7B2-4E83-A238-4DD60993F39E}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadPgnFile", "ReadPgnFile\ReadPgnFile.csproj", "{63D1ACE0-B12B-425B-92C3-458F1A72F603}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET_4_0", "NET_4_0\NET_4_0.csproj", "{EB3FD875-927A-451F-91AB-E929CE08A2D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET_4_5", "NET_4_5\NET_4_5.csproj", "{12C49C77-2C52-48EB-8C50-2784EF1E3307}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LargeFile", "LargeFile\LargeFile.csproj", "{3C1FB6DA-7C50-4EF1-ACB9-25004BCA0DDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +29,10 @@ Global
 		{12C49C77-2C52-48EB-8C50-2784EF1E3307}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12C49C77-2C52-48EB-8C50-2784EF1E3307}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12C49C77-2C52-48EB-8C50-2784EF1E3307}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C1FB6DA-7C50-4EF1-ACB9-25004BCA0DDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C1FB6DA-7C50-4EF1-ACB9-25004BCA0DDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C1FB6DA-7C50-4EF1-ACB9-25004BCA0DDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C1FB6DA-7C50-4EF1-ACB9-25004BCA0DDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
