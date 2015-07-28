@@ -17,6 +17,7 @@ namespace ilf.pgn.Data.Format
         public string Format(Game game)
         {
             var writer = new StringWriter();
+            writer.NewLine = "\n";
             Format(game, writer);
             return writer.ToString();
         }

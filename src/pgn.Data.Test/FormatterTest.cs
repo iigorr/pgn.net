@@ -44,9 +44,9 @@ namespace ilf.pgn.Data.Format.Test
         {
             var sut = new Formatter();
             var writer = new StringWriter();
-            writer.Write("Foo ");
+            writer.NewLine = "\n";
             sut.Format(_testGame, writer);
-            Assert.AreEqual("Foo " + TestGameString, writer.ToString());
+            Assert.AreEqual(TestGameString, writer.ToString());
         }
 
         [TestMethod]

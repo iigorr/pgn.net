@@ -37,6 +37,7 @@ namespace ilf.pgn
             var formatter = new Formatter();
 
             TextWriter writer = new StreamWriter(_stream);
+            writer.NewLine = "\n";
             foreach (var game in pgnDatabase.Games)
             {
                 formatter.Format(game, writer);
