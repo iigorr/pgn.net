@@ -51,8 +51,8 @@ namespace ilf.pgn.Data
         /// </returns>
         public Piece this[Square square]
         {
-            get { return this[(int)square.File, square.Rank]; }
-            set { this[(int)square.File, square.Rank] = value; }
+            get { return this[square.File, square.Rank]; }
+            set { this[square.File, square.Rank] = value; }
         }
 
         /// <summary>
