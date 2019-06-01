@@ -1,5 +1,5 @@
 ﻿[<AutoOpen>]
-module internal ilf.pgn.PgnParsers.PgnTags
+module ilf.pgn.PgnParsers.PgnTags
 
 open System
 open ilf.pgn.Data

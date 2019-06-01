@@ -5,36 +5,35 @@ open ilf.pgn.PgnParsers.Move
 open ilf.pgn.PgnParsers.MoveSeries
 open ilf.pgn.Test.TestBase
 
-open Microsoft.VisualStudio.TestTools.UnitTesting
+open Xunit
 
-[<TestClass>]
 type MoveSeriesParserTest() =
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveNumberIndicator_should_accept_simple_move_number() =
         tryParse pMoveNumberIndicator "1."
         tryParse pMoveNumberIndicator "104."
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveNumberIndicator_should_accept_continued_move_number() =
         tryParse pMoveNumberIndicator "2..."
         tryParse pMoveNumberIndicator "54....."
         tryParse pMoveNumberIndicator "7…"
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveNumberIndicator_should_accept_spaces_between_number_and_periods() =
         tryParse pMoveNumberIndicator "2  \t..."
         tryParse pMoveNumberIndicator "1    ."
         tryParse pMoveNumberIndicator "54\n....."
         tryParse pMoveNumberIndicator "7 …"
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveSeriesEntry_should_accept_move_pair() =
         tryParse pMoveSeriesEntry "1. e2e4 Nb8c6"
         tryParse pMoveSeriesEntry "1 .   e2e4   Nb8c6"
 
 
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveSeriesEntry_should_accept_a_full_move_pair() =
         let entry = (parse pMoveSeriesEntry "1. e2e4 Nb8c6") :?> MovePairEntry
         let moveWhite = parse pMove "e2e4"
@@ -42,55 +41,55 @@ type MoveSeriesParserTest() =
 
         Assert.Equal(moveWhite, entry.White)
         Assert.Equal(moveBlack, entry.Black)
-        Assert.Equal(1, entry.MoveNumber)
+        Assert.Equal(1, entry.MoveNumber.Value)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveSeriesEntry_should_accept_a_split_move_white() =
         let entry = (parse pMoveSeriesEntry "1. e2e4") :?> HalfMoveEntry
         let moveWhite = parse pMove "e2e4"
 
         Assert.Equal(moveWhite, entry.Move)
-        Assert.Equal(1, entry.MoveNumber)
+        Assert.Equal(1, entry.MoveNumber.Value)
 
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveSeriesEntry_should_accept_a_single_move_by_white() =
         let entry = (parse pMoveSeriesEntry "13.Nxd4") :?> HalfMoveEntry
         let move = parse pMove "Nxd4"
 
         Assert.Equal(move, entry.Move)
-        Assert.Equal(13, entry.MoveNumber)
+        Assert.Equal(13, entry.MoveNumber.Value)
         Assert.Equal(false, entry.IsContinued)
 
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveSeriesEntry_should_accept_a_continued_move_by_black() =
         let entry = (parse pMoveSeriesEntry "13... Ba6") :?> HalfMoveEntry
         let move = parse pMove "Ba6"
 
         Assert.Equal(move, entry.Move)
-        Assert.Equal(13, entry.MoveNumber)
+        Assert.Equal(13, entry.MoveNumber.Value)
         Assert.Equal(true, entry.IsContinued)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveSeries_should_accept_a_moveSeries() =
         let moveSeries = parse pMoveSeries "1. e4 c5 2. Nf3 d6 3. Bb5+ Bd7"
 
         Assert.Equal(3, moveSeries.Length)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveSeries_should_accept_a_moveSeries_with_split_moves() =
         let moveSeries = parse pMoveSeries "1. e4 c5 2. Nf3 \n 2... d6 3. Bb5+ Bd7"
 
         Assert.Equal(4, moveSeries.Length)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveEntry_should_accept_comments_in_braces() =
         let entry = (parse pMoveSeriesEntry "{this is a comment}") :?> CommentEntry
 
         Assert.Equal("this is a comment", entry.Comment)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveEntry_should_accept_comments_semicolon_comment() =
         let moveSeries = parse pMoveSeries "1. e4 e5 2. Nf3 Nc6 3. Bb5 ;This opening is called the Ruy Lopez.
         3... a6"
@@ -100,7 +99,7 @@ type MoveSeriesParserTest() =
         let commentEntry= (moveSeries.Item(3)) :?> CommentEntry
         Assert.Equal("This opening is called the Ruy Lopez.", commentEntry.Comment)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveEntry_should_accept_multiple_line_comments() =
         let moveSeries = parse pMoveSeries "1. e4 e5 2. Nf3 Nc6 3. Bb5 ;This opening is called the Ruy Lopez.
         ;Another comment
@@ -114,32 +113,32 @@ type MoveSeriesParserTest() =
         Assert.Equal("Another comment", commentEntry2.Comment)
 
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pEndOfGame_should_accept_Draw() =
         let entry = (parse pEndOfGame "1/2 - 1/2") :?> GameEndEntry
         Assert.Equal(GameResult.Draw, entry.Result)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pEndOfGame_should_accept_utf8_draw() =
         let entry = (parse pEndOfGame "½-½") :?> GameEndEntry
         Assert.Equal(GameResult.Draw, entry.Result)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pEndOfGame_should_accept_WhiteWin() =
         let entry = (parse pEndOfGame "1-0") :?> GameEndEntry
         Assert.Equal(GameResult.White, entry.Result)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pEndOfGame_should_accept_BlackWin() =
         let entry = (parse pEndOfGame "0-1") :?> GameEndEntry
         Assert.Equal(GameResult.Black, entry.Result)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pEndOfGame_should_accept_EndOpen() =
         let entry = (parse pEndOfGame "*") :?> GameEndEntry
         Assert.Equal(GameResult.Open, entry.Result)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveSeries_should_accept_comment_after_end_game() =
         let entries = parse pMoveSeries "1-0 {impressive game!}"
 
@@ -147,13 +146,13 @@ type MoveSeriesParserTest() =
         Assert.Equal("impressive game!", commentEntry.Comment)
 
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveSeries_should_accept_comment_before_moves() =
         let entries = parse pMoveSeries "{This game is gonna be awesome! Watch this} \n 1. e4 e5 2. Nf3"
 
         Assert.Equal(MoveTextEntryType.Comment, entries.Item(0).Type)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveSeries_should_accept_comment_between_moves() =
         let entries = parse pMoveSeries "1. e4 {[%emt 0.0]} c5 {[%emt 0.0]} 2. Nc3"
 
@@ -162,7 +161,7 @@ type MoveSeriesParserTest() =
         Assert.Equal("[%emt 0.0]", commentEntry.Comment)
 
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveSeries_should_accept_NAGs() =
         let entries = parse pMoveSeries "1. e4 c5 $6 "
 
@@ -171,7 +170,7 @@ type MoveSeriesParserTest() =
         Assert.Equal(6, nagEntry.Code)
 
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveSeries_should_accept_RAVs() =
         let entries = parse pMoveSeries "6. d5 $6 (6. Bd3 cxd4 7. exd4 d5 { - B14 }) 6... exd5"
 
@@ -183,7 +182,7 @@ type MoveSeriesParserTest() =
         Assert.Equal(MoveTextEntryType.Comment, ravEntry.MoveText.Item(2).Type)
 
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pMoveSeries_should_accept_nested_RAVs() =
         let entries = parse pMoveSeries "6. d5 (6. Bd3 cxd4 7. exd4 d5 (7... Qa4)) 6... exd5"
 

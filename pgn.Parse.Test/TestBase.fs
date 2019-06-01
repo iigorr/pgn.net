@@ -1,11 +1,9 @@
 ﻿module ilf.pgn.Test.TestBase
 
 open FParsec
-open ilf.pgn.Data
 open ilf.pgn.Exceptions
-open ilf.pgn.PgnParsers
 
-open Microsoft.VisualStudio.TestTools.UnitTesting
+open Xunit.Sdk
 
 let parse p str =
     match run p str with
@@ -18,7 +16,7 @@ let tryParse p str =
     | Success(result, _, _)   -> ()
     | Failure(errorMsg, _, _) -> raise (PgnFormatException errorMsg)
 
-let shouldFail p str = 
+let shouldFail p str =
     match run p str with
-    | Success(result, _, _)   -> raise (AssertFailedException "Expected parser did not fail")
+    | Success(result, _, _)   -> raise (XunitException "Expected parser did not fail")
     | Failure(errorMsg, _, _) -> ()

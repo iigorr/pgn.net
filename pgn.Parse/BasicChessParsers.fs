@@ -1,7 +1,7 @@
 ﻿[<AutoOpen>]
-module internal ilf.pgn.PgnParsers.BasicChess
+module ilf.pgn.PgnParsers.BasicChess
 
-open System 
+open System
 open FParsec
 open ilf.pgn.Data
 
@@ -25,7 +25,7 @@ let rankSymbol = [1 .. 8] |> List.map (fun x -> x.ToString())
 
 //NOTE: we allow S (ger. "Springer") for knight was used traditionally and is around in older PGNs
 //NOTE: 'b' is not allowed here as it is reserved for the b file
-let pPiece = 
+let pPiece =
         (pchar 'p' >>% PieceType.Pawn)
     <|> (pchar 'P' >>% PieceType.Pawn)
     <|> (pchar 'N' >>% PieceType.Knight)
@@ -41,11 +41,11 @@ let pPiece =
     <|> (pchar 'k' >>% PieceType.King)
     <?> "Piece (N, B, R, Q, K, P, n, r, q, k, p)"
 
-let pFile =  
+let pFile =
     pList(strCI, fileSymbol) |>> findFile
     <?> "File letter (A..H)"
 
-let pRank = 
+let pRank =
     pList(strCI, rankSymbol) |>> System.Convert.ToInt32
     <?> "Rank (1..8)"
 

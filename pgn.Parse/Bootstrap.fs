@@ -1,7 +1,7 @@
 ﻿[<AutoOpen>]
-module internal ilf.pgn.PgnParsers.Bootstrap
+module ilf.pgn.PgnParsers.Bootstrap
 
-open System 
+open System
 
 #if DEBUG
 open NLog
@@ -11,7 +11,7 @@ type DebugMode =
     | Console
     | Off
 
-type Debug() = 
+type Debug() =
     do Debug.ConfigureLog()
     let fileLog : Logger = LogManager.GetLogger("file")
     let consoleLog : Logger = LogManager.GetLogger("console")
@@ -39,7 +39,7 @@ type Debug() =
 
     member val DebugMode : DebugMode = DebugMode.Off with get, set
     member val ParserLvl : int = 4 with get, set
-    member this.Log (message: string) (parserLevel : int) = 
+    member this.Log (message: string) (parserLevel : int) =
         if parserLevel >= this.ParserLvl then
             match this.DebugMode with
             | File -> fileLog.Log(LogLevel.Debug, message)

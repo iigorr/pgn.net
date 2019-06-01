@@ -1,5 +1,5 @@
 ﻿[<AutoOpen>]
-module internal ilf.pgn.PgnParsers.Move
+module ilf.pgn.PgnParsers.Move
 
 open System
 open FParsec
@@ -15,7 +15,7 @@ let getSquare(moveInfo : MoveInfo) =
     | x, y when x.HasValue && y.HasValue -> Square(x.Value, y.Value)
     | _, _ -> null
 
-let getMove(originInfo: MoveInfo option, targetInfo: MoveInfo, moveType: MoveType) = 
+let getMove(originInfo: MoveInfo option, targetInfo: MoveInfo, moveType: MoveType) =
     match originInfo, targetInfo with
     | None, _ -> Move (
                     Type = moveType,
@@ -38,20 +38,20 @@ let getMove(originInfo: MoveInfo option, targetInfo: MoveInfo, moveType: MoveTyp
 //MOVE MECHANICS
 
 // target square of a move
-let pTarget = 
+let pTarget =
     attempt(pPiece .>>. pFile .>>. pRank) // Qd5
     <|> (pFile .>>. pRank |>> fun (f, r) -> ((PieceType.Pawn, f),r)) //Pawn move, e.g. d5
     |>> fun ((piece, file), rank) ->  MoveInfo(Some(piece), Some(file), Some(rank))
     <!> "pTarget"
 
 // origin squalre of move (usually for disambiguation)
-let pOrigin = 
+let pOrigin =
     attempt(pPiece .>>. opt pFile .>>. opt pRank)
     <|> (pFile .>>. opt pRank |>> fun(f, r) -> ((PieceType.Pawn , Some f),r))
     |>> fun ((piece, file), rank) ->  MoveInfo(Some piece, file, rank)
     <!> "pOrigin"
 
-let pBasicMove = 
+let pBasicMove =
     attempt (pOrigin .>>. pTarget) |>> fun (origin, target) -> getMove(Some(origin), target, MoveType.Simple)
     <|> (pTarget |>> fun target -> getMove(None, target, MoveType.Simple))
     <!!> ("pBasicMove", 1)
@@ -65,12 +65,12 @@ let pInfixCaptureMove =   // e.g. QxBc5
     <!> "pInfixCaptureMove"
 
 let pSimplifiedPawnCapture =  // e.g. dxe or de
-    pFile .>> pCapturingSign .>>. pFile 
-    >>= fun(f1, f2) -> 
+    pFile .>> pCapturingSign .>>. pFile
+    >>= fun(f1, f2) ->
         match f1 = f2 with //do not allow a6xa7
         | true -> pzero
         | false -> preturn (f1, f2)
-    |>> fun (file1, file2) -> 
+    |>> fun (file1, file2) ->
         new Move (
             Type = MoveType.Capture,
             Piece = Nullable(PieceType.Pawn),
@@ -80,18 +80,18 @@ let pSimplifiedPawnCapture =  // e.g. dxe or de
     <!> "pSimplifiedPawnCapture"
 
 let pSuffixCaptureMove = // e.g. Qf4d4x or Qf4:
-    pBasicMove .>> pCapturingSign 
+    pBasicMove .>> pCapturingSign
     |>> fun move -> move.Type <- MoveType.Capture; move
     <!> "pSuffixCaptureMove"
 
-let pBasicCapturingMove = 
+let pBasicCapturingMove =
     attempt (attempt pInfixCaptureMove <|> pSuffixCaptureMove)
     <|> pSimplifiedPawnCapture
     <!> "pBasicCapturingMove"
 
 
 // the two most common move types: move and capture
-let pCapturingMove = 
+let pCapturingMove =
     pBasicCapturingMove .>>. opt (strCI "e.p." ) //TODO: e.p. should only be allowed for pawns
     |>> fun (move, enpassant) ->
             match enpassant with
@@ -101,23 +101,23 @@ let pCapturingMove =
 
 
 // special moves: pawn promotion and castle (king-side, queen-side)
-// TODO: this parser allows to much, e.g. Qxd5(R). 
+// TODO: this parser allows to much, e.g. Qxd5(R).
 //       It should be asserted, that the moved piece is a pawn.
 //       If rank is set, then only rank 8 is allowed
-let pPawnPromotion = 
+let pPawnPromotion =
     (attempt  pBasicCapturingMove <|> pBasicMove)
     .>>. ((str "=" >>. pPiece) <|> (str "(" >>. pPiece .>> str ")"))
     |>> fun (move, piece) -> move.PromotedPiece <- Nullable(piece); move
     <!> "pPawnPromotion"
 
-let pCasteKingSide = 
-    str "O-O" <|> str "O - O" <|> str "0-0"  <|> str "0 - 0" 
-    |>> fun _ -> new Move(Type=MoveType.CastleKingSide) 
+let pCasteKingSide =
+    str "O-O" <|> str "O - O" <|> str "0-0"  <|> str "0 - 0"
+    |>> fun _ -> new Move(Type=MoveType.CastleKingSide)
     <!> "pCastleKingSide"
 
-let pCasteQueenSide = 
-    str "O-O-O" <|> str "O - O - O" <|> str "0-0-0"  <|> str "0 - 0 - 0" 
-    |>> fun _ -> new Move(Type=MoveType.CastleQueenSide) 
+let pCasteQueenSide =
+    str "O-O-O" <|> str "O - O - O" <|> str "0-0-0"  <|> str "0 - 0 - 0"
+    |>> fun _ -> new Move(Type=MoveType.CastleQueenSide)
     <!> "pCasteQueenSide"
 
 let pCastle = pCasteQueenSide <|> pCasteKingSide
@@ -126,7 +126,7 @@ let pCastle = pCasteQueenSide <|> pCasteKingSide
 let pCheckIndicator = str "++" <|> str "††" <|> str "dbl ch" <|> str "+" <|> str "†" <|> str "ch" <!> "pCheckIndicator"
 let pCheckMateIndicator = str "#" <|> str "‡" <!> "pCheckMateIndicator"
 let pIndicator = pCheckIndicator <|> pCheckMateIndicator
-let pAnnotation = 
+let pAnnotation =
     str "????" <|> str "???"
     <|> str "!!!!" <|> str "!!!" <|> str "?!?" <|> str "!?!" <|> str "??" <|> str "?!"
     <|> str "!!" <|> str "!?" <|> str "?" <|> str "!"
@@ -169,20 +169,20 @@ let pAdditionalInfo =
     (attempt(pIndicator .>>. pAnnotation) |>> fun (i, a) -> Some(i), Some(a))
     <|> (attempt(pAnnotation) |>> fun (a) -> None, Some(a))
     <|> (pIndicator|>> fun (i) -> Some(i), None)
-    
-let pMove = 
+
+let pMove =
     attempt pPawnPromotion <|>
     attempt pCapturingMove <|>
-    attempt pBasicMove <|> 
+    attempt pBasicMove <|>
     pCastle
     .>>. opt(pAdditionalInfo)
     |>> fun (move, addInfo) ->
-            let indicator, annotation = 
+            let indicator, annotation =
                 match addInfo with
                 | None -> None, None
                 | Some(x) -> x
             move.Annotation<- toNullable(annotation)
-            match indicator with 
+            match indicator with
             | None -> move
             | Some(i) ->
                 match i with

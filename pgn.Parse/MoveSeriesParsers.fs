@@ -1,35 +1,35 @@
 ﻿[<AutoOpen>]
-module internal ilf.pgn.PgnParsers.MoveSeries
+module ilf.pgn.PgnParsers.MoveSeries
 
 open System.Collections.Generic
 open FParsec
 open ilf.pgn.Data
 
 
-let pPeriods = 
+let pPeriods =
     (str ".." .>> manyChars (pchar '.') >>% true) //two or more dots => Continued move pair
     <|> (str "…" >>% true) // => Continued move pair
     <|> (pchar '.' >>% false) // => Non-Continued move pair (move start)
 
-let pMoveNumberIndicator = 
+let pMoveNumberIndicator =
     attempt(pint32 .>> ws .>>. pPeriods |>> fun (num, contd) -> (Some(num), contd))
     <|> preturn (None, false)
     <!> "pMoveNumberIndicator"
     <?> "Move number indicator (e.g. 5. or 13...)"
 
 let pFullMoveTextEntry =
-    pMoveNumberIndicator .>> ws .>>. pMove .>> ws1 .>>. pMove 
-    |>> fun (((moveNum, contd), moveWhite), moveBlack) ->  
+    pMoveNumberIndicator .>> ws .>>. pMove .>> ws1 .>>. pMove
+    |>> fun (((moveNum, contd), moveWhite), moveBlack) ->
             MovePairEntry(moveWhite, moveBlack, MoveNumber=toNullable(moveNum)) :> MoveTextEntry
     <!!> ("pFullMoveTextEntry", 3)
 
-let pSplitMoveTextEntry = 
+let pSplitMoveTextEntry =
     pMoveNumberIndicator .>> ws .>>. pMove
     |>> fun ((moveNum, contd), move) -> HalfMoveEntry(move, MoveNumber = toNullable(moveNum), IsContinued=contd) :> MoveTextEntry
     <!!> ("pSplitMoveTextEntry", 3)
 
-let pCommentary = 
-    between (str "{") (str "}") (many (noneOf "}")) 
+let pCommentary =
+    between (str "{") (str "}") (many (noneOf "}"))
     <|> between (str ";") newline (many (noneOf "\n")) //to end of line comment
     |>> charList2String
     |>> fun text -> CommentEntry(text) :> MoveTextEntry
@@ -55,19 +55,19 @@ let pNAG =
 let pMoveSeries, pMoveSeriesImpl = createParserForwardedToRef()
 
 let pRAV =
-    pchar '(' .>> ws >>. pMoveSeries .>> ws .>> pchar ')' 
-    |>> fun moveSeries -> 
+    pchar '(' .>> ws >>. pMoveSeries .>> ws .>> pchar ')'
+    |>> fun moveSeries ->
             let moveSeriesList = MoveText.MoveTextEntryList()
             moveSeriesList.AddRange(moveSeries)
             RAVEntry(moveSeriesList) :> MoveTextEntry
     <?> "RAV e.g. \"(6. Bd3)\""
     <!!> ("pRAV", 4)
 
-let pMoveSeriesEntry= 
+let pMoveSeriesEntry=
      pCommentary
     <|> pNAG
     <|> pRAV
-    <|> attempt(pFullMoveTextEntry) 
+    <|> attempt(pFullMoveTextEntry)
     <|> attempt(pSplitMoveTextEntry)
     <|> attempt(pEndOfGame)
     <!!> ("pMoveSeriesEntry", 4)

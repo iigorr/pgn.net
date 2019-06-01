@@ -1,5 +1,5 @@
 ﻿[<AutoOpen>]
-module internal ilf.pgn.PgnParsers.BasicCommons
+module ilf.pgn.PgnParsers.BasicCommons
 
 open FParsec
 
@@ -20,7 +20,7 @@ let BP (p: Parser<_,_>) stream =
 
 let NBP (p: Parser<_,_>, name:string) stream =
     p stream // set a breakpoint here
-    
+
 let D (p: Parser<_,_>, name:string) stream =
     System.Console.WriteLine(name);
     p stream
@@ -31,7 +31,7 @@ let (<!!>) (p: Parser<_,_>) (label, depth) : Parser<_,_> =
     fun stream ->
         let startTime = System.DateTime.Now
 
-        if(deb.DebugMode = DebugMode.Off) 
+        if(deb.DebugMode = DebugMode.Off)
             then p stream
         else
             deb.Log (sprintf "%A: %sEntering %s. \"%s\""  stream.Position ("->".PadLeft(2*depth)) label (stream.PeekString(5))) depth
@@ -47,4 +47,4 @@ let (<!!>) (p: Parser<_,_>) (label, depth) : Parser<_,_> =
 
 
 let (<!>) (p: Parser<_,_>) label : Parser<_,_> =
-        p <!!> (label, 0) 
+        p <!!> (label, 0)

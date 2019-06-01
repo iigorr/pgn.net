@@ -1,5 +1,5 @@
 ﻿[<AutoOpen>]
-module internal ilf.pgn.PgnParsers.DateTagParser
+module ilf.pgn.PgnParsers.DateTagParser
 
 open FParsec
 
@@ -8,7 +8,7 @@ let pYear = ((str "????" |>> fun x -> None) <|> (pint32 |>> fun x -> Some(x)))
 let pMonth = ((str "??" |>> fun x -> None) <|> (pint32 |>> fun x -> Some(x)))
 let pDay = pMonth
 
-let pDateTagValue = 
+let pDateTagValue =
     attempt(pchar '"' >>. pYear .>> pchar '.' .>>. pMonth .>> pchar '.' .>>. pDay .>> pchar '"')
     <|> ((pchar '"' >>. pYear .>> pchar '"') |>> fun year -> ((year, None), None))
     |>> fun((year, month), day) -> PgnDateTag("Date", year, month, day) :> PgnTag

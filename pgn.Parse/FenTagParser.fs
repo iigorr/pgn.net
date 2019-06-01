@@ -1,11 +1,11 @@
 ﻿[<AutoOpen>]
-module internal ilf.pgn.PgnParsers.FenTagParser
+module ilf.pgn.PgnParsers.FenTagParser
 
 open FParsec
 open ilf.pgn.Data
 open System.Linq
 
-let pFenPieces = 
+let pFenPieces =
         (pchar 'p' >>% [Piece.BlackPawn])
     <|> (pchar 'n' >>% [Piece.BlackKnight])
     <|> (pchar 'b' >>% [Piece.BlackBishop])
@@ -22,25 +22,25 @@ let pFenPieces =
 
 let check8elem (msg: string) (row: 'a list) : Parser<_, _> =
     fun stream ->
-        match row.Length with 
-        | 8 -> Reply(row) 
+        match row.Length with
+        | 8 -> Reply(row)
         | _  -> Reply(Error, messageError(msg))
 
-let pFenRow = 
+let pFenRow =
     many pFenPieces |>> fun lists -> List.concat lists
     >>= check8elem "Invalid fen row lenght. Rows must be of length 8"
 
 
 let checkBoardLenght (row: 'a list) : Parser<_, _> =
     fun stream ->
-        match row.Length with 
-        | 8 -> Reply(row) 
+        match row.Length with
+        | 8 -> Reply(row)
         | _  -> Reply(Error, messageError(sprintf "Invalid fen row lenght (%d). Rows must be of length 8"  row.Length ))
 
 let pPiecePositions =
     sepEndBy1 pFenRow (pchar '/') >>= check8elem "Invalid fen row count. There must be 8 rows."
     |>> fun lists -> List.concat lists
-    
+
 let pFenCastlingInfo =
     attempt(pchar '-' >>% [ false; false; false; false] <!> "noCastling")
     <|> (
@@ -51,25 +51,25 @@ let pFenCastlingInfo =
         |>> fun(((K, Q), k), q) -> [K; Q; k; q]
     )
 
-let pFenEnPassantSquare = 
+let pFenEnPassantSquare =
     attempt(pchar '-' >>% null)
     <|> (pFile .>>. pRank |>> fun (f, r) -> Square(f, r))
 
-let pFenTagValue = 
+let pFenTagValue =
     pchar '"' >>. pPiecePositions .>> ws
     .>>. ((pchar 'w' >>% true) <|> (pchar 'b' >>% false)) .>> ws
     .>>. pFenCastlingInfo .>> ws
     .>>. pFenEnPassantSquare .>> ws
     .>>. pint32 .>> ws
-    .>>. pint32 .>> ws 
+    .>>. pint32 .>> ws
     .>> pchar '"'
-    |>> fun (((((pieces, whiteMove), castlingInfo), enPassantSquare), halfMoves), fullMoves) -> 
+    |>> fun (((((pieces, whiteMove), castlingInfo), enPassantSquare), halfMoves), fullMoves) ->
             let boardSetup= new BoardSetup();
             for i in 0 .. 63 do
                 boardSetup.[i] <- pieces.[i]
-            
+
             boardSetup.IsWhiteMove <- whiteMove
-            
+
             boardSetup.CanWhiteCastleKingSide <- castlingInfo.[0]
             boardSetup.CanWhiteCastleQueenSide <- castlingInfo.[1]
             boardSetup.CanBlackCastleKingSide <- castlingInfo.[2]

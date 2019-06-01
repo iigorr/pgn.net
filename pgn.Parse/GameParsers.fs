@@ -1,5 +1,5 @@
 ﻿[<AutoOpen>]
-module internal ilf.pgn.PgnParsers.Game
+module ilf.pgn.PgnParsers.Game
 
 open FParsec
 open ilf.pgn.Data
@@ -15,10 +15,10 @@ let setTag(game : Game, tag : PgnTag) =
     | "Black" -> game.BlackPlayer <- tag.Value
     | "Result" -> game.Result <- (tag :?> PgnResultTag).Result
     | "FEN" -> game.BoardSetup <- (tag :?> FenTag).Setup
-    | _ -> 
+    | _ ->
         game.AdditionalInfo.Add(GameInfo(tag.Name, tag.Value))
-        
-        
+
+
 
 
 let makeGame (tagList : PgnTag list, moveTextList : MoveTextEntry list) =
@@ -28,15 +28,15 @@ let makeGame (tagList : PgnTag list, moveTextList : MoveTextEntry list) =
     moveTextList |>  List.iter (fun entry -> game.MoveText.Add(entry))
     game
 
-let pGame = 
+let pGame =
     ws >>. pTagList .>> ws .>>.  pMoveSeries .>> (ws <|> eof)
     |>>  makeGame
     <!!> ("pGame", 5)
 
 
-let pDatabase = 
+let pDatabase =
     sepEndBy pGame ws .>> eof
-    |>> fun games -> 
+    |>> fun games ->
             let db = new Database()
             db.Games.AddRange(games)
             db

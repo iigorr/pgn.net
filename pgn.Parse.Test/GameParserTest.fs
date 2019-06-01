@@ -1,14 +1,11 @@
 ﻿namespace ilf.pgn.Test
 
 open ilf.pgn.Data
-open ilf.pgn.Exceptions
 open ilf.pgn.PgnParsers.Game
 open ilf.pgn.Test.TestBase
 
-open Microsoft.VisualStudio.TestTools.UnitTesting
+open Xunit
 
-
-[<TestClass>]
 type GameParserTest() =
     let testGame1 = "
     [Event \"Breslau\"]
@@ -59,7 +56,7 @@ type GameParserTest() =
 
 *"
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pGame_should_accept_a_standard_pgn_game() =
         let game= parse pGame testGame1
         Assert.Equal("Tarrasch, Siegbert", game.WhitePlayer)
@@ -67,42 +64,42 @@ type GameParserTest() =
         Assert.Equal(MoveTextEntryType.GameEnd, game.MoveText.Item(24).Type)
         Assert.Equal(null, game.BoardSetup)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pGame_should_set_event_correctly() =
         let game= parse pGame testGame1
         Assert.Equal("Breslau", game.Event)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pGame_should_set_site_correctly() =
         let game= parse pGame testGame1
         Assert.Equal("Breslau", game.Site)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pGame_should_set_Date_correctly() =
         let game= parse pGame testGame2
-        Assert.Equal(2000, game.Year)
-        Assert.Equal(11, game.Month)
-        Assert.Equal(2, game.Day)
+        Assert.Equal(2000, game.Year.Value)
+        Assert.Equal(11, game.Month.Value)
+        Assert.Equal(2, game.Day.Value)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pGame_should_set_incomplete_date_correctly() =
         let game= parse pGame testGame1
-        Assert.Equal(1879, game.Year)
-        Assert.Equal(null, game.Month)
-        Assert.Equal(null, game.Day)
+        Assert.Equal(1879, game.Year.Value)
+        Assert.False(game.Month.HasValue)
+        Assert.False(game.Day.HasValue)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pGame_should_set_round_correctly() =
         let game= parse pGame testGame2
         Assert.Equal("15", game.Round)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pGame_should_set_players_correctly() =
         let game= parse pGame testGame1
         Assert.Equal("Tarrasch, Siegbert", game.WhitePlayer)
         Assert.Equal("Mendelsohn, J.", game.BlackPlayer)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pGame_should_fill_tags_dictionary_correctly() =
         let game= parse pGame testGame2
         Assert.Equal("Braingames WCC", game.Tags.["Event"])
@@ -116,34 +113,34 @@ type GameParserTest() =
         Assert.Equal("2770", game.Tags.["BlackElo"])
         Assert.Equal("E05", game.Tags.["ECO"])
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pGame_should_set_game_result_correctly() =
         let game= parse pGame testGame2
         Assert.Equal(GameResult.Draw, game.Result)
 
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pGame_should_set_all_other_tags_correctly() =
         let game= parse pGame testGame2
 
         Assert.Equal(3, game.AdditionalInfo.Count)
 
-    [<TestMethod>]
+    [<Fact>]
     member this.pGame_should_set_the_move_text() =
         let game= parse pGame testGame2
 
         Assert.Equal(39, game.MoveText.Count)
 
+    // TODO: Expect exception, so wait with converting this
+    // [<TestMethod; ExpectedException(typeof<PgnFormatException>)>]
+    // member this.pGame_should_disallow_non_game_data_before_end_of_file() =
+    //     tryParse pDatabase (testGame2 + "   x")
 
-    [<TestMethod; ExpectedException(typeof<PgnFormatException>)>]
-    member this.pGame_should_disallow_non_game_data_before_end_of_file() =
-        tryParse pDatabase (testGame2 + "   x")
-
-    [<TestMethod>]
+    [<Fact>]
     member this.pGame_should_parse_a_new_game_with_board_setup() =
         let game= parse pGame testGame3
         let setup= game.BoardSetup //[FEN \"4k3/8/8/8/8/8/4P3/4K3 w - - 5 39\"]"
-        System.Console.WriteLine(setup.ToString());
+
         Assert.Equal(Piece.BlackKing, setup.[File.E, 1])
         Assert.Equal(Piece.WhitePawn, setup.[File.E, 7])
         Assert.Equal(Piece.WhiteKing, setup.[File.E, 8])

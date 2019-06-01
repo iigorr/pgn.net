@@ -5,7 +5,7 @@ open System.IO
 open ilf.pgn.Exceptions
 open ilf.pgn.PgnParsers.Game
 
-type internal Parser() =
+type Parser() =
     member this.ReadFromFile(file:string) =
         let stream = new FileStream(file, FileMode.Open)
         let result = this.ReadFromStream(stream)
