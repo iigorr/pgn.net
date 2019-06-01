@@ -7,7 +7,6 @@ using ilf.pgn.Data.MoveText;
 
 namespace ilf.pgn.Test
 {
-    [TestClass]
     public class PgnWriterTest
     {
         private readonly Game _testGame;

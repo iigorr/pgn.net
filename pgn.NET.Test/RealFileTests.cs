@@ -1,12 +1,10 @@
 ﻿using Xunit;
-using ilf.pgn.PgnParsers;
 
 namespace ilf.pgn.Test
 {
-    [TestClass]
     public class RealFileTests
     {
-        private const string TestSet = "Real Files\\";
+        private const string TestSet = "RealGames/";
 
         [Fact]
         public void ChessInformantSample()
