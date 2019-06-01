@@ -2,6 +2,8 @@ PGN.NET Core
 ============
 _A .NET Core library for working with [Portable Game Notation (PGN)](http://en.wikipedia.org/wiki/Portable_Game_Notation)._
 
+![Example showing how to read a PGN file with PGN.NET Core](images/read-pgn-file.gif)
+
 What's PGN.NET Core?
 --------------------
 PGN.NET Core is a library that parses portable game notation (PGN), a format for storing chess games. The PGN parser mostly conforms to [this specs](http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm), but tries to be as tolerant as possible.
