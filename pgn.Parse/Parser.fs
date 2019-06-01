@@ -6,7 +6,7 @@ open ilf.pgn.Exceptions
 open ilf.pgn.PgnParsers.Game
 
 type internal Parser() =
-    member this.ReadFromFile(file:string) =  
+    member this.ReadFromFile(file:string) =
         let stream = new FileStream(file, FileMode.Open)
         let result = this.ReadFromStream(stream)
         stream.Close()
@@ -47,7 +47,7 @@ type internal Parser() =
                  yield this.ParseGame(charStream)
             }
 
-    member this.ParseGame(charStream: CharStream<'a>) =
+    member this.ParseGame(charStream: CharStream<Unit>) =
 
         let parserResult = pGame(charStream)
         let game  =
