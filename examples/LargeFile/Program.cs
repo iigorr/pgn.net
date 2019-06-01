@@ -8,8 +8,7 @@ namespace ReadPgnFile
         static void Main(string[] args)
         {
             var reader = new PgnReader();
-
-            var gamesCollection = reader.ReadGamesFromFile(@"c:\tmp\millionbase-2.22.pgn"); 
+            var gamesCollection = reader.ReadGamesFromFile(@"c:\tmp\millionbase-2.22.pgn");
 
             int count = 0;
             var start = DateTime.Now;
@@ -24,10 +23,13 @@ namespace ReadPgnFile
                     Console.SetCursorPosition(1, 0);
                     Console.WriteLine("Time passed: {0}. Games: {1}, Games per Second: {2}", timespan, count, gamesPerSecond);
                     if (count > 10000)
+                    {
                         break;
+                    }
                 }
             }
 
+            Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
         }
     }
