@@ -4,3 +4,7 @@
 
 # VS Code user settings
 .vscode/
+
+# VS user settings
+.vscode/
+*.sln
