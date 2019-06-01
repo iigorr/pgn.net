@@ -1,95 +1,85 @@
-pgn.net 
-=======
+PGN.NET Core
+============
+_A .NET Core library for working with [Portable Game Notation (PGN)](http://en.wikipedia.org/wiki/Portable_Game_Notation)._
 
-Portable Game Notation (PGN) implementation in .NET
+What's PGN.NET Core?
+--------------------
+PGN.NET Core is a library that parses portable game notation (PGN), a format for storing chess games. The PGN parser mostly conforms to [this specs](http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm), but tries to be as tolerant as possible.
 
-## About PGN
+The parser is based on [FParsec](http://www.quanttec.com/fparsec/), and the entire project is a fork of [Igor Lankin](https://github.com/iigorr)'s [pgn.net](https://github.com/iigorr/pgn.net) (seriously, buy the man a beer!).
 
-Read more about [PGN on Wikipedia](http://en.wikipedia.org/wiki/Portable_Game_Notation).
+Getting started
+---------------
 
-Here is an excellent [spec document](http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm).
+### Installing
+_This project isn't currently published to [NuGet](https://www.nuget.org/), so in the meantime use the original [pgn.net package](https://www.nuget.org/packages/pgn.NET/), or clone this repository and build from source._
 
+### PGN.NET Core
+With PGN.NET Core installed in your project, you can try to read and parse a PGN file.
 
-## About pgn.NET
-
-pgn.NET is a library which can be used to handle chess games and read/write them in the PGN format. It is implemented in F# and C# and uses [FParsec](http://www.quanttec.com/fparsec/).
-
-To support as many .pgn file formats as possible the parsers try to be as tolerant as possible. It mostly conforms to [this specs](http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm).
-However, other than the specification says we use UTF-8 as encoding, cause it's the 21st century.
-
-
-
-## How To Use
-
-``` csharp
+```csharp
 using ilf.pgn;
 using ilf.pgn.Data;
 
 // ...
 
-//READ FILE
+// Read a PGN file.
 var reader = new PgnReader();
 var gameDb = reader.ReadFromFile("Tarrasch.pgn");
 
+// Get the first game from the file and print it to the console.
 Game game = gameDb.Games[0];
-
 Console.WriteLine(game);
 ```
 
-## Installation
-You can download the [NuGet Package](https://www.nuget.org/packages/pgn.NET/) or just clone, build and reference the assemblies.
+Have a look at [the ReadPgnFile project](/examples/ReadPgnFile), and the other examples if you get stuck. If you need an example of a PGN file, have a look in [/pgn.NET.Test/TestExamples](/pgn.NET.Test/TestExamples).
 
-### NuGet package via console:
-``` powershell
-PM> Install-Package pgn.NET
+Acknowledgments
+---------------
+This project wouldn't be possible without [Igor Lankin](https://github.com/iigorr) and [pgn.net](https://github.com/iigorr/pgn.net), from which this fork borrows heavily.
+
+Building
+--------
+### Installing dependencies
+You'll need a recent version of [.NET Core](https://dotnet.microsoft.com/download) and [git](https://git-scm.com/downloads). You'll probably want [a decent editor](https://code.visualstudio.com/) for C# and F# as well, but you probably have that installed already.
+
+### Building and testing
+With everything in place, navigate to `pgn.NET.Test`, and build the project:
+```shell
+$> cd pgn.NET.Test/
+$> dotnet build
+Microsoft (R) Build Engine version 15.9.20+g88f5fadfbe for .NET Core
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Restore completed in 42.35 ms for /pgn.net/pgn.Parse/pgn.Parse.fsproj.
+  Restore completed in 42.32 ms for /pgn.net/pgn.NET.Test/pgn.NET.Test.csproj.
+  Restore completed in 42.35 ms for /pgn.net/pgn.NET/pgn.NET.csproj.
+  Restore completed in 42.35 ms for /pgn.net/pgn.Data/pgn.Data.csproj.
+  pgn.Data -> /pgn.net/pgn.Data/bin/Debug/netstandard2.0/pgn.Data.dll
+  pgn.Parse -> /pgn.net/pgn.Parse/bin/Debug/netstandard2.0/pgn.Parse.dll
+  pgn.NET -> /pgn.net/pgn.NET/bin/Debug/netstandard2.0/pgn.NET.dll
+  pgn.NET.Test -> /pgn.net/pgn.NET.Test/bin/Debug/netcoreapp2.1/pgn.NET.Test.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.11
 ```
 
-### NuGet package in Visual Studio:
+If everything went as expected, you can try to run the tests:
+```shell
+$> dotnet test
+Build started, please wait...
+Build completed.
 
-Choose your project and open the NuGet Package Manager:
-![vs step1](https://raw.githubusercontent.com/iigorr/pgn.net/master/resources/package_manager_nuget.png)
+Test run for /pgn.net/pgn.NET.Test/bin/Debug/netcoreapp2.1/pgn.NET.Test.dll(.NETCoreApp,Version=v2.1)
+Microsoft (R) Test Execution Command Line Tool Version 15.9.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
 
-Search for "pgn.net" in the online directory, then click "Install" on the pgn.net package:
-![vs step2](https://raw.githubusercontent.com/iigorr/pgn.net/master/resources/search_for_pgn_net.png)
+Starting test execution, please wait...
 
-The project should now reference the pgn.NET assembly
-
-
-## How To Contribute
-
-1. Fork
-1. Clone
-1. Code
-1. Create Pull Request
-
-
-## Changelog
-
-### Bugfix Release 1.1.1
-
-* Bugfix: Castle should use the letter O rather than the digit 0 (https://github.com/iigorr/pgn.net/issues/10)
-* Bugfix: parser recognizes bxc6 as "Bishop captures c6" (https://github.com/iigorr/pgn.net/issues/11)
-* FSharp.Core is merged in into the assembly
-* Removed support for wp71 due to FParsec incompatitbilities
-
-### Release 1.1
-* Bugfix: zero-length move text bug (IndexOutOfRange)
-* Introduce MoveTextEntryList, a MoveEntry list which provides simplifed access to moves. 
-* Change type of Game.MoveText and RAVEntry.MoveText to MoveTextEntryList
-* Add missing API doc
-* Add support for frameworks: net40, net45, wp71
-
-### Release 1.0
-
-This is the initial release of pgn.NET, a library to parse PGN chess databases which includes
-
-* Data model for chess games (Game, Board, move text, move, piece)
-* PgnReader (Parser) for the PGN format (http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm).
-  - The parser tries to be as tolerant as possible (there are many variation of the pgn format),
-    so most pgn files should be readable. If not, please file an issue here: https://github.com/iigorr/pgn.net/issues
-  - Support for iso-8859 and UTF-8
-  - Support for Recursive Annotation Variation (RAV)
-  - Support for Forsyth-Edwards-Notation (FEN, http://de.wikipedia.org/wiki/Forsyth-Edwards-Notation)
-* PgnWriter, formatter for PGN games. 
-
-
+Total tests: 18. Passed: 18. Failed: 0. Skipped: 0.
+Test Run Successful.
+Test execution time: 2.3071 Seconds
+```
